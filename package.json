@@ -1,0 +1,47 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "watch-style": "node-sass --watch src/resources/scss/style.scss --output src/public/css/",
+    "watch-base": "node-sass --watch src/resources/scss/base.scss --output src/public/css/",
+    "watch-respon": "node-sass --watch src/resources/scss/responsive.scss --output src/public/css/",
+    "start": "nodemon --inspect src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/baolinh-dev/nodejs-blog.git"
+  },
+  "keywords": [
+    "f8",
+    "blog",
+    "f8",
+    "nodejs",
+    "nodejs"
+  ],
+  "author": "bao_linh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/baolinh-dev/nodejs-blog/issues"
+  },
+  "homepage": "https://github.com/baolinh-dev/nodejs-blog#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "express-handlebars": "^6.0.6",
+    "mongoose": "^6.6.1"
+  },
+  "devDependencies": {
+    "cookie-parser": "^1.4.6",
+    "crypto-js": "^4.1.1",
+    "express-session": "^1.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "method-override": "^3.0.0",
+    "mongoose-delete": "^0.5.4",
+    "mongoose-slug-generator": "^1.0.4",
+    "morgan": "^1.10.0",
+    "node-sass": "^7.0.3",
+    "nodemon": "^2.0.19"
+  }
+}

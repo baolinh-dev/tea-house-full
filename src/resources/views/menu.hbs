@@ -1,0 +1,62 @@
+<section id="menu">
+    <div class="common-heading">
+        <div class="common-heading__img-wrap">
+            <img class="common-heading__img" src="/img/logo-text.png" alt="">
+        </div>
+        <p class="common-heading__text">menu hôm nay</p>
+    </div>
+    <div class="menu-main">
+        <div class="drink-list">
+            <div class="container">
+                <div class="row">
+                    {{#each products}}
+                    <div class="col-lg-3 col-md-6 col-6">
+                        <div class="drink-item">
+                            <div class="drink-item__img-wrap">
+                                <img src="{{this.image}}" alt="" class="drink-item__img">
+                                <div class="add-to-cart-part">
+                                    <p>thêm vào giỏ hàng</p>
+                                </div>
+                            </div>
+                            <div class="drink-item__content">
+                                <h3 class="drink-item__content-heading">
+                                    {{this.name}}
+                                </h3>
+                                <p class="drink-item__content-price">
+                                    giá: <span class="drink-item__content-price-number">{{this.price}} đ</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>  
+        <p class="tongSoPage" style="display: none">{{tongSoPage}}</p>
+        <div class="menu-main__pagination"> 
+            <nav aria-label="Page navigation example"> 
+                <ul class="pagination justify-content-center">
+                    <li class="page-item ">
+                        <a class="page-link"  onclick="previousMenu()" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>   
+                {{#times tongSoPage}} 
+                    <li class="page-item">  
+                        {{!--  --}} 
+                        <a class="page-link page-link--number" href="?page={{sum this 1}}"> 
+                            {{sum this 1}} 
+                        </a> 
+                    </li>
+                {{/times}}
+                
+                    <li class="page-item">
+                        <a class="page-link" onclick="nextMenu()" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>

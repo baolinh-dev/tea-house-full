@@ -1,0 +1,86 @@
+    <section id="contact">
+        <div class="breadcumb-container">
+            <div class="container">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Liên hệ</li>
+                    </ol>
+                </nav>
+            </div>
+        </div> 
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3835.7332974702504!2d108.25016631486675!3d15.975298246191747!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142108997dc971f%3A0x1295cb3d313469c9!2sVietnam%20-%20Korea%20University%20of%20Information%20and%20Communication%20Technology.!5e0!3m2!1sen!2s!4v1661639242527!5m2!1sen!2s"
+                        width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"> 
+                    </iframe>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="contact-main">
+                            <div class="common-heading">
+                                <div class="common-heading__img-wrap">
+                                    <img class="common-heading__img common-heading__img--time-open" src="./assets/imgs/logo-text.png" alt="">
+                                </div>
+                                <p class="common-heading__text">
+                                    thông tin liên hệ
+                                </p>
+                            </div>
+                        <p class="contact-main-text">
+                            Hãy liên hệ ngay với chúng tôi để nhận được nhiều ưu đãi hấp dẫn dành cho bạn!
+                        </p> 
+                        <ul class="contact-list">
+                            <li class="contact-item"> 
+                                <i class="fa-solid fa-location-dot contact-item__icon"></i> 
+                                <p class="contact-item__text">
+                                    <span class="contact-item__text-label"> 
+                                        Địa chỉ:
+                                    </span> 
+                                        Trường Đại Học Công Nghệ Thông Tin Và Truyền Thông Việt - Hàn, Đại Học Đà Nẵng
+                                </p>
+                            </li>
+                            <li class="contact-item"> 
+                                <i class="fa-solid fa-location-dot contact-item__icon"></i> 
+                                <a href="mailto:tblinh.20it12@vku.udn.vn" class="contact-item__text">
+                                    <span class="contact-item__text-label"> 
+                                        Email:
+                                    </span> 
+                                        tblinh.20it12@vku.udn.vn
+                                </a>
+                            </li>
+                            <li class="contact-item"> 
+                                <i class="fa-solid fa-location-dot contact-item__icon"></i> 
+                                <a href="tel:+84768494121" class="contact-item__text">
+                                    <span class="contact-item__text-label"> 
+                                        Hotline:
+                                    </span> 
+                                        (+84)768.494.121
+                                </a>
+                            </li>
+                        </ul> 
+                        <form method="POST" action="/sites/contact/post-feedback" class="contact-form"> 
+                            <input name="fullname" type="text" class="contact-form__input" placeholder="Họ và tên *">
+                            <input name="email" type="email" class="contact-form__input" placeholder="Email *">
+                            <input name="phone" type="tel" class="contact-form__number" placeholder="Điện thoại *"> 
+                            <textarea name="content" placeholder="Nội dung *" class="contact-form__text-area" name="" id="" cols="30" rows="10"></textarea> 
+                            <button type="submit" value="" class="contact-form__submit"> gửi thông tin </button>  
+                        </form>
+                            
+                    </div>
+                </div>
+            </div>  
+        <div class="toast-container position-fixed top-0 end-0 p-3">
+            <div id="errorRegisterDupli" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <strong class="me-auto">Thông báo</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    Đăng nhập bị trùng
+                </div>
+            </div>
+        </div>
+        </div>
+    </section> 

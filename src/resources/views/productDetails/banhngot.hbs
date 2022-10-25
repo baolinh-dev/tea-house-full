@@ -1,0 +1,82 @@
+<section id="menu">
+    <div class="breadcumb-container">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Thực đơn</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="menu-main">
+        <div class="menu-item">
+            <div class="common-heading common-heading--menu">
+                <div class="common-heading__img-wrap">
+                    <img class="common-heading__img" src="../imgs/logo-text.png" alt="">
+                </div>
+                <p class="common-heading__text">Bánh ngọt</p>
+            </div>
+            <div class="menu-item__content">
+                <div class="container">
+                    <p class="menu-item__content-text">
+                        Hương vị tự nhiên, thơm ngon của Trà Việt với phong cách hiện đại tại Tea House sẽ giúp bạn
+                        gợi mở vị giác của bản thân
+                        và tận hưởng một cảm giác thật khoan khoái, tươi mới.
+                    </p>
+                    <div class="drink-list mt-5">
+                        <div class="container">
+                            <div class="row">
+                                {{#each productsBanhngot}}
+                                <div class="col-lg-3 col-md-6 col-6">
+                                    <div class="drink-item">
+                                        <div class="drink-item__img-wrap">
+                                            <img src="{{this.image}}" alt="" class="drink-item__img">
+                                            <div class="add-to-cart-part">
+                                                <p>thêm vào giỏ hàng</p>
+                                            </div>
+                                        </div>
+                                        <div class="drink-item__content">
+                                            <h3 class="drink-item__content-heading">
+                                                {{this.name}}
+                                            </h3>
+                                            <p class="drink-item__content-price">
+                                                giá: <span class="drink-item__content-price-number">40.000 đ</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{/each}}
+                            </div>
+                        </div>
+                    </div>  
+        <p class="tongSoPage" style="display: none">{{tongSoPage}}</p>
+        <div class="menu-main__pagination">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item ">
+                        <a class="page-link" onclick="previousBanhngot()" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    {{#times tongSoPage}}
+                    <li class="page-item">
+                        {{!-- --}}
+                        <a class="page-link page-link--number" href="?page={{sum this 1}}">
+                            {{sum this 1}}
+                        </a>
+                    </li>
+                    {{/times}}
+        
+                    <li class="page-item">
+                        <a class="page-link" onclick="nextBanhngot()" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+                </div>
+            </div>
+        </div>
+</section>

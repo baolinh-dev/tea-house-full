@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tea House | Trang chủ</title>
+    <!-- Link Favicon -->
+    <link rel="icon" type="image/x-icon" href="/img/favi.png">
+    <!-- Link Bootrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <!-- Link OwlCarousel -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+        integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+        integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Link Font AweSome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+        integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Link Normalize Css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+        integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+</head>
+
+<body>
+<div id="admin">
+    <div class="row">
+        <div class="col-lg-2 menu">
+            <h3 class="menu-heading">Menu Admin</h3>
+            <ul class="menu-list">
+                <li class="menu-list__item">
+                    <a href="" class="menu-list__item-link">
+                        <i class="menu-icon fa-solid fa-house"></i>
+                        <p>Trang chủ</p>
+                    </a>
+                </li>
+                <li class="menu-list__item">
+                    <a href="/admin/account?page=1" class="menu-list__item-link">
+                        <i class="menu-icon fa-solid fa-user"></i>
+                        <p>Tài khoản</p>
+                    </a>
+                </li>
+                <li class="menu-list__item">
+                    <a href="/admin/warehouse?page=1" class="menu-list__item-link">
+                        <i class="menu-icon fa-solid fa-warehouse"></i>
+                        <p>Nhà kho</p>
+                    </a>
+                </li>
+                <li class="menu-list__item">
+                    <a href="/admin/feedback?page=1" class="menu-list__item-link">
+                        <i class="fa-solid fa-envelope"></i>
+                        <p>Feedbacks</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <form class="col-lg-10 content" method="GET" class="mt-4" action="/admin/feedback/search">
+            <div class="admin-heading">
+                <h1 class="admin-content-heading">
+                    Quản lí tài khoản
+                </h1>
+                <h1 class="admin-name-heading">
+                    {{name}}
+                </h1>
+            </div>
+            <div class="admin-table">
+                <div class="admin-table__options">
+                    <div class="admin-table__options-search-wrap mt-3 mb-3">
+                        <i class="fa-solid fa-magnifying-glass admin-table__options-search-icon"> </i>
+                        <input placeholder="Tìm kiếm theo tên ..." name="search" type="text" class="admin-table__options-search">
+                    </div>
+                    <a class="btn-table" href="/admin/feedback">
+                        <i class="fa-solid fa-arrow-rotate-right"></i>
+                        Reset
+                    </a>
+                    <button type="submit" class="btn-table filter-btn">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        Save
+                    </button>
+                </div> 
+                <a class="text-link" href="/admin/feedback/trash">
+                    <i class="fa-solid fa-trash"></i> ({{deletedCount}})
+                </a>
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="d-flex">
+                            <th class="col-2" scope="col">Full Name</th>
+                            <th class="col-3" scope="col">Email</th>
+                            <th class="col-2" scope="col">Phone</th>
+                            <th class="col-4" scope="col">Content</th> 
+                            <th class="col-2" scope="col" colspan="2"></th>
+                        </tr>
+                    </thead>
+                    <tbody>  
+                        {{#each feedbacks}}
+                        <tr class="d-flex">
+                            <td class="col-2">{{this.fullname}}</td>
+                            <td class="col-3">{{this.email}}</td>
+                            <td class="col-2">  
+                                <p class="table-data__text">{{this.phone}}</p>
+                            </td>
+                            <td class="col-4">{{this.content}}</td>
+                            <td class="col-2">
+                                <a href="/admin/feedback/{{this._id}}/edit" class="btn btn-link">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                                <a href="" class="btn btn-link" data-id="{{this._id}}" data-bs-toggle="modal" data-bs-target="#deleteCourseModal">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </a>
+                            </td>
+                        </tr>   
+        {{else}}
+        <tr>
+            <td colspan="5" class="text-center">
+                Hiện tại không có feedbacks nào từ khách hàng 
+                <a class="another-link" href="/sites/contact">Đến trang liên hệ</a>
+            </td>
+        </tr>
+                        {{/each }}
+                    </tbody>
+                </table>
+            </div> 
+            <div class="menu-main__pagination">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item ">
+                            <a class="page-link" onclick="previousPage()" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        {{#times tongSoPage}}
+                        <li class="page-item">
+                            {{!-- --}}
+                            <a class="page-link page-link--number" href="?page={{sum this 1}}">
+                                {{sum this 1}}
+                            </a>
+                        </li>
+                        {{/times}}
+            
+                        <li class="page-item">
+                            <a class="page-link" onclick="nextPage()" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </form>
+    </div>
+</div> 
+
+{{!-- Confirm Delete --}}
+<div id="deleteCourseModal" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xóa sản phẩm này ?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa sản phẩm này không?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy xóa</button>
+                <button id="btn-delete-course" type="button" class="btn btn-danger">Xác nhận xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{!-- Delete Hidden Form --}}
+<form method="POST" name="delete-course-form"></form> 
+
+    <!-- Link Owlcaroulsel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+        integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+        integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Link Bootrap Script -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+        integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
+        integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
+        crossorigin="anonymous"></script>
+
+    {{!-- Owl --}}
+
+    <script>
+        $('#home .gallery .owl-carousel.owl-carousel--gallery').owlCarousel({
+            loop: true,
+            autoplay: true,
+            autoplayTimeout: 6000,
+            responsive: {
+                0: {
+                    items: 2
+                },
+                740: {
+                    items: 3
+                },
+                1024: {
+                    items: 5
+                }
+            }
+        })
+        $('#home .drink-list .owl-carousel').owlCarousel({
+            loop: true,
+            autoplay: false,
+            autoplayTimeout: 6000,
+            responsive: {
+                0: {
+                    items: 2
+                },
+                740: {
+                    items: 2
+                },
+                1024: {
+                    items: 4
+                }
+            }
+        })
+        $('#home .category .owl-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            autoplay: true,
+            autoplayTimeout: 6000,
+            dotsEach: true,
+            URLhashListener: true,
+            center: true,
+            startPosition: 'URLHash',
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 3
+                },
+                1000: {
+                    items: 3
+                }
+            }
+        })
+        $('#menu .owl-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            responsive: {
+                0: {
+                    items: 2
+                },
+                600: {
+                    items: 3
+                },
+                1000: {
+                    items: 4
+                }
+            }
+        })  
+    </script> 
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var courseId;
+        var deleteForm = document.forms['delete-course-form'];
+        var containerForm = document.forms['container-form'];
+        var btnDeleteCourse = document.getElementById('btn-delete-course');
+        var checkboxAll = $('#checkbox-all');
+        var courseItemCheckbox = $('input[name="courseIds[]"]')
+        var checkAllSubmitBtn = $('.check-all-submit-btn')
+        // When Dialog Confirm Show 
+        $('#deleteCourseModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            feedbackId = button.data('id');
+        });
+        // When delete Course btn clicked
+        btnDeleteCourse.onclick = function () {
+            deleteForm.action = '/admin/feedback/' + feedbackId + '?_method=DELETE';
+            deleteForm.submit();
+        }
+        // Checkbox All clicked
+        checkboxAll.change(function () {
+            var isCheckedAll = $(this).prop('checked');
+            courseItemCheckbox.prop('checked', isCheckedAll);
+            renderCheckAllSubmitBtn()
+        })
+        // Course item checkbox changed
+        courseItemCheckbox.change(function () {
+            var isCheckedAll = courseItemCheckbox.length
+                === $('input[name="courseIds[]"]:checked').length;
+            checkboxAll.prop('checked', isCheckedAll);
+            renderCheckAllSubmitBtn()
+        });
+        // Check all submit button clicked
+        checkAllSubmitBtn.on('submit', function (e) {
+            var isSubmitable = !$(this).hasClass('disabled');
+            if (!isSubmitable) {
+                e.preventDefault();
+            }
+        })
+        // Re-render check all submit button
+        function renderCheckAllSubmitBtn() {
+            var checkedCount = $(' input[name="courseIds[]"]:checked').length;
+            if (checkedCount > 0) {
+                checkAllSubmitBtn.removeClass('disabled');
+            } else {
+                checkAllSubmitBtn.addClass('disabled');
+            }
+        }
+    })
+    </script>
+    <script>
+        const urlSearchParams = new URLSearchParams(window.location.search);
+        const params = Object.fromEntries(urlSearchParams.entries());
+
+        let currentPage = parseInt(params.page);
+        function nextPage() {
+            var nextPage = currentPage + 1
+            if (nextPage > 5) {
+                nextPage = 5
+            }
+            location.href = `/admin/account?page=${nextPage}`;
+        }
+        function previousPage() {
+            var previousPage = currentPage - 1
+            if (previousPage < 1) {
+                previousPage = 1
+            }
+            location.href = `/admin/account?page=${previousPage}`;
+        }
+        var list = document.querySelectorAll('.page-link--number')
+
+        document.querySelectorAll('.page-link--number')[currentPage - 1].classList.add('page-link--actived')
+    </script>
+</body>
+
+</html>

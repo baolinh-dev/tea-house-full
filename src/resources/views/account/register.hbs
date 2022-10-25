@@ -1,0 +1,32 @@
+<section id="register">
+    <div class="register-form-container">
+        <h3 class="register-heading">Đăng kí</h3>
+        <p class="resgister-link-wrap">Đã có tài khoản,
+            <a class="resgister-link" href="/account/login">đăng nhập tại đây</a>
+        </p>  
+    <form method="POST" action="/account/store">   
+        <input required type="text" class="login-register-btn-common" placeholder="Full Name" name="name">
+        <input required type="email" class="login-register-btn-common" placeholder="Email" name="email">
+        <input required type="tel" class="login-register-btn-common" placeholder="Phone" name="phone">
+        <input required type="text" class="login-register-btn-common" placeholder="UserName" name="username">
+        <input required type="password" class="login-register-btn-common" placeholder="PassWord" name="password">
+        <input id="toastTrigger" type="submit" class="login-register-btn-common submit-input">
+    </form>
+        <div class="another-links">
+            <a href="">Quên mật khẩu</a>
+        </div>
+        <p class="introduce-socials">Hoặc đăng nhập bằng</p>
+        <div class="social-btns">
+            <div class="social-wrap-btn facebook-wrap-btn">
+                <i class="fa-brands fa-facebook"></i>
+                <p>Facebook</p>
+            </div>
+            <div class="social-wrap-btn google-wrap-btn">
+                <i class="fa-brands fa-google"></i>
+                <p>Google</p>
+            </div>
+        </div>
+    </div>      
+</section> 
+
+{{!-- Toast --}} 

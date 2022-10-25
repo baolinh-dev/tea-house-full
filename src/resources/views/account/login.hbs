@@ -1,0 +1,43 @@
+<section id="login">
+    <form class="login-form-container" method="POST" action="/account/enter">
+        <h3 class="login-heading">Đăng nhập</h3>
+        <p class="resgister-link-wrap">Nếu bạn chưa có tài khoản,
+            <a class="resgister-link" href="/account/register">đăng ký tại đây</a>
+        </p>
+        <input required type="text" class="login-register-btn-common" placeholder="Username" name="username" id="username">
+        <input required type="password" class="login-register-btn-common" placeholder="Passwork" name="password" id="password">
+        <input onclick="login()" type="submit" class="login-register-btn-common submit-input">
+        <div class="another-links">
+            <a href="">Quên mật khẩu</a>
+        </div>
+        <p class="introduce-socials">Hoặc đăng nhập bằng</p>
+        <div class="social-btns">
+            <div class="social-wrap-btn facebook-wrap-btn">
+                <i class="fa-brands fa-facebook"></i>
+                <p>Facebook</p>
+            </div>
+            <div class="social-wrap-btn google-wrap-btn">
+                <i class="fa-brands fa-google"></i>
+                <p>Google</p>
+            </div>
+        </div>
+    </form>
+</section> 
+<script>
+    function login() { 
+        $.ajax({ 
+            url: 'account/login', 
+            type: 'POST', 
+            data: { 
+                username: $('#username').val(), 
+                password: $('#password').val()
+            }
+        }).then(data => { 
+            setCookie('token', data.token, 1)
+        }) 
+        .catch(err => { 
+            console.log(err)
+        })
+    }
+
+</script>

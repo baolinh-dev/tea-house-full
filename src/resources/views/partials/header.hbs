@@ -1,0 +1,166 @@
+    <section id="header">
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-container">
+                    <div class="header-top__phone">
+                        <a class="header-top__phone-link" href="tel:+84768494121">
+                            <i class="fa-solid fa-mobile-screen-button"></i>
+                            <p>Hotline: 0768494121</p>
+                        </a>
+                    </div>
+                    <ul class="header-top__sub-top">
+                        <li class="header-top__sub-top__item">
+                            <input href="" class="header-top__sub-top__item-link header-top__sub-top__item-link--search"
+                                placeholder=" Tìm kiếm  ">
+                            <i class="fa-solid fa-magnifying-glass header-icon--search"></i>
+                        </li>
+                        <li class="header-top__sub-top__item">
+                            <a href="" class="header-top__sub-top__item-link">
+                                <i class="fa-solid fa-cart-shopping cart-shopping-icon"></i>
+                                <p>Giỏ hàng</p>
+                            </a>
+                        </li>
+                        <li class="header-top__sub-top__item">
+                            <a href="" class="header-top__sub-top__item-link">
+                                <i class="fa-solid fa-user"></i>
+                                <p>{{name}}</p>
+                            </a>
+                        </li>
+                        <li class="header-top__sub-top__item">
+                            <a href="/account/logout" class="header-top__sub-top__item-link">
+                                <i class="fa-sharp fa-solid fa-arrow-right-from-bracket"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="header-bottom">
+            <div class="container">
+                <ul class="header-bottom-list">
+                    <div class="header-bottom-list--left">
+                        <li class="header-bottom-item">
+                            <a class="header-bottom-item__link main-color" href="/">Trang chủ</a>
+                        </li>
+                        <li class="header-bottom-item">
+                            <a class="header-bottom-item__link " href="/menu?page=1">Thực đơn</a>
+                        </li>
+                        <li class="header-bottom-item">
+                            <a class="header-bottom-item__link " href="/menu/tra-hoa-qua?page=1">Sản phẩm</a>
+                            <ul class="product-nav-list">
+                                <li class="product-nav-item">
+                                    <a class="product-nav-item__link" href="/menu/tra-hoa-qua?page=1">trà hoa quả</a>
+                                </li>
+                                <li class="product-nav-item">
+                                    <a class="product-nav-item__link" href="/menu/smoothies?page=1">smoothies</a>
+                                </li>
+                                <li class="product-nav-item">
+                                    <a class="product-nav-item__link" href="/menu/banh-ngot?page=1">Bánh ngọt</a>
+                                </li>
+                                <li class="product-nav-item">
+                                    <a class="product-nav-item__link" href="/menu/ca-phe?page=1">Cà phê</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </div>
+                    <li class="header-bottom-item ">
+                        <a class="header-bottom-item__link " href="index.html">
+                            <img src="/img/main-logo.png" alt="" class="main-logo">
+                        </a>
+                    </li>
+                    <div class="header-bottom-list--right">
+                        <li class="header-bottom-item">
+                            <a class="header-bottom-item__link " href="/sites/news">Tin tức</a>
+                        </li>
+                        <li class="header-bottom-item">
+                            <a class="header-bottom-item__link " href="/sites/introduce">Giới thiệu</a>
+                        </li>
+                        <li class="header-bottom-item">
+                            <a class="header-bottom-item__link " href="/sites/contact">Liên hệ</a>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+        </div> 
+        <div class="header-bottom--mobile">
+            <div class="container">                
+                <ul class="header-bottom--mobile-list">  
+                    <li class="header-bottom--mobile-item">   
+                        <label class="fa-solid fa-bars header-mobile-icon" for="toggle-nav-mobile"></label> 
+                        <input type="checkbox" id="toggle-nav-mobile" class="toggle-nav-mobile" hidden>  
+                        
+                            <ul class="nav-mobile-list">   
+                                <label for="toggle-nav-mobile" class="fa-solid fa-xmark nav-mobile-list--close-btn"></label> 
+                                <div class="login-reister-mobile"> 
+                                    <a href="" class="login-link"> 
+                                        đăng nhập 
+                                    </a>
+                                    <a href="" class="register-link"> 
+                                        đăng kí 
+                                    </a>
+                                </div>
+                                <li class="nav-mobile-item">  
+                                    <a href="index.html" class="nav-mobile-item__link"> 
+                                        Trang chủ
+                                    </a>
+                                </li>
+                                <li class="nav-mobile-item">  
+                                    <a href="/menu?page=1" class="nav-mobile-item__link"> 
+                                        Thực đơn
+                                    </a>
+                                </li>
+                                <li class="nav-mobile-item nav-mobile-item--products">   
+                                    <div class="nav-mobile-item--products--toggle">
+                                        <a href="./assets/pages/trahoaqua.html" class="nav-mobile-item__link"> 
+                                            Sản phẩm
+                                        </a>   
+                                        <i class="toggle-btn-product-nav fa-solid fa-plus"></i>
+                                    </div>
+                                    <ul class="nav-product-list">
+                                        <li class="nav-product-item">  
+                                            <a href="./assets/pages/trahoaqua.html" class="nav-product-item__link">Trà hoa quả</a>
+                                        </li>
+                                        <li class="nav-product-item">  
+                                            <a href="./assets/pages/smoothies.html" class="nav-product-item__link"> 
+                                                Smoothies
+                                            </a>
+                                        </li>
+                                        <li class="nav-product-item"> 
+                                            <a href="./assets/pages/banhngot.html" class="nav-product-item__link">Bánh ngọt</a>
+                                        </li>
+                                        <li class="nav-product-item">  
+                                            <a href="./assets/pages/caphe.html" class="nav-product-item__link">Cà phê</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-mobile-item">  
+                                    <a href="./assets/pages/news.html" class="nav-mobile-item__link"> 
+                                        Tin tức
+                                    </a>
+                                </li>
+                                <li class="nav-mobile-item">  
+                                    <a href="./assets/pages/introduce.html" class="nav-mobile-item__link"> 
+                                        Giới thiệu
+                                    </a>
+                                </li>
+                                <li class="nav-mobile-item">  
+                                    <a href="./assets/pages/contact.html" class="nav-mobile-item__link"> 
+                                        Liên hệ
+                                    </a>
+                                </li>
+                            </ul>
+                        
+                    </li> 
+                    <li class="header-bottom--mobile-item"> 
+                        <a href="index.html"> 
+                            <img src="./assets/imgs/logo_mobi.webp" alt="" class="main-logo-mobile">
+                        </a>
+                    </li>
+                    <li class="header-bottom--mobile-item"> 
+                        <label for="" class="fa-solid fa-cart-shopping header-mobile-icon"></label>
+                    </li>
+                </ul> 
+                <input href="" class="header-bottom--mobile-search" placeholder=" Tìm kiếm  ">
+            </div>
+        </div> 
+    </section>
