@@ -350,7 +350,16 @@ Account.findById(ketqua._id)
     searchAccountTrash(req, res, next) {   
         var search = req.query.search 
         // var filter = req.query.filter
-        Promise.all([Account.findDeleted({'name' : new RegExp(search, 'i')}), Account.countDocumentsDeleted()])
+        Promise.all( 
+            [Account.findDeleted({  
+                "$or" : [  
+                    {name : new RegExp(search, 'i')}, 
+                    {email : new RegExp(search, 'i')}, 
+                    {phone : new RegExp(search, 'i')},  
+                    {username : new RegExp(search, 'i')}
+                ]
+            }),  
+        Account.countDocumentsDeleted()])
             .then(([accounts, deletedCount]) =>
                 res.render('admin/trashAccount', { 
                     layout: false,
