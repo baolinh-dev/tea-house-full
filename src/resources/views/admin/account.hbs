@@ -80,7 +80,15 @@
                     <div class="admin-table__options-search-wrap mt-3 mb-3">
                         <i class="fa-solid fa-magnifying-glass admin-table__options-search-icon"> </i>
                         <input type="text" name="search" class="admin-table__options-search" placeholder="Tìm kiếm theo tên ...">
-                    </div>  
+                    </div>   
+
+                    <select id="cars" class="search__option" >  
+                        <option selected value="">Lựa chọn</option>
+                        <option name="name" value="name">Name</option>
+                        <option name="email" value="email">Email</option>
+                        <option name="phone" value="phone">Phone</option>
+                        <option name="username" value="username">Username</option>
+                    </select>
 
                     <a class="btn-table" href="/admin/account">
                         <i class="fa-solid fa-arrow-rotate-right"></i> 
@@ -362,10 +370,11 @@
         var list = document.querySelectorAll('.page-link--number')
 
         document.querySelectorAll('.page-link--number')[currentPage - 1].classList.add('page-link--actived')
-    </script>  
+    </script>   
+    {{!-- Hashing password --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"
         integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>  
     <script type="text/javascript"> 
         function encryptString(oldString) { 
             var encryptText = CryptoJS.AES.encrypt(oldString, 'teahouse').toString(); 
@@ -375,7 +384,6 @@
         for(var index in listPasswork) { 
             listPasswork[index].innerText = encryptString(listPasswork[index].innerText)
         }
-    </script>
-
+    </script>  
 </body>
 </html>

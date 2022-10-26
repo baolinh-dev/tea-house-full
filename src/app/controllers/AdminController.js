@@ -326,10 +326,17 @@ Account.findById(ketqua._id)
             .catch(next);
     }     
     // [GET] /admin/search
-    searchAccount(req, res, next) {   
-        var search = req.query.search 
-        // var filter = req.query.filter
-        Promise.all([Account.find({'name' : new RegExp(search, 'i')}), Account.countDocumentsDeleted()])
+    searchAccount(req, res, next) {    
+        var search = req.query.search   
+        Promise.all( 
+            [Account.find({  
+                "$or" : [  
+                    {name : new RegExp(search, 'i')}, 
+                    {email : new RegExp(search, 'i')}, 
+                    {phone : new RegExp(search, 'i')},  
+                    {username : new RegExp(search, 'i')}
+                ]
+            }), Account.countDocumentsDeleted()])
             .then(([accounts, deletedCount]) =>
                 res.render('admin/account', { 
                     layout: false,
