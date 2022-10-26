@@ -373,7 +373,15 @@ Account.findById(ketqua._id)
     searchWarehouse(req, res, next) {   
         var search = req.query.search 
         // var filter = req.query.filter
-        Promise.all([Product.find({'name' : new RegExp(search, 'i')}), Product.countDocumentsDeleted()])
+        Promise.all( 
+            [Product.find({  
+                "$or" : [  
+                    {name : new RegExp(search, 'i')}, 
+                    {price : new RegExp(search, 'i')}, 
+                    {category : new RegExp(search, 'i')}
+                ]
+            }),  
+            Product.countDocumentsDeleted()])
             .then(([products, deletedCount]) =>
                 res.render('admin/warehouse', { 
                     layout: false,
@@ -387,7 +395,15 @@ Account.findById(ketqua._id)
     searchWarehouseTrash(req, res, next) {   
         var search = req.query.search 
         // var filter = req.query.filter
-        Promise.all([Product.findDeleted({'name' : new RegExp(search, 'i')}), Product.countDocumentsDeleted()])
+        Promise.all( 
+            [Product.findDeleted({  
+                "$or" : [  
+                    {name : new RegExp(search, 'i')}, 
+                    {price : new RegExp(search, 'i')}, 
+                    {category : new RegExp(search, 'i')}
+                ]
+            }), 
+            Product.countDocumentsDeleted()])
             .then(([products, deletedCount]) =>
                 res.render('admin/trashWarehouse', { 
                     layout: false,
@@ -401,7 +417,16 @@ Account.findById(ketqua._id)
     searchFeedback(req, res, next) {   
         var search = req.query.search 
         // var filter = req.query.filter
-        Promise.all([Feedback.find({'fullname' : new RegExp(search, 'i')}), Feedback.countDocumentsDeleted()])
+        Promise.all( 
+            [Feedback.find({  
+                "$or" : [  
+                    {fullname : new RegExp(search, 'i')}, 
+                    {email : new RegExp(search, 'i')}, 
+                    {phone : new RegExp(search, 'i')}, 
+                    {content : new RegExp(search, 'i')}
+                ]
+            }),  
+            Feedback.countDocumentsDeleted()])
             .then(([feedbacks, deletedCount]) =>
                 res.render('admin/feedback', { 
                     layout: false,
@@ -415,7 +440,16 @@ Account.findById(ketqua._id)
     searchFeedbackTrash(req, res, next) {   
         var search = req.query.search 
         // var filter = req.query.filter
-        Promise.all([Feedback.findDeleted({'fullname' : new RegExp(search, 'i')}), Feedback.countDocumentsDeleted()])
+        Promise.all( 
+            [Feedback.findDeleted({  
+                "$or" : [  
+                    {fullname : new RegExp(search, 'i')}, 
+                    {email : new RegExp(search, 'i')}, 
+                    {phone : new RegExp(search, 'i')}, 
+                    {content : new RegExp(search, 'i')}
+                ]
+            }),  
+            Feedback.countDocumentsDeleted()])
             .then(([feedbacks, deletedCount]) =>
                 res.render('admin/trashFeedback', { 
                     layout: false,
