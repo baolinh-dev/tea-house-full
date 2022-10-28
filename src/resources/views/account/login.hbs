@@ -66,7 +66,11 @@
             <input required type="text" class="login-register-btn-common" placeholder="Username" name="username"
                 id="username">
             <input required type="password" class="login-register-btn-common" placeholder="Passwork" name="password"
-                id="password">
+                id="password">   
+            <div class="showpassword">
+                <input onclick="showPassWord()" type="checkbox" name=""> 
+                <label for="">Show Password</label>
+            </div>
             <input onclick="login()" type="submit" class="login-register-btn-common submit-input">
             <div class="another-links">
                 <a href="">Quên mật khẩu</a>
@@ -179,8 +183,7 @@
             }
         })  
     </script>
-    {{!--
-    <script src="../../../hehavior.js"></script> --}}
+    {{!-- Next Pre Pagination --}}
     <script>
         const urlSearchParams = new URLSearchParams(window.location.search);
         const params = Object.fromEntries(urlSearchParams.entries());
@@ -266,6 +269,17 @@
             }
             location.href = `/menu/banh-ngot?page=${previousPage}`;
         }     
+    </script> 
+    {{!-- Show Hide PassWord --}}  
+    <script>         
+        function showPassWord() {
+            var x = document.getElementById("password");
+            if (x.type === "password") {
+            x.type = "text";
+            } else {
+            x.type = "password";
+            }
+        }
     </script>
 </body>
 

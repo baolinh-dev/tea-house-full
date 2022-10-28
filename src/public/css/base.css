@@ -481,3 +481,11 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #000; }
+
+.showpassword {
+  display: inline-flex;
+  margin-bottom: 12px;
+  padding: 0 8px; }
+
+.showpassword input {
+  margin-right: 8px; }
