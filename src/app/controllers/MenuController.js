@@ -33,11 +33,14 @@ class MenuController {
                 } else {  
                     // get all
                     Product.find({}).exec() 
-                    var tongSoPage = Math.ceil(total / PAGE_SIZE) 
-                        .then((products) => { 
-                            res.render('menu', { 
-                                products: mutipleMongooseToObject(products),
-                            });
+                        .then((products) => {   
+                            Product.countDocuments({}).then((total)=>{  
+                                var tongSoPage = Math.ceil(total / PAGE_SIZE) 
+                                res.render('menu', {  
+                                    tongSoPage, 
+                                    products: mutipleMongooseToObject(products),
+                                });
+                            })
                         })
                         .catch(next);
                 }
@@ -77,10 +80,15 @@ class MenuController {
                     .catch(next); 
                 } else {
                 Product.find({ category: 'Tra-hoa-qua' }).exec()
-                    .then((productsTraHoaQua) => {
-                        res.render('productDetails/trahoaqua', {
-                            productsTraHoaQua: mutipleMongooseToObject(productsTraHoaQua),
-                        });
+                    .then((productsTraHoaQua) => {   
+                        Product.find({ category: 'Tra-hoa-qua' }).countDocuments({}) 
+                        .then((total)=>{  
+                            var tongSoPage = Math.ceil(total / PAGE_SIZE) 
+                            res.render('productDetails/trahoaqua', {  
+                                tongSoPage, 
+                                productsTraHoaQua: mutipleMongooseToObject(productsTraHoaQua),
+                            });
+                        })
                     })
                     .catch(next);
                 }
@@ -119,13 +127,18 @@ class MenuController {
                     .catch(next); 
                 } else {
                 Product.find({ category: 'Smoothies' }).exec()
-                    .then((productsSmoothies) => {
-                        res.render('productDetails/smoothies', {
-                            productsSmoothies: mutipleMongooseToObject(productsSmoothies),
-                        });
+                    .then((productsSmoothies) => {   
+                        Product.find({ category: 'Smoothies' }).countDocuments({}) 
+                        .then((total)=>{  
+                            var tongSoPage = Math.ceil(total / PAGE_SIZE) 
+                            res.render('productDetails/smoothies', {  
+                                tongSoPage, 
+                                productsSmoothies: mutipleMongooseToObject(productsSmoothies),
+                            });
+                        })
                     })
                     .catch(next);
-                }
+                } 
             } 
         } catch (error) {
             res.redirect('/account/login')
@@ -161,10 +174,15 @@ class MenuController {
                     .catch(next); 
                 } else {
                 Product.find({ category: 'Ca-phe' }).exec()
-                    .then((productsCaphe) => {
-                        res.render('productDetails/caphe', {
-                            productsCaphe: mutipleMongooseToObject(productsCaphe),
-                        });
+                    .then((productsCaphe) => {   
+                        Product.find({ category: 'Ca-phe' }).countDocuments({}) 
+                        .then((total)=>{  
+                            var tongSoPage = Math.ceil(total / PAGE_SIZE) 
+                            res.render('productDetails/caphe', {  
+                                tongSoPage, 
+                                productsCaphe: mutipleMongooseToObject(productsCaphe),
+                            });
+                        })
                     })
                     .catch(next);
                 }
@@ -203,13 +221,18 @@ class MenuController {
                     .catch(next); 
                 } else {
                 Product.find({ category: 'Banh-ngot' }).exec()
-                    .then((productsBanhngot) => {
-                        res.render('productDetails/banhngot', {
-                            productsBanhngot: mutipleMongooseToObject(productsBanhngot),
-                        });
+                    .then((productsBanhngot) => {   
+                        Product.find({ category: 'Banh-ngot' }).countDocuments({}) 
+                        .then((total)=>{  
+                            var tongSoPage = Math.ceil(total / PAGE_SIZE) 
+                            res.render('productDetails/banhngot', {  
+                                tongSoPage, 
+                                productsBanhngot: mutipleMongooseToObject(productsBanhngot),
+                            });
+                        })
                     })
                     .catch(next);
-                }
+                } 
             } 
         } catch (error) {
             res.redirect('/account/login')
