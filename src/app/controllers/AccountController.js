@@ -8,7 +8,11 @@ const { json } = require('express');
 class AccountController {  
     // [GET] /account/register
     register(req, res, next) {
-        res.render('account/register')
+        var name = req.cookies.name
+        res.render('account/register', {   
+            layout: false,
+            name,
+        })
     }  
     // [POST] /account/store
     store(req, res, next) { 
@@ -33,8 +37,9 @@ class AccountController {
     // [GET] /account/login
     login(req, res, next) { 
         var name = req.cookies.name
-        res.render('account/login', { 
-            name
+        res.render('account/login', {   
+            layout: false,
+            name,
         })
     }    
     // [POST] /account/enter 
