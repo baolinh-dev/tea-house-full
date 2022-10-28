@@ -51,27 +51,13 @@ app.engine('.hbs', engine(
 app.set('view engine', 'hbs'); 
 app.set('views', path.join(__dirname, 'resources', 'views'));   
 // Route Init  
-route(app)     
-// app.get('/', (req, res, next)=>{ 
-//   try {
-//     var token = req.cookies.token
-//     var ketqua = jwt.verify(token, 'matkhau')   
-//     var name = req.cookies.name
-//     if(ketqua) {    
-//         Product.find({ category: 'Tra-hoa-qua' }) 
-//             .limit(4)
-//             .then((products) => {
-//                 res.render('home', {  
-//                     name,
-//                     products: mutipleMongooseToObject(products),
-//                 });
-//             })
-//             .catch(next);
-//     } 
-//   } catch (error) {
-//     res.redirect('/account/login')
-//   }
-// })   
+route(app)      
+// 404 Not Found 
+app.use((req, res) => { 
+  return res.render('404', { 
+    layout: false
+  })
+})
 // Delete Cookies 
 app.get('/account/logout',(req, res, next)=>{ 
   res.clearCookie('name')  
