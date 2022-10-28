@@ -105,6 +105,9 @@
   position: relative;
   overflow: hidden; }
 
+#detail .drink-item__img-wrap {
+  border: 1px solid #ddd; }
+
 #home .drink-item__img-wrap:hover .add-to-cart-part {
   animation: addToCartMoveIn 0.5s ease-in-out forwards; }
 
@@ -774,3 +777,155 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2; }
+
+#detail {
+  margin-top: var(--height-header); }
+
+#detail .img-product__represent-wrap {
+  border-radius: 4px;
+  border: 1px solid #ddd; }
+
+#detail .detail-infor {
+  padding: 0 80px; }
+
+#detail .detail-content {
+  border-bottom: 2px solid #ddd;
+  margin-bottom: 20px; }
+
+#detail .detail-heading {
+  font-size: 24px;
+  color: var(--main-color); }
+
+#detail .detail-price {
+  display: flex;
+  flex-direction: row;
+  align-items: center; }
+
+#detail .detail-price__label {
+  font-weight: bold;
+  font-size: 14px;
+  margin-right: 8px; }
+
+#detail .detail-price__content {
+  font-weight: bold;
+  font-size: 18px;
+  color: var(--main-color); }
+
+#detail .detail-quantity {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 16px;
+  align-items: center; }
+
+#detail .detail-quantity__label {
+  font-weight: bold;
+  font-size: 14px;
+  margin-right: 8px;
+  margin-bottom: 0; }
+
+#detail .detail-quantity__switch {
+  display: flex;
+  align-items: center; }
+
+#detail .increase-btn,
+#detail .decrease-btn {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #ddd;
+  background-color: #fff; }
+
+#detail .detail-quantity__number {
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  margin-bottom: 0;
+  text-align: center; }
+
+#detail .detail-content__button-list {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 16px; }
+
+#detail .detail-content__button {
+  width: 48%;
+  border: 1px solid #ddd;
+  color: var(--text-color);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 0;
+  font-weight: 600;
+  font-size: 14px; }
+
+#detail .detail-content__button i {
+  margin-right: 12px; }
+
+#detail .detail-content__button:hover {
+  color: #fff;
+  background-color: var(--main-color);
+  transition: all 0.3s linear; }
+
+#detail .detail-content__button p {
+  margin-bottom: 0; }
+
+#detail .detail-describle__content pre {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px; }
+
+#detail .detail-comment__heading,
+#detail .detail-describle__heading {
+  display: inline-block;
+  padding-top: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 2px;
+  border-bottom: 2px solid var(--main-color); }
+
+#detail .detail-comment__btn {
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  background-color: var(--main-color);
+  padding: 16px 20px;
+  margin: 20px 0;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600; }
+
+#detail .detail-comment__content {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 10px 20px;
+  margin-bottom: 16px; }
+
+#detail .detail-comment__content-infor {
+  display: inline-flex;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #000; }
+
+#detail .detail-comment__content-infor-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 4px; }
+
+#detail .detail-comment__content-infor-author {
+  display: flex;
+  flex-direction: column; }
+
+#detail .detail-comment__content-infor-name {
+  margin-bottom: 0;
+  font-size: 18px; }
+
+#detail .detail-comment__content-infor-time {
+  margin-bottom: 0;
+  font-size: 12px;
+  font-style: italic; }
+
+#detail .detail-comment__content-text {
+  padding-top: 10px;
+  font-size: 16px; }

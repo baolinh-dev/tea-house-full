@@ -96,7 +96,11 @@ class MenuController {
         } catch (error) {
             res.redirect('/account/login')
         }
-    }  
+    }   
+    // [GET] /menu/tra-hoa-qua/tra-vai 
+    travai(req, res, next) { 
+        res.render('detail/travai')
+    }
      // [GET] /menu/smoothies 
     smoothies(req, res, next) {    
         try {

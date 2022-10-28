@@ -489,3 +489,43 @@
 
 .showpassword input {
   margin-right: 8px; }
+
+#detail .owl-nav .owl-prev span,
+#detail .owl-nav .owl-next span {
+  display: block;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 30px;
+  background-color: #4D8A54;
+  border-radius: 50%;
+  color: var(--white-color);
+  font-size: 1.8rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); }
+
+#detail .owl-carousel {
+  position: relative; }
+
+#detail .img-product__tiny-wrap .owl-carousel {
+  margin-top: 20px !important; }
+
+#detail .owl-theme .owl-nav [class*="owl-"]:hover {
+  background: transparent;
+  color: white;
+  text-decoration: none; }
+
+#detail .owl-nav .owl-next {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-30%); }
+
+#detail .owl-nav .owl-prev {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-30%); }
+
+#detail .owl-nav .owl-next {
+  right: 0; }
+
+#detail .owl-nav .owl-prev {
+  left: 0; }
