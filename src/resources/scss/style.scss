@@ -1145,4 +1145,35 @@
 #detail .detail-comment__content-text {
     padding-top: 10px;
     font-size: 16px;
+}  
+#page404 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.box404 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.box404 h1 {
+    color: var(--main-color);
+    font-size: 200px;
+    margin: 0;
+}
+
+.box404 .subtitle {
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.box404 .content {
+    font-size: 28px;
+    font-weight: 600;
+    text-transform: capitalize;
 }
