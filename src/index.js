@@ -51,19 +51,20 @@ app.engine('.hbs', engine(
 app.set('view engine', 'hbs'); 
 app.set('views', path.join(__dirname, 'resources', 'views'));   
 // Route Init  
-route(app)      
+route(app)    
+// Delete Cookies 
+app.get('/account/logout',(req, res, next)=>{ 
+  res.clearCookie('name')  
+  res.clearCookie('token') 
+  res.redirect('/account/login')
+})   
 // 404 Not Found 
 app.use((req, res) => { 
   return res.render('404', { 
     layout: false
   })
 })
-// Delete Cookies 
-app.get('/account/logout',(req, res, next)=>{ 
-  res.clearCookie('name')  
-  res.clearCookie('token') 
-  res.redirect('/account/login')
-})
+
 
 // Nhận vào cổng PORT và chạy app    
 app.listen(port, () => {
