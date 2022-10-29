@@ -52,7 +52,7 @@ Account.findById(ketqua._id)
                         .catch(next);
                 } 
         } else { 
-            res.json('Bạn không có quyền vào trang admin này')
+            res.redirect('/')
         }
     })
 
@@ -151,8 +151,8 @@ Account.findById(ketqua._id)
                                 }) 
                                 .catch(next);
                         }       
-                        } else { 
-                            res.json('Bạn không có quyền vào trang admin này')
+                        } else {  
+                            res.redirect('/')
                         }
                 })
             }
@@ -270,8 +270,8 @@ Account.findById(ketqua._id)
                                 }) 
                                 .catch(next);
                         }
-                    } else  { 
-                        res.json('Bạn không có quyền vào trang admin này')
+                    } else  {  
+                        res.redirect('/')
                     }
                 })
             }
