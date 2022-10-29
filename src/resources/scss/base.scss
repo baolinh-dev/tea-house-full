@@ -357,16 +357,21 @@
     outline: none;
 }
 
-.footer-content-sale-btn {
+.footer-content-sale-btn { 
+    text-decoration: none;
     position: absolute;
     right: -2px;
-    padding: 24px;
+    padding: 22px;
     border-radius: 42px;
     background-color: var(--main-color);
     color: var(--white-color);
     border: none;
     outline: none;
-    font-weight: 700;
+    font-weight: 700; 
+    cursor: pointer;
+} 
+.footer-content-sale-btn:hover { 
+    color: #fff;
 }
 
 .copyright {
