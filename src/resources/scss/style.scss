@@ -576,7 +576,8 @@
     border: 1px solid #ddd;
 }
 
-#contact .contact-form__text-area {
+#contact .contact-form__text-area { 
+    height: 320px;
     width: 100%;
     padding: 12px;
     margin-bottom: 12px;
