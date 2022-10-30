@@ -12,7 +12,8 @@ class AdminController {
         try {
             var token = req.cookies.token
             var ketqua = jwt.verify(token, 'matkhau')  
-            var name = req.cookies.name  
+            var name = req.cookies.name   
+            var avatar = req.cookies.avatar  
             var page = parseInt(req.query.page);   
             if(ketqua) {      
 Account.findById(ketqua._id)  
@@ -28,7 +29,8 @@ Account.findById(ketqua._id)
                                 res.render('admin/account', {    
                                     layout: false, 
                                     deletedCount,
-                                    tongSoPage,
+                                    tongSoPage, 
+                                    avatar,
                                     name,
                                     accounts: mutipleMongooseToObject(accounts),
                                 });
@@ -43,7 +45,8 @@ Account.findById(ketqua._id)
                                 res.render('admin/account', {  
                                     layout: false, 
                                     deletedCount,
-                                    tongSoPage, 
+                                    tongSoPage,  
+                                    avatar,
                                     name,
                                     accounts: mutipleMongooseToObject(accounts),
                                 });
@@ -112,7 +115,8 @@ Account.findById(ketqua._id)
         try {
             var token = req.cookies.token
             var ketqua = jwt.verify(token, 'matkhau')   
-            var name = req.cookies.name
+            var name = req.cookies.name 
+            var avatar = req.cookies.avatar
             if(ketqua) {   
                 Account.findById(ketqua._id)  
                     .then((accounts) => {  
@@ -128,7 +132,8 @@ Account.findById(ketqua._id)
                                         res.render('admin/warehouse', {  
                                             layout: false, 
                                             deletedCount,
-                                            tongSoPage, 
+                                            tongSoPage,  
+                                            avatar,
                                             name,
                                             products: mutipleMongooseToObject(products),
                                         });
@@ -143,7 +148,8 @@ Account.findById(ketqua._id)
                                         res.render('admin/warehouse', {  
                                             layout: false, 
                                             deletedCount,
-                                            tongSoPage, 
+                                            tongSoPage,   
+                                            avatar,
                                             name,
                                             products: mutipleMongooseToObject(products),
                                         });
@@ -231,7 +237,8 @@ Account.findById(ketqua._id)
         try {
             var token = req.cookies.token
             var ketqua = jwt.verify(token, 'matkhau')   
-            var name = req.cookies.name
+            var name = req.cookies.name 
+            var avatar = req.cookies.avatar 
             if(ketqua) {   
                 Account.findById(ketqua._id)  
                 .then((accounts) => {  
@@ -247,7 +254,8 @@ Account.findById(ketqua._id)
                                         res.render('admin/feedback', {  
                                             layout: false, 
                                             deletedCount,
-                                            tongSoPage, 
+                                            tongSoPage,  
+                                            avatar,
                                             name,
                                             feedbacks: mutipleMongooseToObject(feedbacks),
                                         });
@@ -262,7 +270,8 @@ Account.findById(ketqua._id)
                                         res.render('admin/feedback', {  
                                             layout: false, 
                                             deletedCount,
-                                            tongSoPage, 
+                                            tongSoPage,  
+                                            avatar,
                                             name,
                                             feedbacks: mutipleMongooseToObject(feedbacks),
                                         });

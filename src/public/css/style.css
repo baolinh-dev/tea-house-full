@@ -660,6 +660,10 @@
 #admin {
   padding: 40px; }
 
+#admin .admin-infor {
+  display: flex;
+  align-items: center; }
+
 #admin .menu {
   border-right: 1px solid #ddd;
   height: 100vh; }

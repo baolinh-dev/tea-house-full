@@ -71,9 +71,12 @@
                     <h1 class="admin-content-heading">
                         Quản lí tài khoản
                     </h1>
-                    <h1 class="admin-name-heading">
-                        {{name}}
-                    </h1>
+                    <div class="admin-infor">
+                        <img style="border-radius: 50%; margin-right: 8px" width="32" src="{{avatar}}" alt="">
+                        <h1 class="admin-name-heading">
+                            {{name}}
+                        </h1>
+                    </div>
                 </div>
                 <div class="admin-edit">
     <form method="POST" action="/admin/warehouse/{{products._id}}?_method=PUT">

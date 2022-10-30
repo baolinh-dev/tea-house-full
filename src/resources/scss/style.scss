@@ -827,6 +827,11 @@
 } 
 #admin {
     padding: 40px;
+} 
+
+#admin .admin-infor { 
+    display: flex; 
+    align-items: center;
 }
 
 #admin .menu {
