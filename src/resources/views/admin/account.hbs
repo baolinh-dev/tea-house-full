@@ -108,10 +108,11 @@
                     <thead>
                         <tr class="d-flex">
                             <th class="col-2" scope="col">Name</th>
-                            <th class="col-3" scope="col">Email</th>
+                            <th class="col-2" scope="col">Email</th>
+                            <th class="col-2" scope="col">Avatar</th>
                             <th class="col-1" scope="col">Phone</th>
                             <th class="col-1" scope="col">User Name</th>
-                            <th class="col-3" scope="col">Pass Word</th>
+                            <th class="col-2" scope="col">Pass Word</th>
                             <th class="col-1" scope="col">Role</th>
                             <th class="col-2" scope="col" colspan="2"></th>
                         </tr>
@@ -120,10 +121,11 @@
                         {{#each accounts}}
                         <tr class="d-flex">
                             <td class="col-2">{{this.name}}</td>
-                            <td class="col-3">{{this.email}}</td>
+                            <td class="col-2">{{this.email}}</td>
+                            <td class="col-2">{{this.avatar}}</td>
                             <td class="col-1">{{this.phone}}</td>
                             <td class="col-1">{{this.username}}</td>
-                            <td class="col-3 table__password">  
+                            <td class="col-2 table__password">  
                                 {{this.password}} 
                             </td>  
                             <td class="col-1">{{this.role}}</td>
