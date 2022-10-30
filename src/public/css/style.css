@@ -549,6 +549,7 @@
   font-weight: bold; }
 
 /* Login Page */
+#upload,
 #register,
 #login {
   background-image: url("/img/background-login.jpg");
@@ -957,3 +958,39 @@
   font-size: 28px;
   font-weight: 600;
   text-transform: capitalize; }
+
+#upload .uploadAvatarForm {
+  border: 1px solid #ddd;
+  padding: 12px;
+  background-color: #fff;
+  border-radius: 20px; }
+
+#upload .uploadAvatarForm_heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+#upload .uploadAvatarForm_heading h3 {
+  font-size: 20px;
+  color: var(--main-color); }
+
+#upload .form-control {
+  height: 40px;
+  border-radius: 4px;
+  padding: 4px;
+  margin-bottom: 12px; }
+
+#upload .btn-save-wrap {
+  display: flex;
+  justify-content: center; }
+
+#upload .btn-save {
+  background-color: var(--main-color);
+  padding: 12px 20px;
+  outline: none;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  margin: 8px 0; }
