@@ -2,7 +2,8 @@ const Account = require('../models/Account')
 const Product = require('../models/Product') 
 const { mongooseToObject } = require('../../util/mogoose');
 const { mutipleMongooseToObject } = require('../../util/mogoose'); 
-const jwt = require('jsonwebtoken');  
+const jwt = require('jsonwebtoken');   
+const multer  = require('multer')  
 const { json } = require('express'); 
 
 class AccountController {  
@@ -79,6 +80,17 @@ class AccountController {
                 });
             })
             .catch(next); 
+    } 
+    handleUploadFile(req, res, next) { 
+        if (req.fileValidationError) {
+            return res.send(req.fileValidationError);
+        }
+        else if (!req.file) {
+            return res.send('Please select an image to upload');
+        }
+        // Display uploaded image for user validation  
+        const urlAvatarUser = `/img/avatar/${req.file.filename}`
+        res.send(`You have uploaded this image: <hr/><img src="${urlAvatarUser}" width="300"><hr /><a href="/upload">Upload another image</a>`);
     }
 } 
 module.exports = new AccountController; 
