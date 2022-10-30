@@ -9,7 +9,8 @@ class HomeController {
         try {
             var token = req.cookies.token
             var ketqua = jwt.verify(token, 'matkhau')    
-            var name = req.cookies.name  
+            var name = req.cookies.name   
+            var avatar = req.cookies.avatar  
             if(ketqua) {                 
                 Account.findById(ketqua._id) 
                     .then((accounts) => {
@@ -17,7 +18,8 @@ class HomeController {
                             Product.find({ category: 'Tra-hoa-qua' }) 
                                 .limit(4)
                                 .then((products) => {
-                                    res.render('home', {  
+                                    res.render('home', {   
+                                        avatar, 
                                         name,
                                         products: mutipleMongooseToObject(products),
                                     });
@@ -34,11 +36,13 @@ class HomeController {
     } 
     // [GET] /ca-phe
     caphe(req, res, next) { 
-        var name = req.cookies.name
+        var name = req.cookies.name  
+        var avatar = req.cookies.avatar  
         Product.find({ category: 'Ca-phe' }) 
             .limit(4)
             .then((products) => {
-                res.render('home', { 
+                res.render('home', {  
+                    avatar, 
                     name,
                     products: mutipleMongooseToObject(products),
                 });
@@ -47,11 +51,13 @@ class HomeController {
     } 
     // [GET] /smoothies
     smoothies(req, res, next) { 
-        var name = req.cookies.name
+        var name = req.cookies.name 
+        var avatar = req.cookies.avatar 
         Product.find({ category: 'Smoothies' }) 
             .limit(4)
             .then((products) => {
-                res.render('home', { 
+                res.render('home', {  
+                    avatar, 
                     name,
                     products: mutipleMongooseToObject(products),
                 });
@@ -60,11 +66,13 @@ class HomeController {
     } 
     // [GET] /banh-ngot
     banhngot(req, res, next) { 
-        var name = req.cookies.name
+        var name = req.cookies.name 
+        var avatar = req.cookies.avatar 
         Product.find({ category: 'Banh-ngot' }) 
             .limit(4)
             .then((products) => {
-                res.render('home', { 
+                res.render('home', {  
+                    avatar, 
                     name,
                     products: mutipleMongooseToObject(products),
                 });

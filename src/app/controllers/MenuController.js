@@ -10,7 +10,8 @@ class MenuController {
             var token = req.cookies.token
             var ketqua = jwt.verify(token, 'matkhau')  
             if(ketqua) {  
-                var name = req.cookies.name
+                var name = req.cookies.name 
+                var avatar = req.cookies.avatar 
                 var page = parseInt(req.query.page); 
                 if (page) {  
                     if (page < 1) { 
@@ -22,7 +23,8 @@ class MenuController {
                     .then((products) => { 
                         Product.countDocuments({}).then((total)=>{  
                             var tongSoPage = Math.ceil(total / PAGE_SIZE) 
-                            res.render('menu', {  
+                            res.render('menu', {   
+                                avatar,
                                 name,
                                 tongSoPage,
                                 products: mutipleMongooseToObject(products),
@@ -36,7 +38,9 @@ class MenuController {
                         .then((products) => {   
                             Product.countDocuments({}).then((total)=>{  
                                 var tongSoPage = Math.ceil(total / PAGE_SIZE) 
-                                res.render('menu', {  
+                                res.render('menu', {   
+                                    avatar,  
+                                    name, 
                                     tongSoPage, 
                                     products: mutipleMongooseToObject(products),
                                 });
@@ -55,7 +59,8 @@ class MenuController {
             var token = req.cookies.token
             var ketqua = jwt.verify(token, 'matkhau')  
             if(ketqua) {  
-                var name = req.cookies.name
+                var name = req.cookies.name 
+                var avatar = req.cookies.avatar 
                 var page = parseInt(req.query.page); 
                 if (page) {  
                     if (page < 1) { 
@@ -70,7 +75,8 @@ class MenuController {
                         Product.countDocuments({category: 'Tra-hoa-qua'}) 
                             .then((total)=>{  
                             var tongSoPage = Math.ceil(total / PAGE_SIZE) 
-                            res.render('productDetails/trahoaqua', { 
+                            res.render('productDetails/trahoaqua', {  
+                                avatar, 
                                 name, 
                                 tongSoPage,
                                 productsTraHoaQua: mutipleMongooseToObject(productsTraHoaQua),
@@ -84,7 +90,9 @@ class MenuController {
                         Product.find({ category: 'Tra-hoa-qua' }).countDocuments({}) 
                         .then((total)=>{  
                             var tongSoPage = Math.ceil(total / PAGE_SIZE) 
-                            res.render('productDetails/trahoaqua', {  
+                            res.render('productDetails/trahoaqua', {   
+                                avatar,  
+                                name, 
                                 tongSoPage, 
                                 productsTraHoaQua: mutipleMongooseToObject(productsTraHoaQua),
                             });
@@ -107,7 +115,8 @@ class MenuController {
             var token = req.cookies.token
             var ketqua = jwt.verify(token, 'matkhau')  
             if(ketqua) {  
-                var name = req.cookies.name
+                var name = req.cookies.name  
+                var avatar = req.cookies.avatar 
                 var page = parseInt(req.query.page); 
                 if (page) {  
                     if (page < 1) { 
@@ -121,7 +130,8 @@ class MenuController {
                     .then((productsSmoothies) => {  
                         Product.countDocuments({category: 'Smoothies'}).then((total)=>{  
                             var tongSoPage = Math.ceil(total / PAGE_SIZE) 
-                            res.render('productDetails/smoothies', {  
+                            res.render('productDetails/smoothies', {   
+                                avatar, 
                                 name,
                                 tongSoPage,
                                 productsSmoothies: mutipleMongooseToObject(productsSmoothies),
@@ -135,7 +145,9 @@ class MenuController {
                         Product.find({ category: 'Smoothies' }).countDocuments({}) 
                         .then((total)=>{  
                             var tongSoPage = Math.ceil(total / PAGE_SIZE) 
-                            res.render('productDetails/smoothies', {  
+                            res.render('productDetails/smoothies', {   
+                                avatar, 
+                                name,
                                 tongSoPage, 
                                 productsSmoothies: mutipleMongooseToObject(productsSmoothies),
                             });
@@ -154,7 +166,8 @@ class MenuController {
             var token = req.cookies.token
             var ketqua = jwt.verify(token, 'matkhau')  
             if(ketqua) {  
-                var name = req.cookies.name
+                var name = req.cookies.name 
+                var avatar = req.cookies.avatar 
                 var page = parseInt(req.query.page); 
                 if (page) {  
                     if (page < 1) { 
@@ -168,7 +181,8 @@ class MenuController {
                     .then((productsCaphe) => { 
                         Product.countDocuments({category: 'Smoothies'}).then((total)=>{  
                             var tongSoPage = Math.ceil(total / PAGE_SIZE) 
-                            res.render('productDetails/caphe', {  
+                            res.render('productDetails/caphe', {   
+                                avatar, 
                                 name,
                                 tongSoPage,
                                 productsCaphe: mutipleMongooseToObject(productsCaphe),
@@ -182,7 +196,9 @@ class MenuController {
                         Product.find({ category: 'Ca-phe' }).countDocuments({}) 
                         .then((total)=>{  
                             var tongSoPage = Math.ceil(total / PAGE_SIZE) 
-                            res.render('productDetails/caphe', {  
+                            res.render('productDetails/caphe', {   
+                                avatar, 
+                                name,
                                 tongSoPage, 
                                 productsCaphe: mutipleMongooseToObject(productsCaphe),
                             });
@@ -201,7 +217,8 @@ class MenuController {
             var token = req.cookies.token
             var ketqua = jwt.verify(token, 'matkhau')  
             if(ketqua) {  
-                var name = req.cookies.name
+                var name = req.cookies.name 
+                var avatar = req.cookies.avatar 
                 var page = parseInt(req.query.page); 
                 if (page) {  
                     if (page < 1) { 
@@ -215,7 +232,8 @@ class MenuController {
                     .then((productsBanhngot) => { 
                         Product.countDocuments({category: 'Banh-ngot'}).then((total)=>{  
                             var tongSoPage = Math.ceil(total / PAGE_SIZE) 
-                            res.render('productDetails/banhngot', {  
+                            res.render('productDetails/banhngot', {   
+                                avatar, 
                                 name,
                                 tongSoPage,
                                 productsBanhngot: mutipleMongooseToObject(productsBanhngot),
@@ -229,7 +247,9 @@ class MenuController {
                         Product.find({ category: 'Banh-ngot' }).countDocuments({}) 
                         .then((total)=>{  
                             var tongSoPage = Math.ceil(total / PAGE_SIZE) 
-                            res.render('productDetails/banhngot', {  
+                            res.render('productDetails/banhngot', {   
+                                avatar,  
+                                name,
                                 tongSoPage, 
                                 productsBanhngot: mutipleMongooseToObject(productsBanhngot),
                             });

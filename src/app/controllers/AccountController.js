@@ -5,6 +5,7 @@ const { mutipleMongooseToObject } = require('../../util/mogoose');
 const jwt = require('jsonwebtoken');   
 const multer  = require('multer')  
 const { json } = require('express'); 
+const { FALSE } = require('node-sass');
 
 class AccountController {  
     // [GET] /account/register
@@ -37,10 +38,8 @@ class AccountController {
     }
     // [GET] /account/login
     login(req, res, next) { 
-        var name = req.cookies.name
         res.render('account/login', {   
             layout: false,
-            name,
         })
     }    
     // [POST] /account/enter 
@@ -53,11 +52,14 @@ class AccountController {
                       var token = jwt.sign({ _id: accounts._id},'matkhau')     
                       res.setHeader('Content-Type', 'text/html');
                       res.cookie('token', token) 
-                      res.cookie('name', accounts.name)   
-                      if(accounts.role === 'user') { 
-                            res.redirect('/')
-                      } else if (accounts.role === 'admin') { 
-                            res.redirect('/admin/account')
+                      res.cookie('name', accounts.name)    
+                      res.cookie('avatar', accounts.avatar)
+                      if(accounts.role === 'user') {  
+                        // redirect
+                        res.redirect('/')
+                      } else if (accounts.role === 'admin') {   
+                        // redirect 
+                        res.redirect('/admin/account')
                       }
                   } else { 
                       res.json('Dang nhap that bai')
@@ -88,9 +90,16 @@ class AccountController {
         else if (!req.file) {
             return res.send('Please select an image to upload');
         }
-        // Display uploaded image for user validation  
-        const urlAvatarUser = `/img/avatar/${req.file.filename}`
-        res.send(`You have uploaded this image: <hr/><img src="${urlAvatarUser}" width="300"><hr /><a href="/upload">Upload another image</a>`);
+        // Display uploaded image for user validation   
+        var name = req.cookies.name 
+        const urlAvatarUser = `/img/avatar/${req.file.filename}` 
+        const query = { name }
+            Account.update(query,
+                          {$set : {"avatar": urlAvatarUser}},
+                          {upsert:false,
+                          multi:true})
+            .catch(next);  
+        res.send(`You have uploaded this image: <hr/><img src="${urlAvatarUser}" width="300"><hr /><a href="/upload">Upload another image</a>`); 
     }
 } 
 module.exports = new AccountController; 

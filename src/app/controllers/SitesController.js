@@ -9,8 +9,9 @@ class HomeController {
             var token = req.cookies.token
             var ketqua = jwt.verify(token, 'matkhau')  
             if(ketqua) {  
-                var name = req.cookies.name
-                res.render('contact', { name })
+                var name = req.cookies.name 
+                var avatar = req.cookies.avatar 
+                res.render('contact', { avatar, name })
             } 
         } catch (error) {
             res.redirect('/account/login')
@@ -22,8 +23,9 @@ class HomeController {
             var token = req.cookies.token
             var ketqua = jwt.verify(token, 'matkhau')  
             if(ketqua) {  
-                var name = req.cookies.name
-                res.render('news', { name })
+                var name = req.cookies.name 
+                var avatar = req.cookies.avatar 
+                res.render('news', { avatar, name })
             } 
         } catch (error) {
             res.redirect('/account/login')
@@ -35,8 +37,9 @@ class HomeController {
             var token = req.cookies.token
             var ketqua = jwt.verify(token, 'matkhau')  
             if(ketqua) {  
-                var name = req.cookies.name
-                res.render('introduce', { name })
+                var name = req.cookies.name 
+                var avatar = req.cookies.avatar 
+                res.render('introduce', { avatar, name })
             }
         } catch (error) {
             res.redirect('/account/login')

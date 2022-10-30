@@ -4,7 +4,8 @@ const mongooseDelete = require('mongoose-delete');
 
 const Account = new Schema( 
     { 
-        name: { type: String, require: true },
+        name: { type: String, require: true }, 
+        avatar: { type: String},
         email: { type: String},
         phone: { type: String}, 
         username: { type: String},  
