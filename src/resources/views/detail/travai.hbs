@@ -113,40 +113,58 @@
             </div>
         </div>
     </div>
-    <div class="detail-comment">
+    <div class="detail-comment"> 
         <div class="container">
             <h4 class="detail-comment__heading">Bình luận</h4>
+            <div id="detail-comment__content-wrap"></div> 
+            <form action="/" method="GET"> 
+                <textarea class="contact-form__text-area" name="comment"></textarea>
+                <button type="submit" class="detail-comment__btn">Thêm bình luận</button> 
+            </form>
+            <p style="display: none;" class="nameComment">{{name}}</p>
+            <p style="display: none;" class="avatarComment">{{avatar}}</p>
+        </div>
+    </div>
+</section> 
+{{!-- Ajax --}} 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+    integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script> 
+    $(document).ready(function () {
+        $("button").on("click",function (e) {   
+            e.preventDefault() 
+            let content = $('.contact-form__text-area').val()  
+            const name = document.querySelector('.nameComment').innerText
+            const avatar =  document.querySelector('.avatarComment').innerText
+            var dataComment = { 
+                content, name, avatar
+            } 
+            $.ajax({ 
+                url: '/menu/tra-hoa-qua/tra-vai', 
+                data: JSON.stringify(dataComment),
+                method: 'POST',  
+            }).done(function (data) { 
+                const nodeSuper = document.querySelector('#detail-comment__content-wrap')
+                var nodeChild = document.createElement("div"); 
+                nodeChild.innerHTML = ` 
             <div class="detail-comment__content">
                 <div class="detail-comment__content-infor">
-                    <img src="https://vivureviews.com/wp-content/uploads/2022/08/avatar-vo-danh-11.jpg" alt=""
+                    <img src="${avatar}" alt=""
                         class="detail-comment__content-infor-avatar">
                     <div class="detail-comment__content-infor-author">
-                        <h4 class="detail-comment__content-infor-name">Trần Bảo Linh</h4>
+                        <h4 class="detail-comment__content-infor-name">${name}</h4>
                         <p class="detail-comment__content-infor-time">28/10/2022</p>
                     </div>
                 </div>
                 <p class="detail-comment__content-text">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Expedita laborum quas inventore iusto
-                    consequuntur sapiente fugiat earum placeat, amet, voluptates est ab sed voluptate. Qui explicabo
-                    deserunt ratione architecto voluptates!
+                    ${content}
                 </p>
-            </div>
-            <textarea class="myWYSIWYG"></textarea>
-            <button class="detail-comment__btn">Thêm bình luận</button>
-        </div>
-    </div>
-</section> 
-    <!-- WYSIWYG -->
-    <script>
-        tinymce.init({
-            selector: '.myWYSIWYG',
-            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect',
-            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-            tinycomments_mode: 'embedded',
-            tinycomments_author: 'Author name',
-            mergetags_list: [
-                { value: 'First.Name', title: 'First Name' },
-                { value: 'Email', title: 'Email' },
-            ],
+            </div>  
+                ` 
+                nodeSuper.appendChild(nodeChild)  
+                console.log(data)
+            });
         });
-    </script> 
+    });
+</script> 

@@ -106,8 +106,12 @@ class MenuController {
         }
     }   
     // [GET] /menu/tra-hoa-qua/tra-vai 
-    travai(req, res, next) { 
-        res.render('detail/travai')
+    travai(req, res, next) {  
+        var name = req.cookies.name  
+        var avatar = req.cookies.avatar
+        res.render('detail/travai', { 
+            name, avatar
+        })
     }
      // [GET] /menu/smoothies 
     smoothies(req, res, next) {    
@@ -261,6 +265,9 @@ class MenuController {
         } catch (error) {
             res.redirect('/account/login')
         }
-    }  
+    }   
+    travaiComment(req, res, next) { 
+        res.json('Thanh cong')
+    }
 } 
 module.exports = new MenuController;
