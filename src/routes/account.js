@@ -4,6 +4,7 @@ const accountController = require('../app/controllers/AccountController');
 
 router.get('/register', accountController.register); 
 router.get('/login', accountController.login);   
+router.get('/upload-avatar', accountController.uploadAvatar);   
 router.post('/store', accountController.store);  
 router.post('/enter', accountController.enter); 
 module.exports = router;

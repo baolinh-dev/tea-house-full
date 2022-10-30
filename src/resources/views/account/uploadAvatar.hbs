@@ -1,0 +1,17 @@
+<form method="POST" action="/upload-profile-pic" enctype="multipart/form-data">
+    <div>
+        <h3>Upload single file:</h3>
+        <div>
+            <span>Upload your profile picture:</span>   
+            <p>{{nameCookies}}</p> 
+            <input type="text" class="form-control" value="{{nameUser}}" id="name" name="name">
+            <input type="text" class="form-control" value="{{phoneUser}}" id="phone" name="phone">
+            <input type="text" class="form-control" value="{{usernameUser}}" id="username" name="username">
+            <input type="text" class="form-control" value="{{emailUser}}" id="email" name="email">
+            <input type="file" name="profile_pic" />
+        </div>
+    </div>
+    <div>
+        <button class="btn-save" type="submit">Upload</button>
+    </div>
+</form>

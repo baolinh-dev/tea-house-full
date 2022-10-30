@@ -63,6 +63,22 @@ class AccountController {
                   }
               }) 
               .catch(next);
+    } 
+    uploadAvatar(req, res, next) {  
+        var nameCookies = req.cookies.name 
+        Account.find({ "name": nameCookies}) 
+            .then((accounts) => { 
+                var nameUser = accounts[0].name
+                var emailUser = accounts[0].email
+                var phoneUser = accounts[0].phone
+                var usernameUser = accounts[0].username
+                res.render('account/uploadAvatar', {  
+                    nameCookies,
+                    layout: false, 
+                    nameUser, emailUser, phoneUser, usernameUser
+                });
+            })
+            .catch(next); 
     }
 } 
 module.exports = new AccountController; 
