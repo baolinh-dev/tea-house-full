@@ -116,15 +116,31 @@
     <div class="detail-comment"> 
         <div class="container">
             <h4 class="detail-comment__heading">Bình luận</h4>
-            <div id="detail-comment__content-wrap"></div> 
-            <form action="/" method="GET"> 
+                <div id="detail-comment__content-wrap">
+                    {{#each comments}}
+                    <div class="detail-comment__content">
+                        <div class="detail-comment__content-infor">
+                            <img src="{{this.avatar}}" alt="" class="detail-comment__content-infor-avatar">
+                            <div class="detail-comment__content-infor-author">
+                                <h4 class="detail-comment__content-infor-name">{{this.name}}</h4>
+                                <p class="detail-comment__content-infor-time">28/10/2022</p>
+                            </div>
+                        </div>
+                        <p class="detail-comment__content-text">
+                            {{this.comment}}
+                        </p>
+                    </div>
+                    {{/each }}
+                </div>
+            <form action="/menu/tra-hoa-qua/tra-vai" method="POST"> 
                 <textarea class="contact-form__text-area" name="comment"></textarea>
                 <button type="submit" class="detail-comment__btn">Thêm bình luận</button> 
             </form>
             <p style="display: none;" class="nameComment">{{name}}</p>
             <p style="display: none;" class="avatarComment">{{avatar}}</p>
         </div>
-    </div>
+    </div> 
+
 </section> 
 {{!-- Ajax --}} 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
@@ -133,21 +149,16 @@
 <script> 
     $(document).ready(function () {
         $("button").on("click",function (e) {   
-            e.preventDefault() 
             let content = $('.contact-form__text-area').val()  
             const name = document.querySelector('.nameComment').innerText
             const avatar =  document.querySelector('.avatarComment').innerText
             var dataComment = { 
                 content, name, avatar
-            } 
-            $.ajax({ 
-                url: '/menu/tra-hoa-qua/tra-vai', 
-                data: JSON.stringify(dataComment),
-                method: 'POST',  
-            }).done(function (data) { 
-                const nodeSuper = document.querySelector('#detail-comment__content-wrap')
-                var nodeChild = document.createElement("div"); 
-                nodeChild.innerHTML = ` 
+            }  
+            const nodeSuper = document.querySelector('#detail-comment__content-wrap')
+            var nodeChild = document.createElement("div");
+            
+            nodeChild.innerHTML = ` 
             <div class="detail-comment__content">
                 <div class="detail-comment__content-infor">
                     <img src="${avatar}" alt=""
@@ -161,10 +172,8 @@
                     ${content}
                 </p>
             </div>  
-                ` 
-                nodeSuper.appendChild(nodeChild)  
-                console.log(data)
-            });
+                `
+            nodeSuper.appendChild(nodeChild)  
         });
     });
 </script> 

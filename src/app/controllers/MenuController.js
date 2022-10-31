@@ -1,4 +1,5 @@
-const Product = require('../models/Product') 
+const Product = require('../models/Product')  
+const Comment = require('../models/Comment')  
 const { mutipleMongooseToObject } = require('../../util/mogoose')  
 const cookieParser = require('cookie-parser') 
 const jwt = require('jsonwebtoken') 
@@ -109,9 +110,24 @@ class MenuController {
     travai(req, res, next) {  
         var name = req.cookies.name  
         var avatar = req.cookies.avatar
-        res.render('detail/travai', { 
-            name, avatar
-        })
+        Comment.find({}) 
+            .then((comments) => { 
+                res.render('detail/travai', {  
+                    name, avatar,
+                    comments: mutipleMongooseToObject(comments)
+                })
+            }) 
+            .catch(next)
+    } 
+    travaiComment(req, res, next) {    
+        var name = req.cookies.name  
+        var avatar = req.cookies.avatar   
+        var comment = req.body.comment 
+
+        Comment.create( 
+            { name: name, avatar: avatar, comment: comment},  
+        );  
+
     }
      // [GET] /menu/smoothies 
     smoothies(req, res, next) {    
@@ -266,8 +282,5 @@ class MenuController {
             res.redirect('/account/login')
         }
     }   
-    travaiComment(req, res, next) { 
-        res.json('Thanh cong')
-    }
 } 
 module.exports = new MenuController;
