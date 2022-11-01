@@ -345,7 +345,7 @@ Account.findById(ketqua._id)
             res.redirect('/account/login')
         }
     }
-     // [GET] /admin/feedback/:id/edit
+    // [GET] /admin/feedback/:id/edit
     editFeedback(req, res, next) {
         Feedback.findById(req.params.id)
             .then((feedbacks) => {
@@ -356,15 +356,38 @@ Account.findById(ketqua._id)
             })
             .catch(next); 
     }   
+    // [GET] /admin/comment/:id/edit
+    editComment(req, res, next) {
+        Comment.findById(req.params.id)
+            .then((comments) => {
+                res.render('admin/editComment', { 
+                    layout: false,
+                    comments: mongooseToObject(comments),
+                });
+            })
+            .catch(next); 
+    }   
     // [PUT] /admin/feedback/:id
     updateFeedback(req, res, next) {
         Feedback.updateOne({ _id: req.params.id }, req.body)
             .then(() => res.redirect('/admin/feedback'))
             .catch(next);  
     }    
+    // [PUT] /admin/comment/:id
+    updateComment(req, res, next) {
+        Comment.updateOne({ _id: req.params.id }, req.body)
+            .then(() => res.redirect('/admin/comment'))
+            .catch(next);  
+    }    
     // [DELETE] /admin/feedback/:id
     destroyFeedback(req, res, next) {
         Feedback.delete({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }  
+    // [DELETE] /admin/comment/:id
+    destroyComment(req, res, next) {
+        Comment.delete({ _id: req.params.id })
             .then(() => res.redirect('back'))
             .catch(next);
     }  
@@ -379,15 +402,38 @@ Account.findById(ketqua._id)
             })
             .catch(next); 
     }   
+    // [GET] /admin/feedback/trash
+    trashComment(req, res, next) {
+        Comment.findDeleted()
+            .then((comments) => {
+                res.render('admin/trashComment', { 
+                    layout: false,
+                    comments: mutipleMongooseToObject(comments),
+                });
+            })
+            .catch(next); 
+    }   
     // [PATCH] /admin/feedback/:id/restore  
     restoreFeedback(req, res, next) {
         Feedback.restore({ _id: req.params.id })
             .then(() => res.redirect('back'))
             .catch(next);
     }   
+    // [PATCH] /admin/feedback/:id/restore  
+    restoreComment(req, res, next) {
+        Comment.restore({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }   
     // [DELETE] /admin/feedback/:id/force
     forceDestroyFeedback(req, res, next) {
         Feedback.deleteOne({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }     
+    // [DELETE] /admin/feedback/:id/force
+    forceDestroyComment(req, res, next) {
+        Comment.deleteOne({ _id: req.params.id })
             .then(() => res.redirect('back'))
             .catch(next);
     }     

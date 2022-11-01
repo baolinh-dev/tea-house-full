@@ -76,7 +76,7 @@
                 action="/admin/feedback/trash/search">
             <div class="admin-heading">
                 <h1 class="admin-content-heading">
-                    Quản lí feedback
+                    Quản lí comments
                 </h1>
                 <div class="admin-infor">
                     <img style="border-radius: 50%; margin-right: 8px" width="32" src="{{avatar}}" alt="">
@@ -100,32 +100,23 @@
                         Save
                     </button>
                 </div>
-                <a class="text-link" href="/admin/feedback">
+                <a class="text-link" href="/admin/comment">
                     <i class="fa-solid fa-left-long"></i> Quay lại
                 </a>
                 <table class="table table-hover">
                     <thead>
                         <tr class="d-flex">
-                            <th class="col-1" scope="col">#</th>
-                            <th class="col-2" scope="col">Full Name</th>
-                            <th class="col-2" scope="col">Email</th>
-                            <th class="col-2" scope="col">Phone</th>
-                            <th class="col-3" scope="col">Content</th> 
-                            <th class="col-2" scope="col" colspan="2"> 
-
-                            </th>
+                            <th class="col-2" scope="col">Name</th>
+                            <th class="col-4" scope="col">Avatar</th>
+                            <th class="col-4" scope="col">Comment</th>
                         </tr>
                     </thead>
                     <tbody>  
-                        {{#each feedbacks}}
+                        {{#each comments}}
                         <tr class="d-flex">
-                            <td class="col-1" cope="row">{{sum @index 1}}</td>
-                            <td class="col-2">{{this.fullname}}</td>
-                            <td class="col-2">{{this.email}}</td>
-                            <td class="col-2">  
-                                <p class="table-data__text">{{this.phone}}</p>
-                            </td>
-                            <td class="col-3">{{this.content}}</td>
+                            <td class="col-2">{{this.name}}</td>
+                            <td class="col-4">{{this.avatar}}</td>
+                            <td class="col-4">{{this.comment}}</td>
                             <td class="col-2">
                                 <a href="" class="btn btn-link btn-restore" data-id="{{this._id}}">
                                     <i class="fa-solid fa-window-restore"></i>
@@ -270,19 +261,19 @@
         // When Dialog Confirm Show 
         $('#deleteCourseModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
-            feedbackId = button.data('id');
+            commentId = button.data('id');
         });
         // When delete Course btn clicked
         btnDeleteCourse.onclick = function () {
-            deleteForm.action = '/admin/feedback/' + feedbackId + '/force?_method=DELETE';
+            deleteForm.action = '/admin/comment/' + commentId + '/force?_method=DELETE';
             deleteForm.submit();
         }
         // Restore Btn Clicked 
         restoreBtn.click(function (e) {
             e.preventDefault();
-            var feedbackId = $(this).data('id')
+            var commentId = $(this).data('id')
             restoreForm.action =
-                '/admin/feedback/' + feedbackId + '/restore?_method=PATCH';
+                '/admin/comment/' + commentId + '/restore?_method=PATCH';
             restoreForm.submit();
         })
     })

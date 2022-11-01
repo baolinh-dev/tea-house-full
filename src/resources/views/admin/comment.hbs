@@ -75,7 +75,7 @@
         <form class="col-lg-10 content" method="GET" class="mt-4" action="/admin/feedback/search">
             <div class="admin-heading">
                 <h1 class="admin-content-heading">
-                    Quản lí tài khoản
+                    Quản lí comments
                 </h1>
                 <div class="admin-infor">
                     <img style="border-radius: 50%; margin-right: 8px" width="32" src="{{avatar}}" alt="">
@@ -99,7 +99,7 @@
                         Save
                     </button>
                 </div> 
-                <a class="text-link" href="/admin/feedback/trash">
+                <a class="text-link" href="/admin/comment/trash">
                     <i class="fa-solid fa-trash"></i> ({{deletedCount}})
                 </a>
                 <table class="table table-hover">
@@ -107,7 +107,7 @@
                         <tr class="d-flex">
                             <th class="col-2" scope="col">Name</th>
                             <th class="col-4" scope="col">Avatar</th>
-                            <th class="col-6" scope="col">Comment</th>
+                            <th class="col-4" scope="col">Comment</th>
                         </tr>
                     </thead>
                     <tbody>  
@@ -117,7 +117,7 @@
                             <td class="col-4">{{this.avatar}}</td>
                             <td class="col-4">{{this.comment}}</td>
                             <td class="col-2">
-                                <a href="/admin/feedback/{{this._id}}/edit" class="btn btn-link">
+                                <a href="/admin/comment/{{this._id}}/edit" class="btn btn-link">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
                                 <a href="" class="btn btn-link" data-id="{{this._id}}" data-bs-toggle="modal" data-bs-target="#deleteCourseModal">
@@ -283,48 +283,19 @@
         var courseId;
         var deleteForm = document.forms['delete-course-form'];
         var containerForm = document.forms['container-form'];
-        var btnDeleteCourse = document.getElementById('btn-delete-course');
+        var btnDeleteComment = document.getElementById('btn-delete-course');
         var checkboxAll = $('#checkbox-all');
         var courseItemCheckbox = $('input[name="courseIds[]"]')
         var checkAllSubmitBtn = $('.check-all-submit-btn')
         // When Dialog Confirm Show 
         $('#deleteCourseModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
-            feedbackId = button.data('id');
+            commentId = button.data('id');
         });
         // When delete Course btn clicked
-        btnDeleteCourse.onclick = function () {
-            deleteForm.action = '/admin/feedback/' + feedbackId + '?_method=DELETE';
+        btnDeleteComment.onclick = function () {
+            deleteForm.action = '/admin/comment/' + commentId + '?_method=DELETE';
             deleteForm.submit();
-        }
-        // Checkbox All clicked
-        checkboxAll.change(function () {
-            var isCheckedAll = $(this).prop('checked');
-            courseItemCheckbox.prop('checked', isCheckedAll);
-            renderCheckAllSubmitBtn()
-        })
-        // Course item checkbox changed
-        courseItemCheckbox.change(function () {
-            var isCheckedAll = courseItemCheckbox.length
-                === $('input[name="courseIds[]"]:checked').length;
-            checkboxAll.prop('checked', isCheckedAll);
-            renderCheckAllSubmitBtn()
-        });
-        // Check all submit button clicked
-        checkAllSubmitBtn.on('submit', function (e) {
-            var isSubmitable = !$(this).hasClass('disabled');
-            if (!isSubmitable) {
-                e.preventDefault();
-            }
-        })
-        // Re-render check all submit button
-        function renderCheckAllSubmitBtn() {
-            var checkedCount = $(' input[name="courseIds[]"]:checked').length;
-            if (checkedCount > 0) {
-                checkAllSubmitBtn.removeClass('disabled');
-            } else {
-                checkAllSubmitBtn.addClass('disabled');
-            }
         }
     })
     </script>

@@ -75,7 +75,7 @@
             <div class="col-lg-10 content">
                 <div class="admin-heading">
                     <h1 class="admin-content-heading">
-                        Quản lí nhà kho
+                        Quản lí comments
                     </h1>
                     <div class="admin-infor">
                         <img style="border-radius: 50%; margin-right: 8px" width="32" src="{{avatar}}" alt="">
@@ -85,28 +85,18 @@
                     </div>
                 </div>
                 <div class="admin-edit">
-    <form method="POST" action="/admin/warehouse/{{products._id}}?_method=PUT">
+    <form method="POST" action="/admin/comment/{{comments._id}}?_method=PUT">
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" value="{{products.name}}" id="name" name="name">
+            <input type="text" class="form-control" value="{{comments.name}}" id="name" name="name">
         </div>
         <div class="mb-3">
-            <label for="price" class="form-label">Price</label>
-            <input type="text" class="form-control" value="{{products.price}}" id="price" name="price">
+            <label for="avatar" class="form-label">Avatar</label>
+            <input type="text" class="form-control" value="{{comments.avatar}}" id="avatar" name="avatar">
         </div>
         <div class="mb-3">
-            <label for="image" class="form-label">Image</label>
-            <input type="text" class="form-control" value="{{products.image}}" id="image" name="image">
-        </div>
-        <div class="mb-3">
-            <label for="category" class="form-label">Category</label>
-        <select id="category" name="category" class="form-select" aria-label="Default select example">
-            <option selected>{{products.category}}</option>
-            <option value="Tra-hoa-qua">Trà hoa quả</option>
-            <option value="Ca-phe">Cà phê</option>
-            <option value="Smoothies">Smoothies</option>
-            <option value="Banh-ngot">Bánh ngọt</option>
-        </select>
+            <label for="comment" class="form-label">Phone</label> 
+            <textarea type="text" class="form-control" id="comment" name="comment"> {{comments.comment}}</textarea>
         </div>
         <button type="submit" class="btn btn-primary">Lưu lại</button>
     </form>

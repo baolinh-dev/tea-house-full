@@ -35,6 +35,12 @@ router.get('/feedback/search', adminController.searchFeedback);
 router.get('/feedback/trash/search', adminController.searchFeedbackTrash);  
 
 router.get('/comment', adminController.comment); 
+router.get('/comment/:id/edit', adminController.editComment);    
+router.put('/comment/:id', adminController.updateComment); 
+router.delete('/comment/:id', adminController.destroyComment);  
+router.get('/comment/trash', adminController.trashComment); 
+router.delete('/comment/:id/force', adminController.forceDestroyComment); 
+router.patch('/comment/:id/restore', adminController.restoreComment);   
 
 
 
