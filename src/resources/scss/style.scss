@@ -643,7 +643,8 @@
     box-shadow: 0px 6px 15px rgba($color: #000000, $alpha: 0.15);
     border-radius: 4px;
     position: relative;
-    overflow: hidden;
+    overflow: hidden; 
+    cursor: pointer;
 }
 
 #menu .drink-item__img-wrap:hover .add-to-cart-part {

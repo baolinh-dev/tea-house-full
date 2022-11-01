@@ -505,7 +505,8 @@
   box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
   position: relative;
-  overflow: hidden; }
+  overflow: hidden;
+  cursor: pointer; }
 
 #menu .drink-item__img-wrap:hover .add-to-cart-part {
   animation: addToCartMoveIn 0.5s ease-in-out forwards; }

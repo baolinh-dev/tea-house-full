@@ -146,7 +146,7 @@
     }
 })  
     </script> 
-    {{!-- <script src="../../../hehavior.js"></script>  --}}
+    {{!-- Next Previos Pagination --}}
     <script>  
         const urlSearchParams = new URLSearchParams(window.location.search);
         const params = Object.fromEntries(urlSearchParams.entries());
@@ -232,6 +232,34 @@
         }
         location.href = `/menu/banh-ngot?page=${previousPage}`;
     }     
+    </script> 
+    {{!-- Add to Cart --}} 
+    <script>  
+        var list = [] 
+        var quantityProduct = 1 
+        var check = false 
+        var product 
+        btnAddToCarts = document.querySelectorAll('.add-to-cart-part')
+        for (btnAddToCart of btnAddToCarts) {
+            btnAddToCart.onclick = function(event) {  
+                event.stopPropagation();  
+                var idProduct = this.dataset.id   
+                
+                for(listChild of list) { 
+                    if(listChild.idProduct === idProduct) {  
+                           listChild.quantityProduct++
+                        product = {  
+                            idProduct, quantityProduct
+                        }   
+                    } 
+                }     
+                product = {
+                    idProduct, quantityProduct
+                } 
+                list.push(product) 
+                console.log(list)
+            }
+        } 
     </script>
 </body>
 </html>

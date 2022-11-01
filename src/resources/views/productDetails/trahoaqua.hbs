@@ -29,10 +29,12 @@
                             <div class="row">
                                 {{#each productsTraHoaQua}}
                                 <div class="col-lg-3 col-md-6 col-6">
-                                    <div class="drink-item">
-                                        <div class="drink-item__img-wrap">
-                                            <img src="{{this.image}}" alt="" class="drink-item__img">
-                                            <div class="add-to-cart-part">
+                                    <div data-slug="{{this.slug}}" class="drink-item"> 
+                                        <div class="drink-item__img-wrap"> 
+                                            <a href="/menu/{{this.slug}}"> 
+                                                <img src="{{this.image}}" alt="" class="drink-item__img">
+                                            </a>
+                                            <div data-id="{{this._id}}" class="add-to-cart-part">
                                                 <p>thêm vào giỏ hàng</p>
                                             </div>
                                         </div>
