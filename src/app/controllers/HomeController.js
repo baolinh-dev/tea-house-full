@@ -16,7 +16,7 @@ class HomeController {
                     .then((accounts) => {
                         if(accounts.role == 'user' || accounts.role == 'admin') { 
                             Product.find({ category: 'Tra-hoa-qua' }) 
-                                .limit(4)
+                                .limit(8)
                                 .then((products) => {
                                     res.render('home', {   
                                         avatar, 

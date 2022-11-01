@@ -4,8 +4,8 @@ const menuController = require('../app/controllers/MenuController');
 
 router.get('/', menuController.index); 
 router.get('/tra-hoa-qua', menuController.trahoaqua);  
-router.get('/tra-hoa-qua/tra-vai', menuController.travai);   
-router.post('/tra-hoa-qua/tra-vai', menuController.travaiComment);  
+router.get('/tra-vai', menuController.travai);   
+router.post('/tra-vai', menuController.travaiComment);  
 router.get('/smoothies', menuController.smoothies); 
 router.get('/ca-phe', menuController.caphe); 
 router.get('/banh-ngot', menuController.banhngot); 

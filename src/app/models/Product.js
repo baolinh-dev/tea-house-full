@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;  
 const slug = require('mongoose-slug-generator');
 const mongooseDelete = require('mongoose-delete');
+const Schema = mongoose.Schema;  
 
 const Product = new Schema( 
     { 

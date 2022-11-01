@@ -103,7 +103,8 @@
   box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
   position: relative;
-  overflow: hidden; }
+  overflow: hidden;
+  cursor: pointer; }
 
 #detail .drink-item__img-wrap {
   border: 1px solid #ddd; }
