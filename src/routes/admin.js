@@ -32,7 +32,9 @@ router.get('/feedback/trash', adminController.trashFeedback);
 router.delete('/feedback/:id/force', adminController.forceDestroyFeedback);
 router.patch('/feedback/:id/restore', adminController.restoreFeedback);  
 router.get('/feedback/search', adminController.searchFeedback);  
-router.get('/feedback/trash/search', adminController.searchFeedbackTrash); 
+router.get('/feedback/trash/search', adminController.searchFeedbackTrash);  
+
+router.get('/comment', adminController.comment); 
 
 
 

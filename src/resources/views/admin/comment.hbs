@@ -63,7 +63,7 @@
                         <i class="fa-solid fa-envelope"></i>
                         <p>Feedbacks</p>
                     </a>
-                </li> 
+                </li>
                 <li class="menu-list__item">
                     <a href="/admin/feedback?page=1" class="menu-list__item-link">
                         <i class="fa-solid fa-comment"></i>
@@ -72,7 +72,7 @@
                 </li>
             </ul>
         </div>
-        <form class="col-lg-10 content" name="container-form" method="GET" class="mt-4" action="/admin/warehouse/search">
+        <form class="col-lg-10 content" method="GET" class="mt-4" action="/admin/feedback/search">
             <div class="admin-heading">
                 <h1 class="admin-content-heading">
                     Quản lí tài khoản
@@ -88,9 +88,9 @@
                 <div class="admin-table__options">
                     <div class="admin-table__options-search-wrap mt-3 mb-3">
                         <i class="fa-solid fa-magnifying-glass admin-table__options-search-icon"> </i>
-                        <input name="search" type="text" class="admin-table__options-search" placeholder="Tìm kiếm ... ">
+                        <input placeholder="Tìm kiếm ..." name="search" type="text" class="admin-table__options-search">
                     </div>
-                    <a class="btn-table" href="/admin/warehouse">
+                    <a class="btn-table" href="/admin/feedback">
                         <i class="fa-solid fa-arrow-rotate-right"></i>
                         Reset
                     </a>
@@ -99,32 +99,25 @@
                         Save
                     </button>
                 </div> 
-                <a class="text-link" href="/admin/warehouse/trash">
+                <a class="text-link" href="/admin/feedback/trash">
                     <i class="fa-solid fa-trash"></i> ({{deletedCount}})
                 </a>
                 <table class="table table-hover">
                     <thead>
                         <tr class="d-flex">
-                            <th class="col-1" scope="col">Name</th>
-                            <th class="col-1" scope="col">Price</th>
-                            <th class="col-6" scope="col">Image</th>
-                            <th class="col-2" scope="col">Category</th> 
-                            <th class="col-2" scope="col" colspan="2"> 
-
-                            </th>
+                            <th class="col-2" scope="col">Name</th>
+                            <th class="col-4" scope="col">Avatar</th>
+                            <th class="col-6" scope="col">Comment</th>
                         </tr>
                     </thead>
                     <tbody>  
-                        {{#each products}}
+                        {{#each comments}}
                         <tr class="d-flex">
-                            <td class="col-1">{{this.name}}</td>
-                            <td class="col-1">{{this.price}}</td>
-                            <td class="col-6">  
-                                <p class="table-data__text">{{this.image}}</p>
-                            </td>
-                            <td class="col-2">{{this.category}}</td>
+                            <td class="col-2">{{this.name}}</td>
+                            <td class="col-4">{{this.avatar}}</td>
+                            <td class="col-4">{{this.comment}}</td>
                             <td class="col-2">
-                                <a href="/admin/warehouse/{{this._id}}/edit" class="btn btn-link">
+                                <a href="/admin/feedback/{{this._id}}/edit" class="btn btn-link">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
                                 <a href="" class="btn btn-link" data-id="{{this._id}}" data-bs-toggle="modal" data-bs-target="#deleteCourseModal">
@@ -135,8 +128,8 @@
         {{else}}
         <tr>
             <td colspan="5" class="text-center">
-                Kho không có sản phẩm nào
-                <a class="another-link" href="/admin/warehouse/post">Đăng sản phẩm</a>
+                Hiện tại không có feedbacks nào từ khách hàng 
+                <a class="another-link" href="/sites/contact">Đến trang liên hệ</a>
             </td>
         </tr>
                         {{/each }}
@@ -297,11 +290,11 @@
         // When Dialog Confirm Show 
         $('#deleteCourseModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
-            productId = button.data('id');
+            feedbackId = button.data('id');
         });
         // When delete Course btn clicked
         btnDeleteCourse.onclick = function () {
-            deleteForm.action = '/admin/warehouse/' + productId + '?_method=DELETE';
+            deleteForm.action = '/admin/feedback/' + feedbackId + '?_method=DELETE';
             deleteForm.submit();
         }
         // Checkbox All clicked
@@ -334,7 +327,7 @@
             }
         }
     })
-    </script> 
+    </script>
     <script>
         const urlSearchParams = new URLSearchParams(window.location.search);
         const params = Object.fromEntries(urlSearchParams.entries());
@@ -345,20 +338,19 @@
             if (nextPage > 5) {
                 nextPage = 5
             }
-            location.href = `/admin/warehouse?page=${nextPage}`;
+            location.href = `/admin/account?page=${nextPage}`;
         }
         function previousPage() {
             var previousPage = currentPage - 1
             if (previousPage < 1) {
                 previousPage = 1
             }
-            location.href = `/admin/warehouse?page=${previousPage}`;
+            location.href = `/admin/account?page=${previousPage}`;
         }
         var list = document.querySelectorAll('.page-link--number')
 
         document.querySelectorAll('.page-link--number')[currentPage - 1].classList.add('page-link--actived')
     </script>
-
 </body>
 
 </html>

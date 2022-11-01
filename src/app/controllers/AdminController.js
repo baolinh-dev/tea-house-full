@@ -1,6 +1,7 @@
 const Account = require('../models/Account')   
 const Product = require('../models/Product')  
-const Feedback = require('../models/Feedback') 
+const Feedback = require('../models/Feedback')  
+const Comment = require('../models/Comment') 
 const { mongooseToObject } = require('../../util/mogoose');
 const { mutipleMongooseToObject } = require('../../util/mogoose');   
 const cookieParser = require('cookie-parser') 
@@ -287,7 +288,63 @@ Account.findById(ketqua._id)
         } catch (error) {
             res.redirect('/account/login')
         }
-    }   
+    }    
+    // [GET] /admin/comment 
+    comment(req, res, next) {   
+        try {
+            var token = req.cookies.token
+            var ketqua = jwt.verify(token, 'matkhau')   
+            var name = req.cookies.name 
+            var avatar = req.cookies.avatar 
+            if(ketqua) {   
+                Account.findById(ketqua._id)  
+                .then((accounts) => {  
+                    if(accounts.role == 'admin') {   
+                    var page = parseInt(req.query.page);   
+                        if (page) {   
+                            if (page < 1) { page = 1 } 
+                            var soLuongBoQua = (page - 1) * PAGE_SIZE   
+                            Promise.all([Comment.find({}).skip(soLuongBoQua).limit(PAGE_SIZE), Comment.countDocumentsDeleted()])  
+                                .then(([comments, deletedCount]) => { 
+                                    Comment.countDocuments({}).then((total)=>{  
+                                        var tongSoPage = Math.ceil(total / PAGE_SIZE) 
+                                        res.render('admin/comment', {  
+                                            layout: false, 
+                                            deletedCount,
+                                            tongSoPage,  
+                                            avatar,
+                                            name,
+                                            comments: mutipleMongooseToObject(comments),
+                                        });
+                                    })
+                                }) 
+                                .catch(next)
+                        } else { 
+                            Promise.all([Comment.find({}), Comment.countDocumentsDeleted()])  
+                                .then(([comments, deletedCount]) => { 
+                                    Comment.countDocuments({}).then((total)=>{  
+                                        var tongSoPage = Math.ceil(total / PAGE_SIZE) 
+                                        res.render('admin/comment', {  
+                                            layout: false, 
+                                            deletedCount,
+                                            tongSoPage,  
+                                            avatar,
+                                            name,
+                                            comments: mutipleMongooseToObject(comments),
+                                        });
+                                    })
+                                }) 
+                                .catch(next);
+                        }
+                    } else  {  
+                        res.redirect('/')
+                    }
+                })
+            }
+        } catch (error) {
+            res.redirect('/account/login')
+        }
+    }
      // [GET] /admin/feedback/:id/edit
     editFeedback(req, res, next) {
         Feedback.findById(req.params.id)
