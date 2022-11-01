@@ -40,7 +40,8 @@ router.put('/comment/:id', adminController.updateComment);
 router.delete('/comment/:id', adminController.destroyComment);  
 router.get('/comment/trash', adminController.trashComment); 
 router.delete('/comment/:id/force', adminController.forceDestroyComment); 
-router.patch('/comment/:id/restore', adminController.restoreComment);   
+router.patch('/comment/:id/restore', adminController.restoreComment);    
+router.get('/comment/search', adminController.searchComment); 
 
 
 

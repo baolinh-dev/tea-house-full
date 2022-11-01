@@ -548,6 +548,27 @@ Account.findById(ketqua._id)
             )
             .catch(next);   
     }    
+    // [GET] /admin/comment/search
+    searchComment(req, res, next) {   
+        var search = req.query.search 
+        // var filter = req.query.filter
+        Promise.all( 
+            [Comment.find({  
+                "$or" : [  
+                    {name : new RegExp(search, 'i')}, 
+                    {comment : new RegExp(search, 'i')}, 
+                ]
+            }),  
+            Comment.countDocumentsDeleted()])
+                .then(([comments, deletedCount]) =>
+                    res.render('admin/comment', { 
+                        layout: false,
+                        deletedCount,
+                        comments: mutipleMongooseToObject(comments),
+                    }),
+                )
+            .catch(next);   
+    }    
     // [GET] /admin/search/trash
     searchFeedbackTrash(req, res, next) {   
         var search = req.query.search 
