@@ -9,7 +9,13 @@ class MenuController {
     index(req, res, next) {       
         try {            
             var token = req.cookies.token
-            var ketqua = jwt.verify(token, 'matkhau')  
+            var ketqua = jwt.verify(token, 'matkhau')   
+            var quantityCart
+            if(typeof req.session.cart == "undefined") { 
+                quantityCart = 0
+            } else { 
+                quantityCart = req.session.cart.length
+            } 
             if(ketqua) {  
                 var name = req.cookies.name 
                 var avatar = req.cookies.avatar 
@@ -27,7 +33,8 @@ class MenuController {
                             res.render('menu', {   
                                 avatar,
                                 name,
-                                tongSoPage,
+                                tongSoPage, 
+                                quantityCart,
                                 products: mutipleMongooseToObject(products),
                             });
                         })
@@ -42,7 +49,8 @@ class MenuController {
                                 res.render('menu', {   
                                     avatar,  
                                     name, 
-                                    tongSoPage, 
+                                    tongSoPage,  
+                                    quantityCart,
                                     products: mutipleMongooseToObject(products),
                                 });
                             })
@@ -58,7 +66,13 @@ class MenuController {
     trahoaqua(req, res, next) {    
         try {
             var token = req.cookies.token
-            var ketqua = jwt.verify(token, 'matkhau')  
+            var ketqua = jwt.verify(token, 'matkhau')   
+            var quantityCart
+            if(typeof req.session.cart == "undefined") { 
+                quantityCart = 0
+            } else { 
+                quantityCart = req.session.cart.length
+            } 
             if(ketqua) {  
                 var name = req.cookies.name 
                 var avatar = req.cookies.avatar 
@@ -75,11 +89,12 @@ class MenuController {
                     .then((productsTraHoaQua) => { 
                         Product.countDocuments({category: 'Tra-hoa-qua'}) 
                             .then((total)=>{  
-                            var tongSoPage = Math.ceil(total / PAGE_SIZE) 
+                            var tongSoPage = Math.ceil(total / PAGE_SIZE)  
                             res.render('productDetails/trahoaqua', {  
                                 avatar, 
                                 name, 
-                                tongSoPage,
+                                tongSoPage,  
+                                quantityCart,
                                 productsTraHoaQua: mutipleMongooseToObject(productsTraHoaQua),
                             });
                         })
@@ -90,11 +105,12 @@ class MenuController {
                     .then((productsTraHoaQua) => {   
                         Product.find({ category: 'Tra-hoa-qua' }).countDocuments({}) 
                         .then((total)=>{  
-                            var tongSoPage = Math.ceil(total / PAGE_SIZE) 
+                            var tongSoPage = Math.ceil(total / PAGE_SIZE)  
                             res.render('productDetails/trahoaqua', {   
                                 avatar,  
                                 name, 
-                                tongSoPage, 
+                                tongSoPage,  
+                                quantityCart,
                                 productsTraHoaQua: mutipleMongooseToObject(productsTraHoaQua),
                             });
                         })
@@ -109,11 +125,17 @@ class MenuController {
     // [GET] /menu/tra-hoa-qua/tra-vai 
     travai(req, res, next) {  
         var name = req.cookies.name  
-        var avatar = req.cookies.avatar
+        var avatar = req.cookies.avatar 
+        var quantityCart
+            if(typeof req.session.cart == "undefined") { 
+                quantityCart = 0
+            } else { 
+                quantityCart = req.session.cart.length
+            }
         Comment.find({}) 
             .then((comments) => { 
                 res.render('detail/travai', {  
-                    name, avatar,
+                    name, avatar, quantityCart,
                     comments: mutipleMongooseToObject(comments)
                 })
             }) 
@@ -122,7 +144,8 @@ class MenuController {
     travaiComment(req, res, next) {    
         var name = req.cookies.name  
         var avatar = req.cookies.avatar   
-        var comment = req.body.comment 
+        var comment = req.body.comment  
+        
 
         Comment.create( 
             { name: name, avatar: avatar, comment: comment},  
@@ -133,7 +156,13 @@ class MenuController {
     smoothies(req, res, next) {    
         try {
             var token = req.cookies.token
-            var ketqua = jwt.verify(token, 'matkhau')  
+            var ketqua = jwt.verify(token, 'matkhau')   
+            var quantityCart
+                if(typeof req.session.cart == "undefined") { 
+                    quantityCart = 0
+                } else { 
+                    quantityCart = req.session.cart.length
+                }
             if(ketqua) {  
                 var name = req.cookies.name  
                 var avatar = req.cookies.avatar 
@@ -153,7 +182,8 @@ class MenuController {
                             res.render('productDetails/smoothies', {   
                                 avatar, 
                                 name,
-                                tongSoPage,
+                                tongSoPage, 
+                                quantityCart,
                                 productsSmoothies: mutipleMongooseToObject(productsSmoothies),
                             });
                         })
@@ -168,7 +198,8 @@ class MenuController {
                             res.render('productDetails/smoothies', {   
                                 avatar, 
                                 name,
-                                tongSoPage, 
+                                tongSoPage,  
+                                quantityCart,
                                 productsSmoothies: mutipleMongooseToObject(productsSmoothies),
                             });
                         })
@@ -184,7 +215,13 @@ class MenuController {
     caphe(req, res, next) {  
         try {
             var token = req.cookies.token
-            var ketqua = jwt.verify(token, 'matkhau')  
+            var ketqua = jwt.verify(token, 'matkhau')    
+            var quantityCart
+            if(typeof req.session.cart == "undefined") { 
+                quantityCart = 0
+            } else { 
+                quantityCart = req.session.cart.length
+            }
             if(ketqua) {  
                 var name = req.cookies.name 
                 var avatar = req.cookies.avatar 
@@ -204,7 +241,8 @@ class MenuController {
                             res.render('productDetails/caphe', {   
                                 avatar, 
                                 name,
-                                tongSoPage,
+                                tongSoPage, 
+                                quantityCart,
                                 productsCaphe: mutipleMongooseToObject(productsCaphe),
                             });
                         })
@@ -219,7 +257,8 @@ class MenuController {
                             res.render('productDetails/caphe', {   
                                 avatar, 
                                 name,
-                                tongSoPage, 
+                                tongSoPage,  
+                                quantityCart,
                                 productsCaphe: mutipleMongooseToObject(productsCaphe),
                             });
                         })

@@ -10,17 +10,24 @@ class HomeController {
             var token = req.cookies.token
             var ketqua = jwt.verify(token, 'matkhau')    
             var name = req.cookies.name   
-            var avatar = req.cookies.avatar  
+            var avatar = req.cookies.avatar    
+            var quantityCart
+            if(typeof req.session.cart == "undefined") { 
+                quantityCart = 0
+            } else { 
+                quantityCart = req.session.cart.length
+            } 
             if(ketqua) {                 
                 Account.findById(ketqua._id) 
                     .then((accounts) => {
                         if(accounts.role == 'user' || accounts.role == 'admin') { 
                             Product.find({ category: 'Tra-hoa-qua' }) 
                                 .limit(8)
-                                .then((products) => {
+                                .then((products) => { 
                                     res.render('home', {   
                                         avatar, 
-                                        name,
+                                        name, 
+                                        quantityCart,
                                         products: mutipleMongooseToObject(products),
                                     });
                                 })
@@ -29,7 +36,7 @@ class HomeController {
                             res.json('Ban khong co quyen vao trang mua hang')  
                         }
                     }) 
-            }
+            }  
         } catch (error) {
             res.redirect('/account/login')
         }

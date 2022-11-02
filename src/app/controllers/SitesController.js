@@ -7,11 +7,17 @@ class HomeController {
     contact(req, res) {    
         try {
             var token = req.cookies.token
-            var ketqua = jwt.verify(token, 'matkhau')  
+            var ketqua = jwt.verify(token, 'matkhau')    
+            var quantityCart
+                if(typeof req.session.cart == "undefined") { 
+                    quantityCart = 0
+                } else { 
+                    quantityCart = req.session.cart.length
+                }
             if(ketqua) {  
                 var name = req.cookies.name 
                 var avatar = req.cookies.avatar 
-                res.render('contact', { avatar, name })
+                res.render('contact', { avatar, name , quantityCart})
             } 
         } catch (error) {
             res.redirect('/account/login')
@@ -21,11 +27,17 @@ class HomeController {
     news(req, res) {    
         try {            
             var token = req.cookies.token
-            var ketqua = jwt.verify(token, 'matkhau')  
+            var ketqua = jwt.verify(token, 'matkhau')   
+            var quantityCart
+            if(typeof req.session.cart == "undefined") { 
+                quantityCart = 0
+            } else { 
+                quantityCart = req.session.cart.length
+            }
             if(ketqua) {  
                 var name = req.cookies.name 
                 var avatar = req.cookies.avatar 
-                res.render('news', { avatar, name })
+                res.render('news', { avatar, name , quantityCart})
             } 
         } catch (error) {
             res.redirect('/account/login')
@@ -35,11 +47,17 @@ class HomeController {
     introduce(req, res) {    
         try {
             var token = req.cookies.token
-            var ketqua = jwt.verify(token, 'matkhau')  
+            var ketqua = jwt.verify(token, 'matkhau')   
+            var quantityCart
+            if(typeof req.session.cart == "undefined") { 
+                quantityCart = 0
+            } else { 
+                quantityCart = req.session.cart.length
+            }
             if(ketqua) {  
                 var name = req.cookies.name 
                 var avatar = req.cookies.avatar 
-                res.render('introduce', { avatar, name })
+                res.render('introduce', { avatar, name , quantityCart})
             }
         } catch (error) {
             res.redirect('/account/login')

@@ -2,7 +2,10 @@ const { mongooseToObject } = require('../../util/mogoose');
 const { mutipleMongooseToObject } = require('../../util/mogoose'); 
 const Order = require('../models/Order')  
 const Product = require('../models/Product')  
-class OrderController { 
+class OrderController {  
+    cartList(req, res, next) { 
+        res.json(req.session.cart)
+    }
     // [POST] cart/:slug
     addCart(req, res, next) {   
         var slug = req.params.slug 
@@ -22,7 +25,7 @@ class OrderController {
                     var newItem = true; 
 
                     for(var i = 0; i < cart.length; i++) { 
-                        if(cart[i].title = slug) { 
+                        if(cart[i].title == slug) { 
                             cart[i].quantity++; 
                             newItem = false; 
                             break;
@@ -37,10 +40,25 @@ class OrderController {
                             image: products.image, 
                         })
                     }
-                } 
-                console.log(req.session.cart)
+                }     
+                var name = req.cookies.name   
+                var avatar = req.cookies.avatar
+                var quantityCart = req.session.cart.length 
+                Product.find({ category: 'Tra-hoa-qua' }).exec() 
+                        .then((products) => {   
+                            res.render('menu', {  
+                                name,  
+                                avatar, 
+                                quantityCart,   
+                                products: mutipleMongooseToObject(products),
+                            })
+                        }) 
+                        console.log(req.session.cart)
             })  
             .catch(next)
-    } 
+    }  
+     
+    
+    
 } 
 module.exports = new OrderController;

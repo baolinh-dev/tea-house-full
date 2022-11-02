@@ -12,12 +12,11 @@ const jwt = require('jsonwebtoken')
 const path = require('path');
 const app = express()
 const port = 3000     
-// 
+// Session
 app.use(session({
-  secret: 'keyboard cat',
+  secret: 'secret-key',
   resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true }
+  saveUninitialized: false,
 }))
 // Cookies 
 app.use(cookieParser())
@@ -65,10 +64,22 @@ app.get('/account/logout',(req, res, next)=>{
   res.clearCookie('token') 
   res.clearCookie('avatr') 
   res.redirect('/account/login')
-})    
+})     
+// 
+app.get('/set_session', (req, res) => {
+    //set a object to session
+    req.session.User = {
+        website: 'anonystick.com',
+        type: 'blog javascript',
+        name: 'Bao Linh'
+    }
+    res.render('home', { 
+      name : req.session.User.name
+    })
+})
 // 
 app.get('*', (req, res, next) => { 
-  res.locals.cart = req.session.cart; 
+  res.locals.cart = req.session.cart
   next()
 })
 // 404 Not Found 
