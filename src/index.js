@@ -6,12 +6,19 @@ const { engine } = require('express-handlebars');
 const express = require('express')  
 const morgan = require('morgan')  
 const methodOverride = require('method-override');   
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser')  
+const session = require('express-session')
 const jwt = require('jsonwebtoken') 
 const path = require('path');
 const app = express()
 const port = 3000     
-
+// 
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}))
 // Cookies 
 app.use(cookieParser())
 // file co ten index thi khong can nap vao
@@ -56,8 +63,14 @@ route(app)
 app.get('/account/logout',(req, res, next)=>{ 
   res.clearCookie('name')  
   res.clearCookie('token') 
+  res.clearCookie('avatr') 
   res.redirect('/account/login')
-})   
+})    
+// 
+app.get('*', (req, res, next) => { 
+  res.locals.cart = req.session.cart; 
+  next()
+})
 // 404 Not Found 
 app.use((req, res) => { 
   return res.render('404', { 
