@@ -91,15 +91,17 @@ class AccountController {
             return res.send('Please select an image to upload');
         }
         // Display uploaded image for user validation   
-        var name = req.cookies.name 
-        const urlAvatarUser = `/img/avatar/${req.file.filename}` 
+        var name = req.cookies.name  
+        const urlAvatarUser = `/img/avatar/${req.file.filename}`  
+        req.cookies.avatar = urlAvatarUser
         const query = { name }
             Account.update(query,
                           {$set : {"avatar": urlAvatarUser}},
                           {upsert:false,
-                          multi:true})
+                          multi:true})  
             .catch(next);  
-        res.send(`You have uploaded this image: <hr/><img src="${urlAvatarUser}" width="300"><hr /><a href="/upload">Upload another image</a>`); 
+        // res.send(`You have uploaded this image: <hr/><img src="${urlAvatarUser}" width="300"><hr /><a href="/upload">Upload another image</a>`);  
+        res.redirect('/account/login')
     }
 } 
 module.exports = new AccountController; 

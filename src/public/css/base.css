@@ -530,3 +530,6 @@
   font-size: 12px;
   transform: translate(-16px, -10px);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); }
+
+::placeholder {
+  color: var(--text-color); }

@@ -1,28 +1,94 @@
-<section id="cartList">
-    <div class="box-cart-list"> 
-        {{#each carts}}
-        <div class="box-cart-item">
-            <div class="cart-infor">
-                <div class="cart-infor-img-wrap">
-                    <img src="https://baolinh-dev.github.io/tea-house-offical/assets/imgs/tra-hoa-qua/tra-chanh.webp"
-                        alt="" class="cart-infor-img">
-                </div>
-                <div class="cart-infor-name-wrap">
-                    <h3 class="cart-infor-name">{{this.name}}</h3>  
-                </div>
-            </div>
-            <div class="cart-price">
-                <div class="cart-price-value-wrap">
-                    <label for="" class="cart-price-value-label">Giá : </label>
-                    <p class="cart-price-value">{{this.price}}</p>
-                </div>
-                <div class="cart-price-quantity-wrap">
-                    <label for="" class="cart-price-quantity-label">Số lượng : </label>
-                    <p class="cart-price-quantity">{{this.quantity}}</p>
-                </div>
-            </div>
-        </div>  
-        {{/each }}
+<section id="cartList">    
+    <div class="breadcumb-container">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Giỏ hàng</li>
+                </ol>
+            </nav>
+        </div>
     </div>
-</section>  
+    <div class="container">
+        <div class="row"> 
+            <div class="box-cart-ship col-lg-8">  
+                <div class="common-heading">
+                    <p class="common-heading__text">Thông tin vận chuyển</p>
+                </div>
+                <form action="/cart/list" class="form-ship" method="POST">   
+                    <div class="form-ship__item"> 
+                        <label for="">Tên người mua hàng:</label> 
+                        <input name="name" type="text" value="{{accounts.name}}" placeholder="{{accounts.name}}">  
+                    </div> 
+                    <div class="form-ship__item">
+                        <label for="">Số điện thoại:</label> 
+                        <input name="phone" type="text" value="{{accounts.phone}}" placeholder="{{accounts.phone}}"> 
+                    </div> 
+                    <div class="form-ship__item">
+                        <label for="">Email:</label> 
+                        <input name="email" type="text" value="{{accounts.email}}" placeholder="{{accounts.email}}">  
+                    </div> 
+                    <div class="form-ship__item">
+                        <label for="">Địa chỉ nhận hàng:</label>
+                        <input name="address" type="text" name="">
+                    </div> 
+                    <input style="display: none;" name="sumary" class="sumary-cart"></input>
+                    <button class="form-ship__submit" type="submit">Thanh toán</button>
+                </form> 
+            </div>
+            <div class="box-cart-list col-lg-4"> 
+                <div class="common-heading">
+                    <div class="common-heading__img-wrap">
+                        <img class="common-heading__img" src="/img/logo-text.png" alt="">
+                    </div>
+                    <p class="common-heading__text">Giỏ hàng</p>
+                </div>
+                {{#each carts}} 
+                <div class="box-cart-item">
+                    <div class="cart-infor"> 
+                        <div class="cart-infor-img-wrap">
+                            <img src="https://baolinh-dev.github.io/tea-house-offical/assets/imgs/tra-hoa-qua/tra-chanh.webp"
+                                alt="" class="cart-infor-img">
+                        </div>
+
+                            <h3 class="cart-infor-name">{{this.name}}</h3>   
+                    </div>
+                    <div class="cart-price">
+                        <div class="cart-price-value-wrap">
+                            <label for="" class="cart-price-value-label">Giá : </label>
+                            <p class="cart-price-value">{{this.price}}</p>
+                        </div>
+                        <div class="cart-price-quantity-wrap">
+                            <label for="" class="cart-price-quantity-label">Số lượng : </label>
+                            <p class="cart-price-quantity">{{this.quantity}}</p>
+                        </div>
+                    </div>
+                </div>  
+                {{/each }}  
+                <div class="sumary-wrap"> 
+                    <label class="sumary-label" for="">Tổng giá tiền: </label>
+                    <p class="sumary">0</p> 
+                </div>
+            </div>
+        </div>
+    </div>
+</section>    
+
+<script>     
+    function switchInt(stringParam) {
+        let stringParamNew = stringParam.replace(".", "");
+        var intParam = Number.parseInt(stringParamNew) 
+        return intParam
+    }
+    var listPriceItem = document.querySelectorAll('.cart-price-value')
+    var listQuantityItem = document.querySelectorAll('.cart-price-quantity')   
+    var sumary = 0
+    for(var i = 0; i < listPriceItem.length; i++) { 
+        var price = switchInt(listPriceItem[i].innerText) 
+        var quantity = switchInt(listQuantityItem[i].innerText)
+        sumary += price * quantity 
+    }     
+    document.querySelector('.sumary').innerText = sumary    
+    document.querySelector('.sumary-cart').value = sumary 
+</script>
 

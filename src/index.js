@@ -68,14 +68,9 @@ app.get('/account/logout',(req, res, next)=>{
 // 
 app.get('/set_session', (req, res) => {
     //set a object to session
-    req.session.User = {
-        website: 'anonystick.com',
-        type: 'blog javascript',
-        name: 'Bao Linh'
+    if(req.session.orderId) { 
+      res.json(req.session.orderId)
     }
-    res.render('home', { 
-      name : req.session.User.name
-    })
 })
 // 
 app.get('*', (req, res, next) => { 
