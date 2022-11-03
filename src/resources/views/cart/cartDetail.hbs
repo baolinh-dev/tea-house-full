@@ -1,8 +1,54 @@
-<section id="cartDetail">
-        <p class="id">{{orders._id}}</p>
-        <p class="name">{{orders.name}}</p>
-        <p class="email">{{orders.email}}</p>
-        <p class="address">{{orders.address}}</p>
-        <p class="sumary">{{orders.sumary}}</p>
-        <p class="dateOrder">{{orders.dateOrder}}</p>
+<section id="order">
+        <div class="breadcumb-container">
+                <div class="container">
+                        <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+                                        <li class="breadcrumb-item"><a href="index.html">Giỏ hàng</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Đơn hàng</li>
+                                </ol>
+                        </nav>
+                </div>
+        </div>
+        <div class="container">
+                <div class="row">
+                        <div class="order-main">
+                                <div class="order-heading">
+                                        <h3 class="order-id">Order ID : {{orders._id}}</h3>
+                                        <div class="order-date-container">
+                                                <div class="order-date-wrap">
+                                                        <label for="">Order date: </label>
+                                                        <p class="order-date">{{orders.dateOrder}}</p>
+                                                </div>
+                                                <div class="order-date-wrap">
+                                                        <label for="">Estimated delivery: </label>
+                                                        <p class="order-date">{{orders.dateOrder}}</p>
+                                                </div>
+                                        </div>
+                                </div>
+                                <div class="order-body">
+                                        <div class="order-body__name-wrap">
+                                                <i class="fa-solid fa-user"></i>
+                                                <p class="order-body__item">{{orders.name}}</p>
+                                        </div>
+                                        <div class="order-body__name-wrap">
+                                                <i class="fa-solid fa-phone"></i>
+                                                <p class="order-body__item">{{orders.phone}}</p>
+                                        </div>
+                                        <div class="order-body__name-wrap">
+                                                <i class="fa-solid fa-envelope"></i>
+                                                <p class="order-body__item">{{orders.email}}</p>
+                                        </div>
+                                        <div class="order-body__name-wrap">
+                                                <i class="fa-solid fa-address-book"></i>
+                                                <p class="order-body__item">{{orders.address}}</p>
+                                        </div>
+                                </div>
+                                <div class="order-sumary">
+                                        <label for="" class="order-sumary-label">Tổng hóa đơn : </label>
+                                        <p class="order-sumary-text">{{orders.sumary}}</p>
+                                </div>
+                        </div>
+                </div>
+        </div>
 </section>

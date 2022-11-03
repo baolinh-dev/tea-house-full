@@ -99,7 +99,6 @@ class OrderController {
         Order.findById(req.session.orderId) 
         .then((orders) => { 
             res.render('cart/cartDetail', {   
-                layout: false, 
                 orders: mongooseToObject(orders)
             }) 
         })
