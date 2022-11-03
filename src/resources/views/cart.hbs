@@ -1,0 +1,28 @@
+<section id="cartList">
+    <div class="box-cart-list"> 
+        {{#each carts}}
+        <div class="box-cart-item">
+            <div class="cart-infor">
+                <div class="cart-infor-img-wrap">
+                    <img src="https://baolinh-dev.github.io/tea-house-offical/assets/imgs/tra-hoa-qua/tra-chanh.webp"
+                        alt="" class="cart-infor-img">
+                </div>
+                <div class="cart-infor-name-wrap">
+                    <h3 class="cart-infor-name">{{this.name}}</h3>  
+                </div>
+            </div>
+            <div class="cart-price">
+                <div class="cart-price-value-wrap">
+                    <label for="" class="cart-price-value-label">Giá : </label>
+                    <p class="cart-price-value">{{this.price}}</p>
+                </div>
+                <div class="cart-price-quantity-wrap">
+                    <label for="" class="cart-price-quantity-label">Số lượng : </label>
+                    <p class="cart-price-quantity">{{this.quantity}}</p>
+                </div>
+            </div>
+        </div>  
+        {{/each }}
+    </div>
+</section>  
+

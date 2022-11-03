@@ -3,8 +3,19 @@ const { mutipleMongooseToObject } = require('../../util/mogoose');
 const Order = require('../models/Order')  
 const Product = require('../models/Product')  
 class OrderController {  
-    cartList(req, res, next) { 
-        res.json(req.session.cart)
+    cartList(req, res, next) {   
+        var carts = req.session.cart 
+        var name = req.cookies.name   
+        var avatar = req.cookies.avatar   
+        var quantityCart
+            if(typeof req.session.cart == "undefined") { 
+                quantityCart = 0
+            } else { 
+                quantityCart = req.session.cart.length
+            }
+        res.render('cart', { 
+            name, avatar, quantityCart, carts
+        })
     }
     // [POST] cart/:slug
     addCart(req, res, next) {   
