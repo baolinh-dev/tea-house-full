@@ -1,3 +1,4 @@
+const { response } = require('express');
 const { mongooseToObject } = require('../../util/mogoose');
 const { mutipleMongooseToObject } = require('../../util/mogoose'); 
 const Account = require('../models/Account');
@@ -16,8 +17,8 @@ class OrderController {
                 quantityCart = req.session.cart.length
             } 
         Account.findOne({"name" : name}) 
-            .then((accounts) => {  
-                res.render('cart', { 
+            .then((accounts) => {   
+                res.render('cart', {  
                     name, avatar, quantityCart, carts,  
                     accounts: mongooseToObject(accounts)
                 })   
@@ -75,15 +76,24 @@ class OrderController {
             .catch(next)
     }   
     // [POST] /cart/list
-    saveCartList(req, res, next) { 
-        const order = new Order(req.body);
-            order
-                .save()  
-                .then((data) => {  
-                    req.session.orderId = data._id
+    saveCartList(req, res, next) {  
+        var d = new Date(); 
+        var month = d.getMonth() + 1; 
+        var day = d.getDate() 
+        var year = d.getFullYear()   
+
+        var name = req.body.name
+        var phone = req.body.phone
+        var email = req.body.email
+        var address = req.body.address
+        var sumary = req.body.sumary
+        var dateOrder = `${day}-${month}-${year}`   
+
+        Order.create({name, phone, email, address, sumary, dateOrder}) 
+            .then((data) => { 
+                    req.session.orderId = data._id 
                     res.redirect('/cart/detail')
-                })
-                .catch(next);
+            })
     }
     cartDetail(req, res, next) {   
         Order.findById(req.session.orderId) 
@@ -95,6 +105,5 @@ class OrderController {
         })
         req.session.destroy();
     }
-    
 } 
 module.exports = new OrderController;

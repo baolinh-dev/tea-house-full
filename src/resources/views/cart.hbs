@@ -55,11 +55,13 @@
                     </div>
                     <div class="cart-price">
                         <div class="cart-price-value-wrap">
-                            <label for="" class="cart-price-value-label">Giá : </label>
-                            <p class="cart-price-value">{{this.price}}</p>
+                            <label for="" class="cart-price-value-label">Giá :  </label>
+                            <p class="cart-price-value">{{this.price}} 
+                                <span> đ </span>
+                            </p>
                         </div>
                         <div class="cart-price-quantity-wrap">
-                            <label for="" class="cart-price-quantity-label">Số lượng : </label>
+                            <label for="" class="cart-price-quantity-label">Số lượng :  </label>
                             <p class="cart-price-quantity">{{this.quantity}}</p>
                         </div>
                     </div>
@@ -67,13 +69,15 @@
                 {{/each }}  
                 <div class="sumary-wrap"> 
                     <label class="sumary-label" for="">Tổng giá tiền: </label>
-                    <p class="sumary">0</p> 
+                    <div class="sumary"> </div> 
                 </div>
             </div>
         </div>
-    </div>
-</section>    
-
+    </div> 
+</section>     
+{{!-- Format Number --}}
+<script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script> 
+{{!-- Calculator Sumary --}}
 <script>     
     function switchInt(stringParam) {
         let stringParamNew = stringParam.replace(".", "");
@@ -87,8 +91,10 @@
         var price = switchInt(listPriceItem[i].innerText) 
         var quantity = switchInt(listQuantityItem[i].innerText)
         sumary += price * quantity 
-    }     
-    document.querySelector('.sumary').innerText = sumary    
+    }      
+    var sumaryFormat = numeral(sumary); 
+    var sumaryStringFormat = String(sumaryFormat.format('0,0')) + " đ";
+    document.querySelector('.sumary').innerText = sumaryStringFormat    
     document.querySelector('.sumary-cart').value = sumary 
-</script>
+</script>  
 

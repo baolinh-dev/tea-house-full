@@ -146,7 +146,6 @@ class MenuController {
         var avatar = req.cookies.avatar   
         var comment = req.body.comment  
         
-
         Comment.create( 
             { name: name, avatar: avatar, comment: comment},  
         );  

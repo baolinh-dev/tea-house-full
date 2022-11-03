@@ -35,9 +35,11 @@
     "multer": "1.4.3"
   },
   "devDependencies": {
+    "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.6",
     "crypto-js": "^4.1.1",
     "express-session": "^1.17.3",
+    "express-toastr": "^2.0.2",
     "jsonwebtoken": "^8.5.1",
     "method-override": "^3.0.0",
     "mongoose-delete": "^0.5.4",
