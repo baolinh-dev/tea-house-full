@@ -15,11 +15,12 @@ class OrderController {
                 quantityCart = 0
             } else { 
                 quantityCart = req.session.cart.length
-            } 
+            }  
         Account.findOne({"name" : name}) 
             .then((accounts) => {   
                 res.render('cart', {  
-                    name, avatar, quantityCart, carts,  
+                    name, avatar, quantityCart,  
+                    carts, 
                     accounts: mongooseToObject(accounts)
                 })   
             }) 
@@ -71,7 +72,6 @@ class OrderController {
                                 products: mutipleMongooseToObject(products),
                             })
                         }) 
-                        console.log(req.session.cart)
             })  
             .catch(next)
     }   
@@ -79,30 +79,46 @@ class OrderController {
     saveCartList(req, res, next) {  
         var d = new Date(); 
         var month = d.getMonth() + 1; 
-        var day = d.getDate() 
+        var day = d.getDate()  
+        var estimatedDay = d.getDate() + 5;
         var year = d.getFullYear()   
 
         var name = req.body.name
         var phone = req.body.phone
         var email = req.body.email
         var address = req.body.address
-        var sumary = req.body.sumary
-        var dateOrder = `${day}-${month}-${year}`   
+        var sumary = req.body.sumary   
 
-        Order.create({name, phone, email, address, sumary, dateOrder}) 
+        var dateOrder = `${day}-${month}-${year}`   
+        var dateEstimatedOrder = `${estimatedDay}-${month}-${year}`   
+
+        Order.create({name, phone, email, address, sumary, dateOrder, dateEstimatedOrder}) 
             .then((data) => { 
                     req.session.orderId = data._id 
                     res.redirect('/cart/detail')
             })
     }
     cartDetail(req, res, next) {   
+        var name = req.cookies.name   
+        var avatar = req.cookies.avatar   
+        var carts = req.session.cart
+        var checkOrder = false 
+        if(req.session.orderId) { 
+            checkOrder = true
+        }
+        var quantityCart
+            if(typeof req.session.cart == "undefined") { 
+                quantityCart = 0
+            } else { 
+                quantityCart = req.session.cart.length
+            } 
         Order.findById(req.session.orderId) 
-        .then((orders) => { 
-            res.render('cart/cartDetail', {   
+        .then((orders) => {  
+            res.render('cart/cartDetail', {     
+                name, avatar, quantityCart, checkOrder, carts, 
                 orders: mongooseToObject(orders)
             }) 
         })
-        req.session.destroy();
     }
 } 
 module.exports = new OrderController;

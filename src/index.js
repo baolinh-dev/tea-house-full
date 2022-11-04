@@ -73,7 +73,8 @@ route(app)
 app.get('/account/logout',(req, res, next)=>{ 
   res.clearCookie('name')  
   res.clearCookie('token') 
-  res.clearCookie('avatr') 
+  res.clearCookie('avatr')  
+  req.session.destroy();
   res.redirect('/account/login')
 })     
 // 

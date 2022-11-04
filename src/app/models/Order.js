@@ -9,7 +9,8 @@ const Order = new Schema(
         email : { type: String},  
         address : { type: String}, 
         sumary : { type: String}, 
-        dateOrder: { type: String},
+        dateOrder: { type: String}, 
+        dateEstimatedOrder: { type: String}, 
     }, 
     {
         timestamps: true,

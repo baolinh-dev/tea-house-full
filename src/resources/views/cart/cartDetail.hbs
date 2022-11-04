@@ -12,8 +12,15 @@
         </div>
         <div class="container">
                 <div class="row">
-                        <div class="order-main">
-                                <div class="order-heading">
+                        <div class="order-main" id="order-main"> 
+                                <div class="common-heading">
+                                        <div class="common-heading__img-wrap">
+                                                <img class="common-heading__img" src="/img/logo-text.png" alt="">
+                                        </div>
+                                        <p class="common-heading__text">Đơn hàng</p>
+                                </div>
+                                <div class="order-heading"> 
+                                        <p style="display: none;" class="check-order">{{checkOrder}}</p>
                                         <h3 class="order-id">Order ID : {{orders._id}}</h3>
                                         <div class="order-date-container">
                                                 <div class="order-date-wrap">
@@ -22,7 +29,7 @@
                                                 </div>
                                                 <div class="order-date-wrap">
                                                         <label for="">Estimated delivery: </label>
-                                                        <p class="order-date">{{orders.dateOrder}}</p>
+                                                        <p class="order-date">{{orders.dateEstimatedOrder}}</p>
                                                 </div>
                                         </div>
                                 </div>
@@ -43,12 +50,81 @@
                                                 <i class="fa-solid fa-address-book"></i>
                                                 <p class="order-body__item">{{orders.address}}</p>
                                         </div>
+                                </div> 
+                                <div class="order-detail"> 
+                                        {{#each carts}}
+                                        <div class="order-detail__item">   
+                                                <div class="order-detail__item-infor">
+                                                        <img class="order-detail__item-infor-img" src="{{this.image}}" alt=""> 
+                                                        <p class="order-detail__item-infor-name">{{this.name}}</p> 
+                                                </div> 
+                                                <div class="order-detail__item-price"> 
+                                                        <p class="order-detail__item-price-value">
+                                                                <span>Giá : </span>     
+                                                                {{this.price}} 
+                                                        </p> 
+                                                        <p class="order-detail__item-price-quantity">  
+                                                                <span>Số lượng : </span>
+                                                                {{this.quantity}} 
+                                                        </p>
+                                                </div>
+                                        </div> 
+                                        {{/each}}
                                 </div>
                                 <div class="order-sumary">
-                                        <label for="" class="order-sumary-label">Tổng hóa đơn : </label>
-                                        <p class="order-sumary-text">{{orders.sumary}}</p>
+                                        <label for="" class="order-sumary-label">Tổng hóa đơn : </label> 
+                                        <p style="display: none;" class="order-sumary-hidden">{{orders.sumary}}</p>
+                                        <p class="order-sumary-text"></p>  
+                                </div>  
+                                <div class="order-buttons">
+                                        <a onclick="printContent('order-main');" class="printToPaper">In đơn hàng</a> 
+                                        <a href="/menu">Tiếp tục mua hàng</a>
                                 </div>
                         </div>
                 </div>
+        </div> 
+</section>     
+<div class="toast-container position-fixed top-0 end-0 p-3">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                        <i class="fa-solid fa-thumbs-up "></i>
+                        <strong class="me-auto">Thông báo</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body bg-success text-white"> 
+                        Đơn hàng của bạn đã được xác nhận
+                </div>
         </div>
-</section>
+</div> 
+<script>   
+        var checkOrder = document.querySelector('.check-order').innerText
+        const toastLiveExample = document.getElementById('liveToast') 
+        if(checkOrder == "true") { 
+                document.addEventListener("DOMContentLoaded", function() {
+                        const toast = new bootstrap.Toast(toastLiveExample)
+                        toast.show()
+                });
+        }
+</script>
+{{!-- Format Number --}}
+<script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+<script> 
+        var sumary = document.querySelector('.order-sumary-hidden').innerText 
+        var sumaryNumber = Number.parseInt(sumary)
+        var sumaryFormat = numeral(sumaryNumber);
+        var sumaryStringFormat = String(sumaryFormat.format('0,0')) + " đ";
+        document.querySelector('.order-sumary-text').innerText = sumaryStringFormat  
+</script> 
+{{!-- Print into paper --}}  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+        integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+        function printContent(el) {
+                var restorepage = $('body').html();
+                var printcontent = $('#' + el).clone();
+                $('body').empty().html(printcontent);
+                window.print();
+                $('body').html(restorepage);
+        }  
+</script>
