@@ -30,79 +30,265 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Link CSS -->
     <link rel="stylesheet" href="/css/base.css">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="/css/responsive.css"> 
+    <style>
+#admin { 
+
+}  
+.admin-main__header { 
+    margin-top: 20px;
+}
+.admin-menu{ 
+    padding-top: 40px;
+    padding-left: 20px;
+    height: 100vh;
+}
+.admin-logo{
+    padding: 8px 8px 40px 8px; 
+}
+.admin-logo-img{
+
+} 
+.admin-menu__list{
+
+} 
+.admin-menu__list-item--active {
+    background-color: var(--main-color); 
+    color: #fff;
+} 
+.admin-menu__list-item--active a { 
+    color: #fff;
+}
+.admin-menu__list-item{
+    padding: 20px; 
+    border-bottom-left-radius: 40px;  
+    border-top-left-radius: 40px; 
+    list-style: none;
+} 
+.admin-menu__list-item:hover { 
+    background-color: var(--main-color);  
+    transition: all 0.3s linear;
+}   
+.admin-menu__list-item:hover .admin-menu__list-item-anchor { 
+    color: #fff;
+}
+.admin-menu__list-item:hover i { 
+    color: #fff;
+}
+.admin-menu__list-item i { 
+    font-size: 20px; 
+    margin-right: 20px;
+}
+.admin-menu__list-item-anchor{ 
+    color: var(--main-color);
+    font-size: 16px; 
+    text-decoration: none; 
+    font-weight: bold;
+}  
+#admin .admin-table__options {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+}
+
+#admin .admin-table__options-search-wrap {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0 40px;
+    /* box-shadow: 0px 4px 8px rgba($color: #000000, $alpha: 0.15); */ 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    width: 100%;
+}
+
+#admin .admin-table__options-search {
+    padding: 8px;
+    border: none;
+    outline: none; 
+    width: 100%; 
+    height: 40px;
+}
+
+#admin .admin-table__options-search:focus {}
+
+#admin .admin-table__options-search-icon {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    color: #999;
+} 
+#admin .btn-table {
+    border-radius: 8px;
+    width: 10%;
+    height: 40px;
+    background-color: #fff;
+    /* box-shadow: 0px 4px 8px rgba($color: #000000, $alpha: 0.15); */ 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    display: block;
+    color: var(--text-color);
+    text-align: center;
+    line-height: 40px;
+    text-decoration: none;
+    margin-left: 8px; 
+    outline: none; 
+    border: none;
+}   
+.admin-infor{
+    display: flex;  
+    align-items: center;
+    padding: 16px 0;
+}
+.admin-infor__img-wrap{ 
+    margin-right: 8px;
+}
+.admin-infor__img{
+    width: 52px; 
+    height: 52px; 
+    border-radius: 50%;
+} 
+.admin-infor__detail { 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center;
+}
+.admin-infor__name{
+    font-size: 22px; 
+    margin-bottom: 0;
+}
+.admin-infor__level{
+    font-size: 16px; 
+    font-style: italic; 
+    opacity: 60%; 
+    margin-bottom: 0;
+} 
+.admin__title{
+    display: flex; 
+    align-items: center;
+}
+.admin__title-text{ 
+    margin: 0; 
+    font-size: 28px;  
+    font-weight: 700; 
+    color: var(--main-color);
+}   
+.admin-card-infor{ 
+    display: flex;
+}
+.admin-card {  
+    width: 100%;
+    height: 120px;
+    background-color: var(--main-color); 
+    border-radius: 8px;  
+    display: flex;  
+    justify-content: space-between;
+    padding: 8px 24px; 
+    color: #fff;  
+    align-items: center; 
+    margin-right: 24px;
+}
+
+.admin-card__number-wrap{ 
+    
+
+}
+.admin-card__number{
+    margin-bottom: 0; 
+    font-size: 44px;
+}
+.admin-card__name-wrap{
+
+}
+.admin-card__name{
+    margin-bottom: 0; 
+    font-size: 16px; 
+    font-weight: 600; 
+    opacity: 0.8;;
+}
+.admin-card__icon{
+
+}
+.admin-card__icon i{
+    font-size: 48px;
+}  
+.admin-main__body-table { 
+}
+.admin-main__body-table thead{ 
+    background-color: var(--main-color);  
+    color: #fff;
+} 
+
+    </style>
 </head>
 
 <body>
-<div id="admin">
-    <div class="row">
-        <div class="col-lg-2 menu">
-            <h3 class="menu-heading">Menu Admin</h3>
-            <ul class="menu-list">
-                <li class="menu-list__item">
-                    <a href="/" class="menu-list__item-link">
-                        <i class="menu-icon fa-solid fa-house"></i> 
-                        <p>Trang chủ</p>
-                    </a>
-                </li>
-                <li class="menu-list__item">
-                    <a href="/admin/account?page=1" class="menu-list__item-link">
-                        <i class="menu-icon fa-solid fa-user"></i> 
-                        <p>Tài khoản</p>
-                    </a>
-                </li>
-                <li class="menu-list__item">
-                    <a href="/admin/warehouse?page=1" class="menu-list__item-link">
-                        <i class="menu-icon fa-solid fa-warehouse"></i> 
-                        <p>Nhà kho</p>
-                    </a>
-                </li>
-                <li class="menu-list__item">
-                    <a href="/admin/feedback?page=1" class="menu-list__item-link">
-                        <i class="fa-solid fa-envelope"></i> 
-                        <p>Feedbacks</p>
-                    </a>
-                </li> 
-                <li class="menu-list__item">
-                    <a href="/admin/comment?page=1" class="menu-list__item-link">
-                        <i class="fa-solid fa-comment"></i>
-                        <p>Comments</p>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <form class="col-lg-10 content" name="container-form" method="GET" class="mt-4" action="/admin/account/search"> 
-            <div class="admin-heading">    
-                <h1 class="admin-content-heading">
-                    Quản lí tài khoản
-                </h1>   
-                <div class="admin-infor">
-                    <img style="border-radius: 50%; margin-right: 8px" width="32" src="{{avatar}}" alt="">
-                    <h1 class="admin-name-heading">
-                    {{name}}
-                    </h1>
+    <div id="admin">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="admin-menu">
+                    <div class="admin-logo">
+                        <img src="/img/main-logo.png" alt="" class="admin-logo-img">
+                    </div>
+                    <ul class="admin-menu__list">
+                        <li class="admin-menu__list-item admin-menu__list-item--active">
+                            <i class="fa-solid fa-chart-simple"></i>
+                            <a href="/admin/dashboard" class="admin-menu__list-item-anchor">Dashboard</a>
+                        </li>
+                        <li class="admin-menu__list-item">
+                            <i class="fa-solid fa-user"></i>
+                            <a href="/admin/account?page=1" class="admin-menu__list-item-anchor">Tài khoản</a>
+                        </li>
+                        <li class="admin-menu__list-item">
+                            <i class="fa-solid fa-warehouse"></i>
+                            <a href="/admin/warehouse?page=1" class="admin-menu__list-item-anchor">Nhà kho</a>
+                        </li>
+                        <li class="admin-menu__list-item">
+                            <i class="fa-solid fa-envelope"></i>
+                            <a href="/admin/feedback?page=1" class="admin-menu__list-item-anchor">Feedbacks</a>
+                        </li>
+                        <li class="admin-menu__list-item">
+                            <i class="fa-solid fa-comments"></i>
+                            <a href="/admin/comment?page=1" class="admin-menu__list-item-anchor">Comments</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <div class="admin-table">
-                <div class="admin-table__options">
-                    <div class="admin-table__options-search-wrap mt-3 mb-3">
-                        <i class="fa-solid fa-magnifying-glass admin-table__options-search-icon"> </i>
-                        <input type="text" name="search" class="admin-table__options-search" placeholder="Tìm kiếm ...">
-                    </div>   
-                    <a class="btn-table" href="/admin/account">
-                        <i class="fa-solid fa-arrow-rotate-right"></i> 
-                        Reset
-                    </a>
-                    <button type="submit" class="btn-table filter-btn">
-                        <i class="fa-solid fa-floppy-disk"></i>
-                        Save
-                    </button>
-                </div> 
-                <a class="text-link" href="/admin/account/trash"> 
-                    <i class="fa-solid fa-trash"></i> ({{deletedCount}})
-                </a>
-                <table class="table table-hover">
+            <div class="col-lg-9">
+                <div class="admin-main">
+                    <div class="admin-main__header">
+                        <div class="row">
+                            <div class="col-lg-2 admin__title">
+                                <h1 class="admin__title-text">Table</h1>
+                            </div>
+                            <div class="col-lg-7 admin-table__options">
+                                <div class="admin-table__options-search-wrap">
+                                    <i class="fa-solid fa-magnifying-glass admin-table__options-search-icon"> </i>
+                                    <input type="text" name="search" class="admin-table__options-search"
+                                        placeholder="Tìm kiếm ...">
+                                </div>
+                                <a class="btn-table" href="/admin/account">
+                                    <i class="fa-solid fa-arrow-rotate-right"></i>
+                                </a>
+                                <button type="submit" class="btn-table filter-btn">
+                                    <i class="fa-solid fa-floppy-disk"></i>
+                                </button>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="admin-infor">
+                                    <div class="admin-infor__img-wrap">
+                                        <img src="{{avatar}}"
+                                            alt="" class="admin-infor__img">
+                                    </div>
+                                    <div class="admin-infor__detail">
+                                        <h3 class="admin-infor__name">{{name}}</h3>
+                                        <p class="admin-infor__level">Admin</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="admin-main__body">
+                <table class="table admin-main__body-table table-hover mt-3">
                     <thead>
                         <tr class="d-flex">
                             <th class="col-2" scope="col">Name</th>
@@ -115,69 +301,45 @@
                             <th class="col-2" scope="col" colspan="2"></th>
                         </tr>
                     </thead>
-                    <tbody>   
+                    <tbody>
                         {{#each accounts}}
                         <tr class="d-flex">
                             <td class="col-2">{{this.name}}</td>
                             <td class="col-2">{{this.email}}</td>
-                            <td class="col-2">{{this.avatar}}</td>
+                            <td class="col-2">  
+                                <img style="width: 50px; height: 50px;" src="{{this.avatar}} " alt="">
+                            </td>
                             <td class="col-1">{{this.phone}}</td>
                             <td class="col-1">{{this.username}}</td>
-                            <td class="col-2 table__password">  
-                                {{this.password}} 
-                            </td>  
+                            <td class="col-2 table__password">
+                                {{this.password}}
+                            </td>
                             <td class="col-1">{{this.role}}</td>
                             <td class="col-2">
                                 <a href="/admin/account/{{this._id}}/edit" class="btn btn-link">
-                                <i class="fa-solid fa-pen-to-square"></i>
+                                    <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
                                 <a href="" class="btn btn-link" data-id="{{this._id}}" data-bs-toggle="modal"
-                                    data-bs-target="#deleteCourseModal"> 
+                                    data-bs-target="#deleteCourseModal">
                                     <i class="fa-solid fa-xmark"></i>
                                 </a>
-                            </td>  
-                        </tr>  
-        {{else}}
-        <tr>
-            <td colspan="5" class="text-center">
-                Bạn chưa đăng kí tài khoản nào
-                <a class="another-link" href="/account/register">Đăng kí tài khoản ngay</a>
-            </td>
-        </tr>
-                        {{/each }} 
-
+                            </td>
+                        </tr>
+                        {{else}}
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                Bạn chưa đăng kí tài khoản nào
+                                <a class="another-link" href="/account/register">Đăng kí tài khoản ngay</a>
+                            </td>
+                        </tr>
+                        {{/each }}
                     </tbody>
                 </table>
-            </div>  
-            <div class="menu-main__pagination">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item ">
-                            <a class="page-link" onclick="previousPage()" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        {{#times tongSoPage}}
-                        <li class="page-item">
-                            {{!-- --}}
-                            <a class="page-link page-link--number" href="?page={{sum this 1}}">
-                                {{sum this 1}}
-                            </a>
-                        </li>
-                        {{/times}}
-            
-                        <li class="page-item">
-                            <a class="page-link" onclick="nextPage()" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+                    </div>
+                </div>
             </div>
-        </form> 
-
+        </div>
     </div>
-</div>  
 
 {{!-- Confirm Delete --}}
 <div id="deleteCourseModal" class="modal" tabindex="-1">

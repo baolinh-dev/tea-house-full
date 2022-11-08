@@ -77,7 +77,7 @@ app.get('/account/logout',(req, res, next)=>{
   req.session.destroy();
   res.redirect('/account/login')
 })     
-// 
+// Test Session
 app.get('/set_session', (req, res) => {
     //set a object to session
     if(req.session.orderId) { 
@@ -88,7 +88,20 @@ app.get('/set_session', (req, res) => {
 app.get('*', (req, res, next) => { 
   res.locals.cart = req.session.cart
   next()
-})
+}) 
+// Test New Admin Inteface  
+app.get('/admin-new', (req, res, next) => {  
+  var name = req.cookies.name
+  var avatar = req.cookies.avatar 
+  Account.find({}) 
+    .then((accounts) => { 
+      res.render('admin/testNewAdmin', { 
+        layout: false, name, avatar,  
+        accounts: mutipleMongooseToObject(accounts)
+      })
+    }) 
+    .catch(next)
+}) 
 // 404 Not Found 
 app.use((req, res) => { 
   return res.render('404', { 
