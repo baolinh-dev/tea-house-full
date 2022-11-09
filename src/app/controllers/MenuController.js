@@ -148,8 +148,8 @@ class MenuController {
         
         Comment.create( 
             { name: name, avatar: avatar, comment: comment},  
-        );  
-
+        );   
+        res.redirect('/menu/tra-vai')
     }
      // [GET] /menu/smoothies 
     smoothies(req, res, next) {    
