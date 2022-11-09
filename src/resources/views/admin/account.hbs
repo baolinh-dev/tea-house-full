@@ -30,175 +30,178 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Link CSS -->
     <link rel="stylesheet" href="/css/base.css">
-    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
-<div id="admin">
-    <div class="row">
-        <div class="col-lg-2 menu">
-            <h3 class="menu-heading">Menu Admin</h3>
-            <ul class="menu-list">
-                <li class="menu-list__item">
-                    <a href="/" class="menu-list__item-link">
-                        <i class="menu-icon fa-solid fa-house"></i> 
-                        <p>Trang chủ</p>
-                    </a>
-                </li>
-                <li class="menu-list__item">
-                    <a href="/admin/account?page=1" class="menu-list__item-link">
-                        <i class="menu-icon fa-solid fa-user"></i> 
-                        <p>Tài khoản</p>
-                    </a>
-                </li>
-                <li class="menu-list__item">
-                    <a href="/admin/warehouse?page=1" class="menu-list__item-link">
-                        <i class="menu-icon fa-solid fa-warehouse"></i> 
-                        <p>Nhà kho</p>
-                    </a>
-                </li>
-                <li class="menu-list__item">
-                    <a href="/admin/feedback?page=1" class="menu-list__item-link">
-                        <i class="fa-solid fa-envelope"></i> 
-                        <p>Feedbacks</p>
-                    </a>
-                </li> 
-                <li class="menu-list__item">
-                    <a href="/admin/comment?page=1" class="menu-list__item-link">
-                        <i class="fa-solid fa-comment"></i>
-                        <p>Comments</p>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <form class="col-lg-10 content" name="container-form" method="GET" class="mt-4" action="/admin/account/search"> 
-            <div class="admin-heading">    
-                <h1 class="admin-content-heading">
-                    Quản lí tài khoản
-                </h1>   
-                <div class="admin-infor">
-                    <img style="border-radius: 50%; margin-right: 8px" width="32" src="{{avatar}}" alt="">
-                    <h1 class="admin-name-heading">
-                    {{name}}
-                    </h1>
-                </div>
-            </div>
-            <div class="admin-table">
-                <div class="admin-table__options">
-                    <div class="admin-table__options-search-wrap mt-3 mb-3">
-                        <i class="fa-solid fa-magnifying-glass admin-table__options-search-icon"> </i>
-                        <input type="text" name="search" class="admin-table__options-search" placeholder="Tìm kiếm ...">
-                    </div>   
-                    <a class="btn-table" href="/admin/account">
-                        <i class="fa-solid fa-arrow-rotate-right"></i> 
-                        Reset
-                    </a>
-                    <button type="submit" class="btn-table filter-btn">
-                        <i class="fa-solid fa-floppy-disk"></i>
-                        Save
-                    </button>
-                </div> 
-                <a class="text-link" href="/admin/account/trash"> 
-                    <i class="fa-solid fa-trash"></i> ({{deletedCount}})
-                </a>
-                <table class="table table-hover">
-                    <thead>
-                        <tr class="d-flex">
-                            <th class="col-2" scope="col">Name</th>
-                            <th class="col-2" scope="col">Email</th>
-                            <th class="col-2" scope="col">Avatar</th>
-                            <th class="col-1" scope="col">Phone</th>
-                            <th class="col-1" scope="col">User Name</th>
-                            <th class="col-2" scope="col">Pass Word</th>
-                            <th class="col-1" scope="col">Role</th>
-                            <th class="col-2" scope="col" colspan="2"></th>
-                        </tr>
-                    </thead>
-                    <tbody>   
-                        {{#each accounts}}
-                        <tr class="d-flex">
-                            <td class="col-2">{{this.name}}</td>
-                            <td class="col-2">{{this.email}}</td>
-                            <td class="col-2">{{this.avatar}}</td>
-                            <td class="col-1">{{this.phone}}</td>
-                            <td class="col-1">{{this.username}}</td>
-                            <td class="col-2 table__password">  
-                                {{this.password}} 
-                            </td>  
-                            <td class="col-1">{{this.role}}</td>
-                            <td class="col-2">
-                                <a href="/admin/account/{{this._id}}/edit" class="btn btn-link">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                                </a>
-                                <a href="" class="btn btn-link" data-id="{{this._id}}" data-bs-toggle="modal"
-                                    data-bs-target="#deleteCourseModal"> 
-                                    <i class="fa-solid fa-xmark"></i>
-                                </a>
-                            </td>  
-                        </tr>  
-        {{else}}
-        <tr>
-            <td colspan="5" class="text-center">
-                Bạn chưa đăng kí tài khoản nào
-                <a class="another-link" href="/account/register">Đăng kí tài khoản ngay</a>
-            </td>
-        </tr>
-                        {{/each }} 
-
-                    </tbody>
-                </table>
-            </div>  
-            <div class="menu-main__pagination">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item ">
-                            <a class="page-link" onclick="previousPage()" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
+    <div id="adminBeauty">
+        <div class="row">
+            <div class="col-lg-3 pr-0">
+                <div class="admin-menu">
+                    <div class="admin-logo"> 
+                        <a href="/"> 
+                            <img src="/img/main-logo.png" alt="" class="admin-logo-img">
+                        </a>
+                    </div>
+                    <ul class="admin-menu__list">
+                        <li class="admin-menu__list-item ">
+                            <i class="fa-solid fa-chart-simple"></i>
+                            <a href="/admin/dashboard" class="admin-menu__list-item-anchor">Dashboard</a>
                         </li>
-                        {{#times tongSoPage}}
-                        <li class="page-item">
-                            {{!-- --}}
-                            <a class="page-link page-link--number" href="?page={{sum this 1}}">
-                                {{sum this 1}}
-                            </a>
+                        <li class="admin-menu__list-item admin-menu__list-item--active">
+                            <i class="fa-solid fa-user"></i>
+                            <a href="/admin/account?page=1" class="admin-menu__list-item-anchor">Tài khoản</a>
                         </li>
-                        {{/times}}
-            
-                        <li class="page-item">
-                            <a class="page-link" onclick="nextPage()" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
+                        <li class="admin-menu__list-item">
+                            <i class="fa-solid fa-warehouse"></i>
+                            <a href="/admin/warehouse?page=1" class="admin-menu__list-item-anchor">Nhà kho</a>
+                        </li>
+                        <li class="admin-menu__list-item">
+                            <i class="fa-solid fa-envelope"></i>
+                            <a href="/admin/feedback?page=1" class="admin-menu__list-item-anchor">Feedbacks</a>
+                        </li>
+                        <li class="admin-menu__list-item">
+                            <i class="fa-solid fa-comments"></i>
+                            <a href="/admin/comment?page=1" class="admin-menu__list-item-anchor">Comments</a>
                         </li>
                     </ul>
-                </nav>
+                </div>
             </div>
-        </form> 
+            <div class="col-lg-9 pl-0">
+                <form class="admin-main" method="GET" class="mt-4" action="/admin/account/search">
+                    <div class="admin-main__header">
+                        <div class="row">
+                            <div class="col-lg-2 admin__title">
+                                <h1 class="admin__title-text">Tài khoản</h1>
+                            </div>
+                            <div class="col-lg-7 admin-table__options">
+                                <div class="admin-table__options-search-wrap">
+                                    <i class="fa-solid fa-magnifying-glass admin-table__options-search-icon"> </i>
+                                    <input type="text" name="search" class="admin-table__options-search"
+                                        placeholder="Tìm kiếm ...">
+                                </div>
+                                <a class="btn-table" href="/admin/account">
+                                    <i class="fa-solid fa-arrow-rotate-right"></i>
+                                </a>
+                                <button type="submit" class="btn-table filter-btn">
+                                    <i class="fa-solid fa-floppy-disk"></i>
+                                </button>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="admin-infor">
+                                    <div class="admin-infor__img-wrap">
+                                        <img src="{{avatar}}" alt="" class="admin-infor__img">
+                                    </div>
+                                    <div class="admin-infor__detail">
+                                        <h3 class="admin-infor__name">{{name}}</h3>
+                                        <p class="admin-infor__level">Admin</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="admin-main__body"> 
+                        <a class="text-link" href="/admin/account/trash">
+                            <i class="fa-solid fa-trash"></i> ({{deletedCount}})
+                        </a>
+                        <table class="table admin-main__body-table table-hover mt-3">
+                            <thead>
+                                <tr class="d-flex">
+                                    <th class="col-2" scope="col">Name</th>
+                                    <th class="col-1" scope="col">User Name</th>
+                                    <th class="col-2" scope="col">Email</th>
+                                    <th class="col-1" scope="col">Avatar</th>
+                                    <th class="col-1" scope="col">Phone</th>
+                                    <th class="col-2" scope="col">Pass Word</th>
+                                    <th class="col-1" scope="col">Role</th>
+                                    <th class="col-2" scope="col" colspan="2"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each accounts}}
+                                <tr class="d-flex">
+                                    <td class="table-data col-2">{{this.name}}</td> 
+                                    <td class="table-data col-1">{{this.username}}</td>
+                                    <td class="table-data col-2">{{this.email}}</td>
+                                    <td class="table-data col-1">
+                                        <img style="border: 1px solid #ddd;border-radius: 50%; width: 60px; height: 60px" src="{{this.avatar}} " alt="">
+                                    </td>
+                                    <td class="table-data col-1">{{this.phone}}</td>
+                                    <td class="table-data col-2 table__password">
+                                        {{this.password}}
+                                    </td>
+                                    <td class="table-data col-1">{{this.role}}</td>
+                                    <td class="col-2">
+                                        <a href="/admin/account/{{this._id}}/edit" class="btn btn-link">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </a>
+                                        <a href="" class="btn btn-link" data-id="{{this._id}}" data-bs-toggle="modal"
+                                            data-bs-target="#deleteCourseModal">
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {{else}}
+                                <tr>
+                                    <td colspan="5" class="text-center">
+                                        Bảng không có dữ liệu
+                                    </td>
+                                </tr>
+                                {{/each }}
+                            </tbody>
+                        </table>
+                        <div class="menu-main__pagination">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item ">
+                                        <a class="page-link" onclick="previousPage()" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    {{#times tongSoPage}}
+                                    <li class="page-item">
+                                        {{!-- --}}
+                                        <a class="page-link page-link--number" href="?page={{sum this 1}}">
+                                            {{sum this 1}}
+                                        </a>
+                                    </li>
+                                    {{/times}}
 
-    </div>
-</div>  
-
-{{!-- Confirm Delete --}}
-<div id="deleteCourseModal" class="modal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Xóa khóa học ?</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>Bạn có chắc chắn muốn xóa khóa học không.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy xóa</button>
-                <button id="btn-delete-course" type="button" class="btn btn-danger">Xác nhận xóa</button>
+                                    <li class="page-item">
+                                        <a class="page-link" onclick="nextPage()" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</div>  
-{{!-- Delete Hidden Form --}}
-<form method="POST" name="delete-course-form"></form>
+
+    {{!-- Confirm Delete --}}
+    <div id="deleteCourseModal" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Xóa tài khoản ?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn xóa tài khoản này không.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy xóa</button>
+                    <button id="btn-delete-course" type="button" class="btn btn-danger">Xác nhận xóa</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{!-- Delete Hidden Form --}}
+    <form method="POST" name="delete-course-form"></form>
 
 
 
@@ -304,7 +307,7 @@
             // When Dialog Confirm Show 
             $('#deleteCourseModal').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget);
-                accountId = button.data('id'); 
+                accountId = button.data('id');
             });
             // When delete Course btn clicked
             btnDeleteCourse.onclick = function () {
@@ -341,7 +344,7 @@
                 }
             }
         })  
-    </script> 
+    </script>
     <script>
         const urlSearchParams = new URLSearchParams(window.location.search);
         const params = Object.fromEntries(urlSearchParams.entries());
@@ -364,20 +367,21 @@
         var list = document.querySelectorAll('.page-link--number')
 
         document.querySelectorAll('.page-link--number')[currentPage - 1].classList.add('page-link--actived')
-    </script>   
+    </script>
     {{!-- Hashing password --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"
         integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>  
-    <script type="text/javascript"> 
-        function encryptString(oldString) { 
-            var encryptText = CryptoJS.AES.encrypt(oldString, 'teahouse').toString(); 
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript">
+        function encryptString(oldString) {
+            var encryptText = CryptoJS.AES.encrypt(oldString, 'teahouse').toString();
             return encryptText
-        }  
-        var listPasswork = document.querySelectorAll('.table__password')  
-        for(var index in listPasswork) { 
+        }
+        var listPasswork = document.querySelectorAll('.table__password')
+        for (var index in listPasswork) {
             listPasswork[index].innerText = encryptString(listPasswork[index].innerText)
         }
-    </script>  
+    </script>
 </body>
+
 </html>

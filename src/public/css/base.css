@@ -531,5 +531,15 @@
   transform: translate(-16px, -10px);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); }
 
-::placeholder {
-  color: var(--text-color); }
+.pl-0 {
+  padding-left: 0; }
+
+.pr-0 {
+  padding-right: 0; }
+
+.table-data {
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  font-size: 16px;
+  overflow-x: hidden; }

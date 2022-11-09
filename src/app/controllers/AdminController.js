@@ -6,7 +6,7 @@ const { mongooseToObject } = require('../../util/mogoose');
 const { mutipleMongooseToObject } = require('../../util/mogoose');   
 const cookieParser = require('cookie-parser') 
 const jwt = require('jsonwebtoken') 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 8;
 class AdminController {  
     // [GET] /admin/account 
     account(req, res, next) {   
@@ -95,10 +95,13 @@ Account.findById(ketqua._id)
             .catch(next);
     }   
     // [GET] /admin/account/trash
-    trashAccount(req, res, next) {
+    trashAccount(req, res, next) { 
+        var name = req.cookies.name   
+        var avatar = req.cookies.avatar  
         Account.findDeleted()
             .then((accounts) => {
-                res.render('admin/trashAccount', { 
+                res.render('admin/trashAccount', {  
+                    name, avatar, 
                     layout: false,
                     accounts: mutipleMongooseToObject(accounts),
                 });
@@ -191,10 +194,13 @@ Account.findById(ketqua._id)
             .catch(next);
     } 
     // [GET] /admin/warehouse/trash
-    trashWarehouse(req, res, next) {
+    trashWarehouse(req, res, next) { 
+        var name = req.cookies.name 
+        var avatar = req.cookies.avatar
         Product.findDeleted()
             .then((products) => {
-                res.render('admin/trashWarehouse', { 
+                res.render('admin/trashWarehouse', {  
+                    name, avatar, 
                     layout: false,
                     products: mutipleMongooseToObject(products),
                 });
@@ -392,10 +398,13 @@ Account.findById(ketqua._id)
             .catch(next);
     }  
     // [GET] /admin/feedback/trash
-    trashFeedback(req, res, next) {
+    trashFeedback(req, res, next) { 
+        var name = req.cookies.name 
+        var avatar = req.cookies.avatar 
         Feedback.findDeleted()
             .then((feedbacks) => {
-                res.render('admin/trashFeedback', { 
+                res.render('admin/trashFeedback', {  
+                    name, avatar, 
                     layout: false,
                     feedbacks: mutipleMongooseToObject(feedbacks),
                 });
@@ -403,10 +412,13 @@ Account.findById(ketqua._id)
             .catch(next); 
     }   
     // [GET] /admin/feedback/trash
-    trashComment(req, res, next) {
+    trashComment(req, res, next) { 
+        var name = req.cookies.name 
+        var avatar = req.cookies.avatar
         Comment.findDeleted()
             .then((comments) => {
-                res.render('admin/trashComment', { 
+                res.render('admin/trashComment', {  
+                    name, avatar, 
                     layout: false,
                     comments: mutipleMongooseToObject(comments),
                 });
@@ -438,7 +450,9 @@ Account.findById(ketqua._id)
             .catch(next);
     }     
     // [GET] /admin/search
-    searchAccount(req, res, next) {    
+    searchAccount(req, res, next) {     
+        var name = req.cookies.name   
+        var avatar = req.cookies.avatar   
         var search = req.query.search   
         Promise.all( 
             [Account.find({  
@@ -450,7 +464,8 @@ Account.findById(ketqua._id)
                 ]
             }), Account.countDocumentsDeleted()])
             .then(([accounts, deletedCount]) =>
-                res.render('admin/account', { 
+                res.render('admin/account', {  
+                    name, avatar, 
                     layout: false,
                     deletedCount,
                     accounts: mutipleMongooseToObject(accounts),
@@ -482,7 +497,9 @@ Account.findById(ketqua._id)
             .catch(next);  
     }   
     // [GET] /admin/search
-    searchWarehouse(req, res, next) {   
+    searchWarehouse(req, res, next) {     
+        var name = req.cookies.name   
+        var avatar = req.cookies.avatar
         var search = req.query.search 
         // var filter = req.query.filter
         Promise.all( 
@@ -495,7 +512,9 @@ Account.findById(ketqua._id)
             }),  
             Product.countDocumentsDeleted()])
             .then(([products, deletedCount]) =>
-                res.render('admin/warehouse', { 
+                res.render('admin/warehouse', {  
+                    name,  
+                    avatar,
                     layout: false,
                     deletedCount,
                     products: mutipleMongooseToObject(products),
@@ -549,9 +568,10 @@ Account.findById(ketqua._id)
             .catch(next);   
     }    
     // [GET] /admin/comment/search
-    searchComment(req, res, next) {   
+    searchComment(req, res, next) {    
+        var name = req.cookies.name 
+        var avatar = req.cookies.avatar 
         var search = req.query.search 
-        // var filter = req.query.filter
         Promise.all( 
             [Comment.find({  
                 "$or" : [  
@@ -561,7 +581,8 @@ Account.findById(ketqua._id)
             }),  
             Comment.countDocumentsDeleted()])
                 .then(([comments, deletedCount]) =>
-                    res.render('admin/comment', { 
+                    res.render('admin/comment', {  
+                        name, avatar, 
                         layout: false,
                         deletedCount,
                         comments: mutipleMongooseToObject(comments),
@@ -569,7 +590,7 @@ Account.findById(ketqua._id)
                 )
             .catch(next);   
     }    
-    // [GET] /admin/search/trash
+    // [GET] /admin/feedback/search/trash
     searchFeedbackTrash(req, res, next) {   
         var search = req.query.search 
         // var filter = req.query.filter
@@ -588,6 +609,30 @@ Account.findById(ketqua._id)
                     layout: false,
                     deletedCount,
                     feedbacks: mutipleMongooseToObject(feedbacks),
+                }),
+            )
+            .catch(next);  
+    }  
+    // [GET] /admin/commentsearch/trash
+    searchCommentTrash(req, res, next) {    
+        var name = req.cookies.name 
+        var avatar = req.cookies.avatar
+        var search = req.query.search 
+        // var filter = req.query.filter
+        Promise.all( 
+            [Comment.findDeleted({  
+                "$or" : [  
+                    {name : new RegExp(search, 'i')}, 
+                    {comment : new RegExp(search, 'i')}, 
+                ]
+            }),  
+            Comment.countDocumentsDeleted()])
+            .then(([comments, deletedCount]) =>
+                res.render('admin/trashComment', {  
+                    name, avatar, 
+                    layout: false,
+                    deletedCount,
+                    comments: mutipleMongooseToObject(comments),
                 }),
             )
             .catch(next);  
