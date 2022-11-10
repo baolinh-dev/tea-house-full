@@ -18,19 +18,44 @@
                 <form action="/cart/list" class="form-ship" method="POST">   
                     <div class="form-ship__item"> 
                         <label for="">Tên người mua hàng:</label> 
-                        <input name="name" type="text" value="{{accounts.name}}" placeholder="{{accounts.name}}">  
+                        <input name="name" type="text" value="{{accounts.name}}" placeholder="{{accounts.name}}" required>  
                     </div> 
                     <div class="form-ship__item">
                         <label for="">Số điện thoại:</label> 
-                        <input name="phone" type="text" value="{{accounts.phone}}" placeholder="{{accounts.phone}}"> 
+                        <input name="phone" type="text" value="{{accounts.phone}}" placeholder="{{accounts.phone}}" required> 
                     </div> 
                     <div class="form-ship__item">
                         <label for="">Email:</label> 
-                        <input name="email" type="text" value="{{accounts.email}}" placeholder="{{accounts.email}}">  
+                        <input name="email" type="text" value="{{accounts.email}}" placeholder="{{accounts.email}}" required>  
                     </div> 
                     <div class="form-ship__item">
-                        <label for="">Địa chỉ nhận hàng:</label>
-                        <input name="address" type="text" name="">
+                        <label for="">Tên đường, Tòa nhà, Số nhà:</label>
+                        <input class="numberAddress" type="text" required>
+                    </div> 
+                    <div class="form-ship__item">
+                        <label for="">Tỉnh/Thành phố:</label>
+                        <input class="province" type="text" required>
+                    </div> 
+                    <div class="form-ship__item">
+                        <label for="">Quận/Huyện:</label>
+                        <input class="district" type="text" required>
+                    </div> 
+                    <div class="form-ship__item">
+                        <label for="">Phường/Xã:</label>
+                        <input class="wards" type="text" required>
+                    </div> 
+                    <div class="form-ship__item">
+                        <label for="">Địa chỉ nhận hàng:</label> 
+                        <input type="text" name="address" class="finalAddress" required>
+                        <p style="font-size: 0px;" class="resultAddress"> 
+                            <span class="numberAddressText"></span>  
+                            <span> / </span> 
+                            <span class="wardsText"></span>
+                            <span> / </span>
+                            <span class="districtText"></span> 
+                            <span> / </span>
+                            <span class="provinceText"></span> 
+                        </p>
                     </div> 
                     <input style="display: none;" name="sumary" class="sumary-cart"></input>
                     <button class="form-ship__submit" type="submit">Thanh toán</button>
@@ -96,5 +121,25 @@
     var sumaryStringFormat = String(sumaryFormat.format('0,0')) + " đ";
     document.querySelector('.sumary').innerText = sumaryStringFormat    
     document.querySelector('.sumary-cart').value = sumary 
-</script>  
+</script>   
+
+{{!-- Render đại chỉ --}} 
+<script>
+    document.querySelector('.numberAddress').oninput = function() { 
+        document.querySelector('.numberAddressText').innerHTML = document.querySelector('.numberAddress').value
+        document.querySelector('.finalAddress').value = document.querySelector('.resultAddress').innerText
+    }  
+    document.querySelector('.province').oninput = function () {   
+        document.querySelector('.provinceText').innerHTML = document.querySelector('.province').value
+        document.querySelector('.finalAddress').value = document.querySelector('.resultAddress').innerText
+    }
+    document.querySelector('.district').oninput = function () {   
+        document.querySelector('.districtText').innerHTML = document.querySelector('.district').value
+        document.querySelector('.finalAddress').value = document.querySelector('.resultAddress').innerText
+    }
+    document.querySelector('.wards').oninput = function () {   
+        document.querySelector('.wardsText').innerHTML = document.querySelector('.wards').value
+        document.querySelector('.finalAddress').value = document.querySelector('.resultAddress').innerText
+    }
+</script>
 

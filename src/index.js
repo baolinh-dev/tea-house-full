@@ -1,5 +1,7 @@
 const Account = require('../src/app/models/Account')    
-const Product = require('../src/app/models/Product')  
+const Product = require('../src/app/models/Product')   
+const Comment = require('../src/app/models/Comment') 
+const Feedback = require('../src/app/models/Feedback') 
 const { mongooseToObject } = require('../src/util/mogoose');
 const { mutipleMongooseToObject } = require('../src/util/mogoose'); 
 const { engine } = require('express-handlebars'); 
@@ -88,19 +90,29 @@ app.get('/set_session', (req, res) => {
 app.get('*', (req, res, next) => { 
   res.locals.cart = req.session.cart
   next()
-}) 
+})  
+// Test 
+
 // Test New Admin Inteface  
-app.get('/admin-new', (req, res, next) => {  
+app.get('/admin/dashboard', (req, res, next) => {  
   var name = req.cookies.name
-  var avatar = req.cookies.avatar 
-  Account.find({}) 
-    .then((accounts) => { 
-      res.render('admin/testNewAdmin', { 
-        layout: false, name, avatar,  
-        accounts: mutipleMongooseToObject(accounts)
-      })
-    }) 
-    .catch(next)
+  var avatar = req.cookies.avatar   
+      Promise.all( 
+        [Account.countDocuments(),  
+        Product.countDocuments(),  
+        Comment.countDocuments(),  
+        Feedback.countDocuments()
+      ])   
+      .then(([numberAccount, numberProduct,  numberComment, numberFeedback]) => { 
+          res.render('admin/dashBoard', {    
+            numberProduct,
+            numberAccount, 
+            numberComment,   
+            numberFeedback,
+            layout: false, name, avatar,  
+          })  
+        }) 
+
 }) 
 // 404 Not Found 
 app.use((req, res) => { 

@@ -933,7 +933,7 @@
   padding: 8px 24px;
   color: #fff;
   align-items: center;
-  margin-right: 24px; }
+  margin: 0 24px; }
 
 #adminBeauty .admin-card__number {
   margin-bottom: 0;
@@ -946,7 +946,7 @@
   opacity: 0.8; }
 
 #adminBeauty .admin-card__icon i {
-  font-size: 48px; }
+  font-size: 40px; }
 
 #adminBeauty .admin-main__body-table {
   border: 1px solid #ddd; }
