@@ -91,38 +91,8 @@ app.get('*', (req, res, next) => {
   res.locals.cart = req.session.cart
   next()
 })  
-// Test 
+// Test DashBoard
 
-// Test New Admin Inteface  
-app.get('/admin/dashboard', (req, res, next) => {  
-  var name = req.cookies.name
-  var avatar = req.cookies.avatar   
-      Promise.all( 
-        [Account.countDocuments(),  
-        Product.countDocuments(),  
-        Comment.countDocuments(),  
-        Feedback.countDocuments(),  
-        Product.countDocuments({ category: 'Tra-hoa-qua'}), 
-        Product.countDocuments({ category: 'Ca-phe'}), 
-        Product.countDocuments({ category: 'Smoothies'}), 
-        Product.countDocuments({ category: 'Banh-ngot'}),
-      ])   
-      .then(([numberAccount, numberProduct, numberComment, numberFeedback,  
-      quantityTraHoaQua, quantitySmoothies, quantityCaPhe, quantityBanhngot]) => {   
-          res.render('admin/dashBoard', {    
-            numberProduct,
-            numberAccount, 
-            numberComment,   
-            numberFeedback, 
-            quantityTraHoaQua, 
-            quantitySmoothies, 
-            quantityCaPhe, 
-            quantityBanhngot, 
-            layout: false, name, avatar,  
-          })  
-        }) 
-
-}) 
 // 404 Not Found 
 app.use((req, res) => { 
   return res.render('404', { 

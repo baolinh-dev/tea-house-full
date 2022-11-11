@@ -18,7 +18,7 @@ class OrderController {
             }  
         Account.findOne({"name" : name}) 
             .then((accounts) => {   
-                res.render('cart', {  
+                res.render('cart/cart', {  
                     name, avatar, quantityCart,  
                     carts, 
                     accounts: mongooseToObject(accounts)

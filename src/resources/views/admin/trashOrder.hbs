@@ -49,11 +49,11 @@
                             <i class="fa-solid fa-chart-simple"></i>
                             <a href="/admin/dashboard" class="admin-menu__list-item-anchor">Dashboard</a>
                         </li>
-                        <li class="admin-menu__list-item ">
+                        <li class="admin-menu__list-item admin-menu__list-item--active">
                             <i class="fa-solid fa-user"></i>
                             <a href="/admin/account?page=1" class="admin-menu__list-item-anchor">Tài khoản</a>
                         </li>
-                        <li class="admin-menu__list-item admin-menu__list-item--active">
+                        <li class="admin-menu__list-item">
                             <i class="fa-solid fa-warehouse"></i>
                             <a href="/admin/warehouse?page=1" class="admin-menu__list-item-anchor">Nhà kho</a>
                         </li>
@@ -73,11 +73,11 @@
                 </div>
             </div>
             <div class="col-lg-9 pl-0">
-                <form class="admin-main" method="GET" class="mt-4" action="/admin/warehouse/search">
+                <form class="admin-main" method="GET" class="mt-4" action="/admin/order/trash/search">
                     <div class="admin-main__header">
                         <div class="row">
                             <div class="col-lg-2 admin__title">
-                                <h1 class="admin__title-text">Nhà kho</h1>
+                                <h1 class="admin__title-text">Tài khoản</h1>
                             </div>
                             <div class="col-lg-7 admin-table__options">
                                 <div class="admin-table__options-search-wrap">
@@ -85,7 +85,7 @@
                                     <input type="text" name="search" class="admin-table__options-search"
                                         placeholder="Tìm kiếm ...">
                                 </div>
-                                <a class="btn-table" href="/admin/warehouse">
+                                <a class="btn-table" href="/admin/order/trash">
                                     <i class="fa-solid fa-arrow-rotate-right"></i>
                                 </a>
                                 <button type="submit" class="btn-table filter-btn">
@@ -94,10 +94,8 @@
                             </div>
                             <div class="col-lg-3">
                                 <div class="admin-infor">
-                                    <div class="admin-infor__img-wrap"> 
-                                        <div class=""> 
+                                    <div class="admin-infor__img-wrap">
                                         <img src="{{avatar}}" alt="" class="admin-infor__img">
-                                        </div>
                                     </div>
                                     <div class="admin-infor__detail">
                                         <h3 class="admin-infor__name">{{name}}</h3>
@@ -108,31 +106,33 @@
                         </div>
                     </div>
                     <div class="admin-main__body">
-                        <a class="text-link" href="/admin/warehouse/trash">
-                            <i class="fa-solid fa-trash"></i> ({{deletedCount}})
+                        <a class="text-link" href="/admin/order">
+                            <i class="fa-solid fa-left-long"></i> Quay lại
                         </a>
                         <table class="table admin-main__body-table table-hover mt-3">
                             <thead>
                                 <tr class="d-flex">
-                                    <th class="col-3" scope="col">Tên sản phẩm</th>
-                                    <th class="col-2" scope="col">Giá</th>
-                                    <th class="col-3" scope="col">Hình ảnh sản phẩm</th>
-                                    <th class="col-2" scope="col">Danh mục</th>
+                                    <th class="col-2" scope="col">Name </th>
+                                    <th class="col-1" scope="col">Phone</th>
+                                    <th class="col-2" scope="col">Email</th>
+                                    <th class="col-2" scope="col">Address</th>
+                                    <th class="col-1" scope="col">Sumary</th>
+                                    <th class="col-2" scope="col">Date Order</th>
                                     <th class="col-2" scope="col" colspan="2"></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {{#each products}}
+                                {{#each orders}}
                                 <tr class="d-flex">
-                                    <td class="table-data col-3">{{this.name}}</td>
-                                    <td class="table-data col-2">{{this.price}}</td>
-                                    <td class="table-data col-3">
-                                        <img style="width: 160px; height: 160px;" src="{{this.image}} " alt="">
-                                    </td>
-                                    <td class="table-data col-2">{{this.category}}</td>
-                                    <td class="table-data col-2">
-                                        <a href="/admin/warehouse/{{this._id}}/edit" class="btn btn-link">
-                                            <i class="fa-solid fa-pen-to-square"></i>
+                                    <td class="col-2">{{this.name}}</td>
+                                    <td class="col-1">{{this.phone}}</td>
+                                    <td class="col-2">{{this.email}}</td>
+                                    <td class="col-2">{{this.address}}</td>
+                                    <td class="col-1">{{this.sumary}}</td>
+                                    <td class="col-2">{{this.dateOrder}}</td>
+                                    <td class="col-2">
+                                        <a href="" class="btn btn-link btn-restore" data-id="{{this._id}}">
+                                            <i class="fa-solid fa-window-restore"></i>
                                         </a>
                                         <a href="" class="btn btn-link" data-id="{{this._id}}" data-bs-toggle="modal"
                                             data-bs-target="#deleteCourseModal">
@@ -143,37 +143,12 @@
                                 {{else}}
                                 <tr>
                                     <td colspan="5" class="text-center">
-                                        Bảng không có dữ liệu
+                                        Thùng rác trống
                                     </td>
                                 </tr>
                                 {{/each }}
                             </tbody>
                         </table>
-                        <div class="menu-main__pagination">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center">
-                                    <li class="page-item ">
-                                        <a class="page-link" onclick="previousPage()" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                                    {{#times tongSoPage}}
-                                    <li class="page-item">
-                                        {{!-- --}}
-                                        <a class="page-link page-link--number" href="?page={{sum this 1}}">
-                                            {{sum this 1}}
-                                        </a>
-                                    </li>
-                                    {{/times}}
-
-                                    <li class="page-item">
-                                        <a class="page-link" onclick="nextPage()" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
                     </div>
                 </form>
             </div>
@@ -185,11 +160,11 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Xóa sản phẩm ?</h5>
+                    <h5 class="modal-title">Xóa tài khoản vĩnh viễn?</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Bạn có chắc chắn muốn xóa sản phẩm này không.</p>
+                    <p>Bạn có chắc chắn muốn xóa tài khoản này vĩnh viễn không?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy xóa</button>
@@ -200,7 +175,7 @@
     </div>
     {{!-- Delete Hidden Form --}}
     <form method="POST" name="delete-course-form"></form>
-
+    <form method="POST" name="restore-course-form"></form>
 
 
     <!-- Link Owlcaroulsel -->
@@ -296,51 +271,32 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var courseId;
-            var deleteForm = document.forms['delete-course-form'];
+            var deleteForm = document.forms['delete-course-form']; 
+            var restoreForm = document.forms['restore-course-form']; 
             var containerForm = document.forms['container-form'];
             var btnDeleteCourse = document.getElementById('btn-delete-course');
             var checkboxAll = $('#checkbox-all');
             var courseItemCheckbox = $('input[name="courseIds[]"]')
-            var checkAllSubmitBtn = $('.check-all-submit-btn')
+            var checkAllSubmitBtn = $('.check-all-submit-btn') 
+            var restoreBtn = $('.btn-restore')
             // When Dialog Confirm Show 
             $('#deleteCourseModal').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget);
-                accountId = button.data('id');
+                orderId = button.data('id');
             });
             // When delete Course btn clicked
             btnDeleteCourse.onclick = function () {
-                deleteForm.action = '/admin/warehouse/' + accountId + '?_method=DELETE';
+                deleteForm.action = '/admin/order/' + orderId + '/force?_method=DELETE';
                 deleteForm.submit();
             }
-            // Checkbox All clicked
-            checkboxAll.change(function () {
-                var isCheckedAll = $(this).prop('checked');
-                courseItemCheckbox.prop('checked', isCheckedAll);
-                renderCheckAllSubmitBtn()
+            // Restore Btn Clicked 
+            restoreBtn.click(function (e) {
+                e.preventDefault();
+                var orderId = $(this).data('id')
+                restoreForm.action =
+                    '/admin/order/' + orderId + '/restore?_method=PATCH';
+                restoreForm.submit();
             })
-            // Course item checkbox changed
-            courseItemCheckbox.change(function () {
-                var isCheckedAll = courseItemCheckbox.length
-                    === $('input[name="courseIds[]"]:checked').length;
-                checkboxAll.prop('checked', isCheckedAll);
-                renderCheckAllSubmitBtn()
-            });
-            // Check all submit button clicked
-            checkAllSubmitBtn.on('submit', function (e) {
-                var isSubmitable = !$(this).hasClass('disabled');
-                if (!isSubmitable) {
-                    e.preventDefault();
-                }
-            })
-            // Re-render check all submit button
-            function renderCheckAllSubmitBtn() {
-                var checkedCount = $(' input[name="courseIds[]"]:checked').length;
-                if (checkedCount > 0) {
-                    checkAllSubmitBtn.removeClass('disabled');
-                } else {
-                    checkAllSubmitBtn.addClass('disabled');
-                }
-            }
         })  
     </script>
     <script>

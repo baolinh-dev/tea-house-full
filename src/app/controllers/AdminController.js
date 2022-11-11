@@ -2,6 +2,7 @@ const Account = require('../models/Account')
 const Product = require('../models/Product')  
 const Feedback = require('../models/Feedback')  
 const Comment = require('../models/Comment') 
+const Order = require('../models/Order') 
 const { mongooseToObject } = require('../../util/mogoose');
 const { mutipleMongooseToObject } = require('../../util/mogoose');   
 const cookieParser = require('cookie-parser') 
@@ -351,6 +352,62 @@ Account.findById(ketqua._id)
             res.redirect('/account/login')
         }
     }
+    // [GET] /admin/order 
+    order(req, res, next) {   
+        try {
+            var token = req.cookies.token
+            var ketqua = jwt.verify(token, 'matkhau')   
+            var name = req.cookies.name 
+            var avatar = req.cookies.avatar 
+            if(ketqua) {   
+                Account.findById(ketqua._id)  
+                .then((accounts) => {  
+                    if(accounts.role == 'admin') {   
+                    var page = parseInt(req.query.page);   
+                        if (page) {   
+                            if (page < 1) { page = 1 } 
+                            var soLuongBoQua = (page - 1) * PAGE_SIZE   
+                            Promise.all([Order.find({}).skip(soLuongBoQua).limit(PAGE_SIZE), Order.countDocumentsDeleted()])  
+                                .then(([orders, deletedCount]) => { 
+                                    Order.countDocuments({}).then((total)=>{  
+                                        var tongSoPage = Math.ceil(total / PAGE_SIZE) 
+                                        res.render('admin/order', {  
+                                            layout: false, 
+                                            deletedCount,
+                                            tongSoPage,  
+                                            avatar,
+                                            name,
+                                            orders: mutipleMongooseToObject(orders),
+                                        });
+                                    })
+                                }) 
+                                .catch(next)
+                        } else { 
+                            Promise.all([Order.find({}), Order.countDocumentsDeleted()])  
+                                .then(([orders, deletedCount]) => { 
+                                    Order.countDocuments({}).then((total)=>{  
+                                        var tongSoPage = Math.ceil(total / PAGE_SIZE) 
+                                        res.render('admin/order', {  
+                                            layout: false, 
+                                            deletedCount,
+                                            tongSoPage,  
+                                            avatar,
+                                            name,
+                                            orders: mutipleMongooseToObject(orders),
+                                        });
+                                    })
+                                }) 
+                                .catch(next);
+                        }
+                    } else  {  
+                        res.redirect('/')
+                    }
+                })
+            }
+        } catch (error) {
+            res.redirect('/account/login')
+        }
+    }
     // [GET] /admin/feedback/:id/edit
     editFeedback(req, res, next) {
         Feedback.findById(req.params.id)
@@ -373,6 +430,17 @@ Account.findById(ketqua._id)
             })
             .catch(next); 
     }   
+    // [GET] /admin/order/:id/edit
+    editOrder(req, res, next) {
+        Order.findById(req.params.id)
+            .then((orders) => {
+                res.render('admin/editOrder', { 
+                    layout: false,
+                    orders: mongooseToObject(orders),
+                });
+            })
+            .catch(next); 
+    }   
     // [PUT] /admin/feedback/:id
     updateFeedback(req, res, next) {
         Feedback.updateOne({ _id: req.params.id }, req.body)
@@ -385,6 +453,12 @@ Account.findById(ketqua._id)
             .then(() => res.redirect('/admin/comment'))
             .catch(next);  
     }    
+    // [PUT] /admin/order/:id
+    updateOrder(req, res, next) {
+        Order.updateOne({ _id: req.params.id }, req.body)
+            .then(() => res.redirect('/admin/order'))
+            .catch(next);  
+    }    
     // [DELETE] /admin/feedback/:id
     destroyFeedback(req, res, next) {
         Feedback.delete({ _id: req.params.id })
@@ -394,6 +468,12 @@ Account.findById(ketqua._id)
     // [DELETE] /admin/comment/:id
     destroyComment(req, res, next) {
         Comment.delete({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }  
+    // [DELETE] /admin/order/:id
+    destroyOrder(req, res, next) {
+        Order.delete({ _id: req.params.id })
             .then(() => res.redirect('back'))
             .catch(next);
     }  
@@ -411,7 +491,7 @@ Account.findById(ketqua._id)
             })
             .catch(next); 
     }   
-    // [GET] /admin/feedback/trash
+    // [GET] /admin/comment/trash
     trashComment(req, res, next) { 
         var name = req.cookies.name 
         var avatar = req.cookies.avatar
@@ -425,15 +505,35 @@ Account.findById(ketqua._id)
             })
             .catch(next); 
     }   
+    // [GET] /admin/order/trash
+    trashOrder(req, res, next) { 
+        var name = req.cookies.name 
+        var avatar = req.cookies.avatar
+        Order.findDeleted()
+            .then((orders) => {
+                res.render('admin/trashOrder', {  
+                    name, avatar, 
+                    layout: false,
+                    orders: mutipleMongooseToObject(orders),
+                });
+            })
+            .catch(next); 
+    }   
     // [PATCH] /admin/feedback/:id/restore  
     restoreFeedback(req, res, next) {
         Feedback.restore({ _id: req.params.id })
             .then(() => res.redirect('back'))
             .catch(next);
     }   
-    // [PATCH] /admin/feedback/:id/restore  
+    // [PATCH] /admin/comment/:id/restore  
     restoreComment(req, res, next) {
         Comment.restore({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }   
+    // [PATCH] /admin/order/:id/restore  
+    restoreOrder(req, res, next) {
+        Order.restore({ _id: req.params.id })
             .then(() => res.redirect('back'))
             .catch(next);
     }   
@@ -443,9 +543,15 @@ Account.findById(ketqua._id)
             .then(() => res.redirect('back'))
             .catch(next);
     }     
-    // [DELETE] /admin/feedback/:id/force
+    // [DELETE] /admin/comment/:id/force
     forceDestroyComment(req, res, next) {
         Comment.deleteOne({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }     
+    // [DELETE] /admin/order/:id/force
+    forceDestroyOrder(req, res, next) {
+        Order.deleteOne({ _id: req.params.id })
             .then(() => res.redirect('back'))
             .catch(next);
     }     
@@ -590,6 +696,28 @@ Account.findById(ketqua._id)
                 )
             .catch(next);   
     }    
+    // [GET] /admin/ỏdẻ/search
+    searchOrder(req, res, next) {    
+        var name = req.cookies.name 
+        var avatar = req.cookies.avatar 
+        var search = req.query.search 
+        Promise.all( 
+            [Order.find({  
+                "$or" : [  
+                    {name : new RegExp(search, 'i')},  
+                ]
+            }),  
+            Order.countDocumentsDeleted()])
+                .then(([orders, deletedCount]) =>
+                    res.render('admin/order', {  
+                        name, avatar, 
+                        layout: false,
+                        deletedCount,
+                        orders: mutipleMongooseToObject(orders),
+                    }),
+                )
+            .catch(next);   
+    }    
     // [GET] /admin/feedback/search/trash
     searchFeedbackTrash(req, res, next) {   
         var search = req.query.search 
@@ -613,7 +741,7 @@ Account.findById(ketqua._id)
             )
             .catch(next);  
     }  
-    // [GET] /admin/commentsearch/trash
+    // [GET] /admin/comment/trash/search
     searchCommentTrash(req, res, next) {    
         var name = req.cookies.name 
         var avatar = req.cookies.avatar
@@ -636,6 +764,57 @@ Account.findById(ketqua._id)
                 }),
             )
             .catch(next);  
-    }  
+    }    
+    // [GET] /admin/order/trash/search
+    searchOrderOrder(req, res, next) {    
+        var name = req.cookies.name 
+        var avatar = req.cookies.avatar
+        var search = req.query.search 
+        // var filter = req.query.filter
+        Promise.all( 
+            [Order.findDeleted({  
+                "$or" : [  
+                    {name : new RegExp(search, 'i')},  
+                ]
+            }),  
+            Order.countDocumentsDeleted()])
+            .then(([orders, deletedCount]) =>
+                res.render('admin/trashOrder', {  
+                    name, avatar, 
+                    layout: false,
+                    deletedCount,
+                    orders: mutipleMongooseToObject(orders),
+                }),
+            )
+            .catch(next);  
+    }    
+    renderDashBoard(req, res, next)  {  
+  var name = req.cookies.name
+  var avatar = req.cookies.avatar   
+      Promise.all( 
+        [Account.countDocuments(),  
+        Product.countDocuments(),  
+        Comment.countDocuments(),  
+        Feedback.countDocuments(),  
+        Product.countDocuments({ category: 'Tra-hoa-qua'}), 
+        Product.countDocuments({ category: 'Ca-phe'}), 
+        Product.countDocuments({ category: 'Smoothies'}), 
+        Product.countDocuments({ category: 'Banh-ngot'}),
+      ])   
+      .then(([numberAccount, numberProduct, numberComment, numberFeedback,  
+      quantityTraHoaQua, quantitySmoothies, quantityCaPhe, quantityBanhngot]) => {   
+          res.render('admin/dashBoard', {    
+            numberProduct,
+            numberAccount, 
+            numberComment,   
+            numberFeedback, 
+            quantityTraHoaQua, 
+            quantitySmoothies, 
+            quantityCaPhe, 
+            quantityBanhngot, 
+            layout: false, name, avatar,  
+          })  
+        }) 
+}
 }  
 module.exports = new AdminController; 
