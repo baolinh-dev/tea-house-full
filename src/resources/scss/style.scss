@@ -1183,6 +1183,12 @@
 }
 #adminBeauty .admin-main__body-table thead { 
     border-bottom: 4px solid var(--main-color);
+} 
+#adminBeauty .chart-tra-hoa-qua {  
+    display: inline-block;
+    color: var(--text-color); 
+    border-bottom: 4px solid var(--main-color); 
+    margin-bottom: 20px;
 }
 // Detail
 #detail {

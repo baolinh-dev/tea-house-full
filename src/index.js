@@ -101,14 +101,23 @@ app.get('/admin/dashboard', (req, res, next) => {
         [Account.countDocuments(),  
         Product.countDocuments(),  
         Comment.countDocuments(),  
-        Feedback.countDocuments()
+        Feedback.countDocuments(),  
+        Product.countDocuments({ category: 'Tra-hoa-qua'}), 
+        Product.countDocuments({ category: 'Ca-phe'}), 
+        Product.countDocuments({ category: 'Smoothies'}), 
+        Product.countDocuments({ category: 'Banh-ngot'}),
       ])   
-      .then(([numberAccount, numberProduct,  numberComment, numberFeedback]) => { 
+      .then(([numberAccount, numberProduct, numberComment, numberFeedback,  
+      quantityTraHoaQua, quantitySmoothies, quantityCaPhe, quantityBanhngot]) => {   
           res.render('admin/dashBoard', {    
             numberProduct,
             numberAccount, 
             numberComment,   
-            numberFeedback,
+            numberFeedback, 
+            quantityTraHoaQua, 
+            quantitySmoothies, 
+            quantityCaPhe, 
+            quantityBanhngot, 
             layout: false, name, avatar,  
           })  
         }) 
