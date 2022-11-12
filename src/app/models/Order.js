@@ -8,7 +8,7 @@ const Order = new Schema(
         phone : { type: String}, 
         email : { type: String},  
         address : { type: String}, 
-        sumary : { type: String}, 
+        sumary : { type: Number}, 
         dateOrder: { type: String}, 
         dateEstimatedOrder: { type: String}, 
     }, 

@@ -1105,7 +1105,8 @@
 #adminBeauty .admin-infor__img {
     width: 52px;
     height: 52px;
-    border-radius: 50%;
+    border-radius: 50%; 
+    border: 1px solid #ddd;
 }
 
 #adminBeauty .admin-infor__detail {
@@ -1186,9 +1187,12 @@
 } 
 #adminBeauty .chart-tra-hoa-qua {  
     display: inline-block;
+    padding-bottom: 4px;
     color: var(--text-color); 
     border-bottom: 4px solid var(--main-color); 
-    margin-bottom: 20px;
+    margin-bottom: 20px; 
+    font-size: 24px; 
+    font-weight: 600; 
 }
 // Detail
 #detail {

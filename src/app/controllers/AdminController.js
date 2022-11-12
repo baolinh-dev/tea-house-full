@@ -799,10 +799,20 @@ Account.findById(ketqua._id)
         Product.countDocuments({ category: 'Tra-hoa-qua'}), 
         Product.countDocuments({ category: 'Ca-phe'}), 
         Product.countDocuments({ category: 'Smoothies'}), 
-        Product.countDocuments({ category: 'Banh-ngot'}),
+        Product.countDocuments({ category: 'Banh-ngot'}), 
+        Order.aggregate([ 
+            {$group : {_id : "$dateOrder", sumaryByDate: { $sum: "$sumary" }}}, 
+            {$sort:{"sumaryByDate": 1}}
+        ]) 
       ])   
       .then(([numberAccount, numberProduct, numberComment, numberFeedback,  
-      quantityTraHoaQua, quantitySmoothies, quantityCaPhe, quantityBanhngot]) => {   
+      quantityTraHoaQua, quantitySmoothies, quantityCaPhe, quantityBanhngot, listSumaryByDate]) => {    
+    var resultData = [] 
+    var resultLabels = []
+    for(var i = 0; i < listSumaryByDate.length; i++) { 
+        resultData.push(listSumaryByDate[i].sumaryByDate)
+        resultLabels.push(listSumaryByDate[i]._id) 
+    }   
           res.render('admin/dashBoard', {    
             numberProduct,
             numberAccount, 
@@ -811,7 +821,9 @@ Account.findById(ketqua._id)
             quantityTraHoaQua, 
             quantitySmoothies, 
             quantityCaPhe, 
-            quantityBanhngot, 
+            quantityBanhngot,   
+            resultLabels, 
+            resultData,
             layout: false, name, avatar,  
           })  
         }) 

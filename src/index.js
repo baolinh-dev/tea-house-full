@@ -38,6 +38,7 @@ const route = require('./routes')
 // Connect to DB 
 const db = require('./config/db'); 
 const { time } = require('console');
+const Order = require('./app/models/Order');
 db.connect() 
 // Fix body POST method 
 app.use(express.urlencoded({ 
@@ -92,7 +93,7 @@ app.get('*', (req, res, next) => {
   next()
 })  
 // Test DashBoard
-
+ 
 // 404 Not Found 
 app.use((req, res) => { 
   return res.render('404', { 

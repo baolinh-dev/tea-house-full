@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tea House | Trang chủ</title>
-    <!-- Link Favicon -->
-    <link rel="icon" type="image/x-icon" href="/img/favi.png"> 
     {{!-- Link ChartJS --}} 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"
         integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Link Favicon -->
+    <link rel="icon" type="image/x-icon" href="/img/favi.png"> 
     <!-- Link Bootrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
@@ -164,18 +164,26 @@
                                 </div>
                             </div>
                         </div> 
-                        <div class="admin-chart mt-3">
+                        <div class="admin-chart mt-5">
                             <div class="container">
                                 <div class="row">
                                     <div class="col-4"> 
                                         <h3 class="chart-tra-hoa-qua">
                                             Chart sản phẩm
                                         </h3>
-                                        <canvas id="myChart"> </canvas> 
+                                        <canvas id="myChartPie"> </canvas> 
                                         <p style="display: none;" class="quantity__tra-hoa-qua">{{quantityTraHoaQua}}</p>
                                         <p style="display: none;" class="quantity__ca-phe">{{quantityCaPhe}}</p>
                                         <p style="display: none;" class="quantity__smoothies">{{quantitySmoothies}}</p>
                                         <p style="display: none;" class="quantity__banh-ngot">{{quantityBanhngot}}</p>
+                                    </div> 
+                                    <div class="col-lg-8">
+                                        <h3 class="chart-tra-hoa-qua">
+                                            DashBoard Order
+                                        </h3>  
+                                        <canvas id="myChartBar"> </canvas>  
+                                        <p style="display: none;" class="labelOrderText">{{resultLabels}}</p>
+                                        <p style="display: none;" class="dataOrderText">{{resultData}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -204,197 +212,15 @@
             </div>
         </div>
     </div>
-    {{!-- Delete Hidden Form --}}
-    <form method="POST" name="delete-course-form"></form>
-
-
-
-    <!-- Link Owlcaroulsel -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
-        integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
-        integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- Link Bootrap Script -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
-        integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
-        crossorigin="anonymous"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
-        integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
-        crossorigin="anonymous"></script>
-
-    {{!-- Owl --}}
-    <script>
-        $('#home .gallery .owl-carousel.owl-carousel--gallery').owlCarousel({
-            loop: true,
-            autoplay: true,
-            autoplayTimeout: 6000,
-            responsive: {
-                0: {
-                    items: 2
-                },
-                740: {
-                    items: 3
-                },
-                1024: {
-                    items: 5
-                }
-            }
-        })
-        $('#home .drink-list .owl-carousel').owlCarousel({
-            loop: true,
-            autoplay: false,
-            autoplayTimeout: 6000,
-            responsive: {
-                0: {
-                    items: 2
-                },
-                740: {
-                    items: 2
-                },
-                1024: {
-                    items: 4
-                }
-            }
-        })
-        $('#home .category .owl-carousel').owlCarousel({
-            loop: true,
-            margin: 10,
-            nav: true,
-            autoplay: true,
-            autoplayTimeout: 6000,
-            dotsEach: true,
-            URLhashListener: true,
-            center: true,
-            startPosition: 'URLHash',
-            responsive: {
-                0: {
-                    items: 1
-                },
-                600: {
-                    items: 3
-                },
-                1000: {
-                    items: 3
-                }
-            }
-        })
-        $('#menu .owl-carousel').owlCarousel({
-            loop: true,
-            margin: 10,
-            nav: true,
-            responsive: {
-                0: {
-                    items: 2
-                },
-                600: {
-                    items: 3
-                },
-                1000: {
-                    items: 4
-                }
-            }
-        })  
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var courseId;
-            var deleteForm = document.forms['delete-course-form'];
-            var containerForm = document.forms['container-form'];
-            var btnDeleteCourse = document.getElementById('btn-delete-course');
-            var checkboxAll = $('#checkbox-all');
-            var courseItemCheckbox = $('input[name="courseIds[]"]')
-            var checkAllSubmitBtn = $('.check-all-submit-btn')
-            // When Dialog Confirm Show 
-            $('#deleteCourseModal').on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget);
-                accountId = button.data('id');
-            });
-            // When delete Course btn clicked
-            btnDeleteCourse.onclick = function () {
-                deleteForm.action = '/admin/account/' + accountId + '?_method=DELETE';
-                deleteForm.submit();
-            }
-            // Checkbox All clicked
-            checkboxAll.change(function () {
-                var isCheckedAll = $(this).prop('checked');
-                courseItemCheckbox.prop('checked', isCheckedAll);
-                renderCheckAllSubmitBtn()
-            })
-            // Course item checkbox changed
-            courseItemCheckbox.change(function () {
-                var isCheckedAll = courseItemCheckbox.length
-                    === $('input[name="courseIds[]"]:checked').length;
-                checkboxAll.prop('checked', isCheckedAll);
-                renderCheckAllSubmitBtn()
-            });
-            // Check all submit button clicked
-            checkAllSubmitBtn.on('submit', function (e) {
-                var isSubmitable = !$(this).hasClass('disabled');
-                if (!isSubmitable) {
-                    e.preventDefault();
-                }
-            })
-            // Re-render check all submit button
-            function renderCheckAllSubmitBtn() {
-                var checkedCount = $(' input[name="courseIds[]"]:checked').length;
-                if (checkedCount > 0) {
-                    checkAllSubmitBtn.removeClass('disabled');
-                } else {
-                    checkAllSubmitBtn.addClass('disabled');
-                }
-            }
-        })  
-    </script>
-    <script>
-        const urlSearchParams = new URLSearchParams(window.location.search);
-        const params = Object.fromEntries(urlSearchParams.entries());
-
-        let currentPage = parseInt(params.page);
-        function nextPage() {
-            var nextPage = currentPage + 1
-            if (nextPage > 5) {
-                nextPage = 5
-            }
-            location.href = `/admin/account?page=${nextPage}`;
-        }
-        function previousPage() {
-            var previousPage = currentPage - 1
-            if (previousPage < 1) {
-                previousPage = 1
-            }
-            location.href = `/admin/account?page=${previousPage}`;
-        }
-        var list = document.querySelectorAll('.page-link--number')
-
-        document.querySelectorAll('.page-link--number')[currentPage - 1].classList.add('page-link--actived')
-    </script>
-    {{!-- Hashing password --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"
-        integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script type="text/javascript">
-        function encryptString(oldString) {
-            var encryptText = CryptoJS.AES.encrypt(oldString, 'teahouse').toString();
-            return encryptText
-        }
-        var listPasswork = document.querySelectorAll('.table__password')
-        for (var index in listPasswork) {
-            listPasswork[index].innerText = encryptString(listPasswork[index].innerText)
-        }
-    </script> 
     {{!-- ChartJS --}}
     <script>  
-         let delayed;
         var quantityTraHoaQua = Number(document.querySelector('.quantity__tra-hoa-qua').innerText) 
         var quantitySmoothies = Number(document.querySelector('.quantity__smoothies').innerText) 
         var quantityBanhNgot = Number(document.querySelector('.quantity__banh-ngot').innerText) 
         var quantityCaPhe = Number(document.querySelector('.quantity__ca-phe').innerText)  
-        let myChart = document.getElementById('myChart').getContext('2d'); 
-                let massPopChart = new Chart(myChart, {
+        // Chart Pie 
+        let myChartPie = document.getElementById('myChartPie').getContext('2d'); 
+        let massPopChart = new Chart(myChartPie, {
                         type: 'pie',
                         data: {
                         labels: [
@@ -404,7 +230,7 @@
                             'Bánh ngọt',
                         ],
                         datasets: [{
-                            label: 'My First Dataset',
+                            label: 'Product Dataset',
                             data: [quantityTraHoaQua, quantityCaPhe, quantitySmoothies, quantityBanhNgot],
                             backgroundColor: [
                                 'rgb(255, 99, 132)',
@@ -415,8 +241,39 @@
                             hoverOffset: 4,  
                         }]
                     },
-                    
-                })
+                }) 
+        // Chart Bar   
+        var dataOrderText = document.querySelector('.dataOrderText').innerText
+        var labelOrderText = document.querySelector('.labelOrderText').innerText 
+
+        var dataOrderList = dataOrderText.split(",");
+        var labelOrderText = labelOrderText.split(",");  
+        
+        let myChartBar = document.getElementById('myChartBar').getContext('2d');  
+        let massPopChartBar = new Chart(myChartBar, {
+                type: 'bar',
+                data: {
+                    labels: labelOrderText,
+                    datasets: [{
+                        label: 'Product Sumary',
+                        data: dataOrderList,
+                        backgroundColor: [
+                            'rgb(49, 173 ,116)',
+                            'rgb(49, 173 ,116)',
+                            'rgb(49, 173 ,116)',
+                            'rgb(49, 173 ,116)'
+                        ],
+                        hoverOffset: 4,
+                    }]
+                }, 
+                options: {
+                    scales: {
+                        y: { 
+                            beginAtZero: true
+                        }
+                    }
+                }
+            }) 
     </script>
 </body> 
 
