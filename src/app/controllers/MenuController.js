@@ -21,19 +21,14 @@ class MenuController {
                 var avatar = req.cookies.avatar 
                 var page = parseInt(req.query.page); 
                 if (page) {  
-                    if (page < 1) { 
-                        page = 1
-                    }
-                    // get page   
+                    // Get Page bằng pagination 
                     var soLuongBoQua = (page - 1) * PAGE_SIZE  
                     Product.find({}).skip(soLuongBoQua).limit(PAGE_SIZE) 
                     .then((products) => { 
                         Product.countDocuments({}).then((total)=>{  
                             var tongSoPage = Math.ceil(total / PAGE_SIZE) 
                             res.render('menu', {   
-                                avatar,
-                                name,
-                                tongSoPage, 
+                                avatar, name, tongSoPage, 
                                 quantityCart,
                                 products: mutipleMongooseToObject(products),
                             });
@@ -41,7 +36,7 @@ class MenuController {
                     }) 
                     .catch(next);
                 } else {  
-                    // get all
+                    // Get ALL
                     Product.find({}).exec() 
                         .then((products) => {   
                             Product.countDocuments({}).then((total)=>{  
@@ -78,29 +73,27 @@ class MenuController {
                 var avatar = req.cookies.avatar 
                 var page = parseInt(req.query.page); 
                 if (page) {  
-                    if (page < 1) { 
-                        page = 1
-                    }
-                    // get page   
+                    // Get Page bằng pagination 
                     var soLuongBoQua = (page - 1) * PAGE_SIZE
-                Product.find({ category: 'Tra-hoa-qua' }) 
-                    .skip(soLuongBoQua) 
-                    .limit(PAGE_SIZE) 
-                    .then((productsTraHoaQua) => { 
-                        Product.countDocuments({category: 'Tra-hoa-qua'}) 
-                            .then((total)=>{  
-                            var tongSoPage = Math.ceil(total / PAGE_SIZE)  
-                            res.render('productDetails/trahoaqua', {  
-                                avatar, 
-                                name, 
-                                tongSoPage,  
-                                quantityCart,
-                                productsTraHoaQua: mutipleMongooseToObject(productsTraHoaQua),
-                            });
+                    Product.find({ category: 'Tra-hoa-qua' }) 
+                        .skip(soLuongBoQua) 
+                        .limit(PAGE_SIZE) 
+                        .then((productsTraHoaQua) => { 
+                            Product.countDocuments({category: 'Tra-hoa-qua'}) 
+                                .then((total)=>{  
+                                var tongSoPage = Math.ceil(total / PAGE_SIZE)  
+                                res.render('productDetails/trahoaqua', {  
+                                    avatar, 
+                                    name, 
+                                    tongSoPage,  
+                                    quantityCart,
+                                    productsTraHoaQua: mutipleMongooseToObject(productsTraHoaQua),
+                                });
+                            })
                         })
-                    })
-                    .catch(next); 
-                } else {
+                        .catch(next); 
+                } else { 
+                // Get All 
                 Product.find({ category: 'Tra-hoa-qua' }).exec()
                     .then((productsTraHoaQua) => {   
                         Product.find({ category: 'Tra-hoa-qua' }).countDocuments({}) 
@@ -167,43 +160,41 @@ class MenuController {
                 var avatar = req.cookies.avatar 
                 var page = parseInt(req.query.page); 
                 if (page) {  
-                    if (page < 1) { 
-                        page = 1
-                    }
-                    // get page   
+                    // Get Page bằng pagination 
                     var soLuongBoQua = (page - 1) * PAGE_SIZE
-                Product.find({ category: 'Smoothies' }) 
-                    .skip(soLuongBoQua) 
-                    .limit(PAGE_SIZE) 
-                    .then((productsSmoothies) => {  
-                        Product.countDocuments({category: 'Smoothies'}).then((total)=>{  
-                            var tongSoPage = Math.ceil(total / PAGE_SIZE) 
-                            res.render('productDetails/smoothies', {   
-                                avatar, 
-                                name,
-                                tongSoPage, 
-                                quantityCart,
-                                productsSmoothies: mutipleMongooseToObject(productsSmoothies),
-                            });
+                    Product.find({ category: 'Smoothies' }) 
+                        .skip(soLuongBoQua) 
+                        .limit(PAGE_SIZE) 
+                        .then((productsSmoothies) => {  
+                            Product.countDocuments({category: 'Smoothies'}).then((total)=>{  
+                                var tongSoPage = Math.ceil(total / PAGE_SIZE) 
+                                res.render('productDetails/smoothies', {   
+                                    avatar, 
+                                    name,
+                                    tongSoPage, 
+                                    quantityCart,
+                                    productsSmoothies: mutipleMongooseToObject(productsSmoothies),
+                                });
+                            })
                         })
-                    })
-                    .catch(next); 
-                } else {
-                Product.find({ category: 'Smoothies' }).exec()
-                    .then((productsSmoothies) => {   
-                        Product.find({ category: 'Smoothies' }).countDocuments({}) 
-                        .then((total)=>{  
-                            var tongSoPage = Math.ceil(total / PAGE_SIZE) 
-                            res.render('productDetails/smoothies', {   
-                                avatar, 
-                                name,
-                                tongSoPage,  
-                                quantityCart,
-                                productsSmoothies: mutipleMongooseToObject(productsSmoothies),
-                            });
+                        .catch(next); 
+                } else {  
+                    // Get All
+                    Product.find({ category: 'Smoothies' }).exec()
+                        .then((productsSmoothies) => {   
+                            Product.find({ category: 'Smoothies' }).countDocuments({}) 
+                            .then((total)=>{  
+                                var tongSoPage = Math.ceil(total / PAGE_SIZE) 
+                                res.render('productDetails/smoothies', {   
+                                    avatar, 
+                                    name,
+                                    tongSoPage,  
+                                    quantityCart,
+                                    productsSmoothies: mutipleMongooseToObject(productsSmoothies),
+                                });
+                            })
                         })
-                    })
-                    .catch(next);
+                        .catch(next);
                 } 
             } 
         } catch (error) {
@@ -226,43 +217,41 @@ class MenuController {
                 var avatar = req.cookies.avatar 
                 var page = parseInt(req.query.page); 
                 if (page) {  
-                    if (page < 1) { 
-                        page = 1
-                    }
-                    // get page   
+                    // Get Page bằng pagination 
                     var soLuongBoQua = (page - 1) * PAGE_SIZE
-                Product.find({ category: 'Ca-phe' }) 
-                    .skip(soLuongBoQua) 
-                    .limit(PAGE_SIZE) 
-                    .then((productsCaphe) => { 
-                        Product.countDocuments({category: 'Smoothies'}).then((total)=>{  
-                            var tongSoPage = Math.ceil(total / PAGE_SIZE) 
-                            res.render('productDetails/caphe', {   
-                                avatar, 
-                                name,
-                                tongSoPage, 
-                                quantityCart,
-                                productsCaphe: mutipleMongooseToObject(productsCaphe),
-                            });
+                    Product.find({ category: 'Ca-phe' }) 
+                        .skip(soLuongBoQua) 
+                        .limit(PAGE_SIZE) 
+                        .then((productsCaphe) => { 
+                            Product.countDocuments({category: 'Smoothies'}).then((total)=>{  
+                                var tongSoPage = Math.ceil(total / PAGE_SIZE) 
+                                res.render('productDetails/caphe', {   
+                                    avatar, 
+                                    name,
+                                    tongSoPage, 
+                                    quantityCart,
+                                    productsCaphe: mutipleMongooseToObject(productsCaphe),
+                                });
+                            })
                         })
-                    })
-                    .catch(next); 
-                } else {
-                Product.find({ category: 'Ca-phe' }).exec()
-                    .then((productsCaphe) => {   
-                        Product.find({ category: 'Ca-phe' }).countDocuments({}) 
-                        .then((total)=>{  
-                            var tongSoPage = Math.ceil(total / PAGE_SIZE) 
-                            res.render('productDetails/caphe', {   
-                                avatar, 
-                                name,
-                                tongSoPage,  
-                                quantityCart,
-                                productsCaphe: mutipleMongooseToObject(productsCaphe),
-                            });
+                        .catch(next); 
+                } else { 
+                // Get All
+                    Product.find({ category: 'Ca-phe' }).exec()
+                        .then((productsCaphe) => {   
+                            Product.find({ category: 'Ca-phe' }).countDocuments({}) 
+                            .then((total)=>{  
+                                var tongSoPage = Math.ceil(total / PAGE_SIZE) 
+                                res.render('productDetails/caphe', {   
+                                    avatar, 
+                                    name,
+                                    tongSoPage,  
+                                    quantityCart,
+                                    productsCaphe: mutipleMongooseToObject(productsCaphe),
+                                });
+                            })
                         })
-                    })
-                    .catch(next);
+                        .catch(next);
                 }
             } 
         } catch (error) {
@@ -279,41 +268,39 @@ class MenuController {
                 var avatar = req.cookies.avatar 
                 var page = parseInt(req.query.page); 
                 if (page) {  
-                    if (page < 1) { 
-                        page = 1
-                    }
-                    // get page   
+                    // Get Page bằng pagination   
                     var soLuongBoQua = (page - 1) * PAGE_SIZE
-                Product.find({ category: 'Banh-ngot' }) 
-                    .skip(soLuongBoQua) 
-                    .limit(PAGE_SIZE) 
-                    .then((productsBanhngot) => { 
-                        Product.countDocuments({category: 'Banh-ngot'}).then((total)=>{  
-                            var tongSoPage = Math.ceil(total / PAGE_SIZE) 
-                            res.render('productDetails/banhngot', {   
-                                avatar, 
-                                name,
-                                tongSoPage,
-                                productsBanhngot: mutipleMongooseToObject(productsBanhngot),
-                            });
+                    Product.find({ category: 'Banh-ngot' }) 
+                        .skip(soLuongBoQua) 
+                        .limit(PAGE_SIZE) 
+                        .then((productsBanhngot) => { 
+                            Product.countDocuments({category: 'Banh-ngot'}).then((total)=>{  
+                                var tongSoPage = Math.ceil(total / PAGE_SIZE) 
+                                res.render('productDetails/banhngot', {   
+                                    avatar, 
+                                    name,
+                                    tongSoPage,
+                                    productsBanhngot: mutipleMongooseToObject(productsBanhngot),
+                                });
+                            })
                         })
-                    })
-                    .catch(next); 
-                } else {
-                Product.find({ category: 'Banh-ngot' }).exec()
-                    .then((productsBanhngot) => {   
-                        Product.find({ category: 'Banh-ngot' }).countDocuments({}) 
-                        .then((total)=>{  
-                            var tongSoPage = Math.ceil(total / PAGE_SIZE) 
-                            res.render('productDetails/banhngot', {   
-                                avatar,  
-                                name,
-                                tongSoPage, 
-                                productsBanhngot: mutipleMongooseToObject(productsBanhngot),
-                            });
+                        .catch(next); 
+                } else { 
+                    // Get All
+                    Product.find({ category: 'Banh-ngot' }).exec()
+                        .then((productsBanhngot) => {   
+                            Product.find({ category: 'Banh-ngot' }).countDocuments({}) 
+                            .then((total)=>{  
+                                var tongSoPage = Math.ceil(total / PAGE_SIZE) 
+                                res.render('productDetails/banhngot', {   
+                                    avatar,  
+                                    name,
+                                    tongSoPage, 
+                                    productsBanhngot: mutipleMongooseToObject(productsBanhngot),
+                                });
+                            })
                         })
-                    })
-                    .catch(next);
+                        .catch(next);
                 } 
             } 
         } catch (error) {

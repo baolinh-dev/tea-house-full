@@ -148,7 +148,8 @@
                                 </tr>
                                 {{/each }}
                             </tbody>
-                        </table>
+                        </table> 
+                        <p style="display: none;" class="sumaryPage">{{tongSoPage}}</p>
                         <div class="menu-main__pagination">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center">
@@ -189,7 +190,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Bạn có chắc chắn muốn xóa sản phẩm này không.</p>
+                    <p>Bạn có chắc chắn muốn xóa sản phẩm này không?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy xóa</button>
@@ -346,21 +347,22 @@
     <script>
         const urlSearchParams = new URLSearchParams(window.location.search);
         const params = Object.fromEntries(urlSearchParams.entries());
+        const sumaryPage = Number(document.querySelector('.sumaryPage').innerText)  
 
         let currentPage = parseInt(params.page);
         function nextPage() {
             var nextPage = currentPage + 1
-            if (nextPage > 5) {
-                nextPage = 5
+            if (nextPage > sumaryPage) {
+                nextPage = sumaryPage
             }
-            location.href = `/admin/account?page=${nextPage}`;
+            location.href = `/admin/warehouse?page=${nextPage}`;
         }
         function previousPage() {
             var previousPage = currentPage - 1
             if (previousPage < 1) {
                 previousPage = 1
             }
-            location.href = `/admin/account?page=${previousPage}`;
+            location.href = `/admin/warehouse?page=${previousPage}`;
         }
         var list = document.querySelectorAll('.page-link--number')
 

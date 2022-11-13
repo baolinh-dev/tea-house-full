@@ -917,15 +917,17 @@
 
 #adminBeauty .admin__title-text {
   margin: 0;
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 700;
-  color: var(--main-color); }
+  color: var(--main-color);
+  width: 100%; }
 
 #adminBeauty .admin-card-infor {
-  display: flex; }
+  display: flex;
+  flex-wrap: wrap; }
 
 #adminBeauty .admin-card {
-  width: 100%;
+  width: 320px;
   height: 120px;
   background-color: var(--main-color);
   border-radius: 8px;
@@ -934,7 +936,7 @@
   padding: 8px 24px;
   color: #fff;
   align-items: center;
-  margin: 0 24px; }
+  margin: 20px 24px 0; }
 
 #adminBeauty .admin-card__number {
   margin-bottom: 0;

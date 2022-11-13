@@ -145,7 +145,8 @@
                                 </tr>
                                 {{/each }}
                             </tbody>
-                        </table>
+                        </table> 
+                        <p style="display: none;" class="sumary-page">{{tongSoPage}}</p>
                         <div class="menu-main__pagination">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center">
@@ -186,7 +187,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Bạn có chắc chắn muốn xóa tài khoản này không.</p>
+                    <p>Bạn có chắc chắn muốn xóa tài khoản này không?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy xóa</button>
@@ -343,12 +344,12 @@
     <script>
         const urlSearchParams = new URLSearchParams(window.location.search);
         const params = Object.fromEntries(urlSearchParams.entries());
-
+        const sumaryPage = Number(document.querySelector('.sumary-page').innerText) 
         let currentPage = parseInt(params.page);
         function nextPage() {
             var nextPage = currentPage + 1
-            if (nextPage > 5) {
-                nextPage = 5
+            if (nextPage > sumaryPage) {
+                nextPage = sumaryPage
             }
             location.href = `/admin/comment?page=${nextPage}`;
         }

@@ -80,23 +80,10 @@
                 <form class="admin-main" method="GET" class="mt-4" action="/admin/account/search">
                     <div class="admin-main__header">
                         <div class="row">
-                            <div class="col-lg-2 admin__title">
+                            <div class="col-lg-9 admin__title">
                                 <h1 class="admin__title-text">Dashboard</h1>
                             </div>
-                            <div class="col-lg-7 admin-table__options">
-                                <div class="admin-table__options-search-wrap">
-                                    <i class="fa-solid fa-magnifying-glass admin-table__options-search-icon"> </i>
-                                    <input type="text" name="search" class="admin-table__options-search"
-                                        placeholder="Tìm kiếm ...">
-                                </div>
-                                <a class="btn-table" href="/admin/account">
-                                    <i class="fa-solid fa-arrow-rotate-right"></i>
-                                </a>
-                                <button type="submit" class="btn-table filter-btn">
-                                    <i class="fa-solid fa-floppy-disk"></i>
-                                </button>
-                            </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-3"> 
                                 <div class="admin-infor">
                                     <div class="admin-infor__img-wrap">
                                         <img src="{{avatar}}" alt="" class="admin-infor__img">
@@ -109,8 +96,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="admin-main__body">
-                        <div class="admin-card-infor">
+                    <div class="admin-main__body"> 
+                        <div class="admin-card-infor"> 
                             <div class="admin-card">
                                 <div class="admin-card-detail">
                                     <div class="admin-card__number-wrap">
@@ -136,6 +123,19 @@
                                 <div class="admin-card__icon">
                                     <i class="fa-solid fa-warehouse"></i>
                                 </div>
+                            </div> 
+                            <div class="admin-card">
+                                <div class="admin-card-detail">
+                                    <div class="admin-card__number-wrap">
+                                        <p class="admin-card__number">{{numberFeedback}}</p>
+                                    </div>
+                                    <div class="admin-card__name-wrap">
+                                        <p class="admin-card__name">Feedback quantity</p>
+                                    </div>
+                                </div>
+                                <div class="admin-card__icon">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
                             </div>
                             <div class="admin-card">
                                 <div class="admin-card-detail">
@@ -153,14 +153,28 @@
                             <div class="admin-card">
                                 <div class="admin-card-detail">
                                     <div class="admin-card__number-wrap">
-                                        <p class="admin-card__number">{{numberFeedback}}</p>
+                                        <p class="admin-card__number">{{numberOrder}}</p> 
                                     </div>
                                     <div class="admin-card__name-wrap">
-                                        <p class="admin-card__name">Feedback quantity</p>
+                                        <p class="admin-card__name">Order quantity</p> 
                                     </div>
                                 </div>
                                 <div class="admin-card__icon">
-                                    <i class="fa-solid fa-envelope"></i>
+                                    <i class="fa-solid fa-file-invoice"></i>
+                                </div>
+                            </div>
+                            <div class="admin-card">
+                                <div class="admin-card-detail">
+                                    <div class="admin-card__number-wrap">
+                                        <p style="display: none;" class="order-sumary-hidden admin-card__number">{{sumaryOrder}}</p>  
+                                        <p style="font-size: 32px; margin-bottom: 0;" class="order-sumary-text admin-card__number--text">{{sumaryOrder}}</p>  
+                                    </div>
+                                    <div class="admin-card__name-wrap">
+                                        <p class="admin-card__name">Sumary Order</p> 
+                                    </div>
+                                </div>
+                                <div class="admin-card__icon">
+                                    <i class="fa-solid fa-money-check-dollar"></i>
                                 </div>
                             </div>
                         </div> 
@@ -168,9 +182,7 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-4"> 
-                                        <h3 class="chart-tra-hoa-qua">
-                                            Chart sản phẩm
-                                        </h3>
+                                        <h3 class="chart-tra-hoa-qua">Chart sản phẩm</h3>
                                         <canvas id="myChartPie"> </canvas> 
                                         <p style="display: none;" class="quantity__tra-hoa-qua">{{quantityTraHoaQua}}</p>
                                         <p style="display: none;" class="quantity__ca-phe">{{quantityCaPhe}}</p>
@@ -274,6 +286,15 @@
                     }
                 }
             }) 
+    </script> 
+    {{!-- Format Number --}}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+    <script>
+        var sumary = document.querySelector('.order-sumary-hidden').innerText
+        var sumaryNumber = Number.parseInt(sumary)
+        var sumaryFormat = numeral(sumaryNumber);
+        var sumaryStringFormat = String(sumaryFormat.format('0,0')) + " đ";
+        document.querySelector('.order-sumary-text').innerText = sumaryStringFormat  
     </script>
 </body> 
 

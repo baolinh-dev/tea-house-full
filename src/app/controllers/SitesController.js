@@ -1,11 +1,13 @@
 
 const cookieParser = require('cookie-parser') 
 const jwt = require('jsonwebtoken') 
+const { mongooseToObject } = require('../../util/mogoose')
+const Account = require('../models/Account')
 const Feedback = require('../models/Feedback') 
 class HomeController { 
     // [GET] sites/contact
     contact(req, res) {    
-        try {
+        try {   
             var token = req.cookies.token
             var ketqua = jwt.verify(token, 'matkhau')    
             var quantityCart
@@ -14,10 +16,15 @@ class HomeController {
                 } else { 
                     quantityCart = req.session.cart.length
                 }
-            if(ketqua) {  
+            if(ketqua) {   
                 var name = req.cookies.name 
-                var avatar = req.cookies.avatar 
-                res.render('contact', { avatar, name , quantityCart})
+                var avatar = req.cookies.avatar   
+                Account.findOne({ name}) 
+                    .then(accounts => {  
+                        res.render('contact',  
+                            { avatar, name , quantityCart, 
+                            accounts: mongooseToObject(accounts)})
+                    })
             } 
         } catch (error) {
             res.redirect('/account/login')

@@ -61,9 +61,9 @@
                             </li>
                         </ul> 
                         <form method="POST" action="/sites/contact/post-feedback" class="contact-form"> 
-                            <input name="fullname" type="text" class="contact-form__input" placeholder="Họ và tên *">
-                            <input name="email" type="email" class="contact-form__input" placeholder="Email *">
-                            <input name="phone" type="tel" class="contact-form__number" placeholder="Điện thoại *"> 
+                            <input name="fullname" type="text" class="contact-form__input" placeholder="Họ và tên *" value="{{accounts.name}}">
+                            <input name="email" type="email" class="contact-form__input" placeholder="Email *" value="{{accounts.email}}">
+                            <input name="phone" type="tel" class="contact-form__number" placeholder="Điện thoại *" value="{{accounts.phone}}"> 
                             <textarea class="contact-form__text-area" name="content" cols="30" id=""></textarea>
                             <button type="submit" value="" class="mt-3 contact-form__submit"> gửi thông tin </button>  
                         </form>

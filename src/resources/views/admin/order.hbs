@@ -130,7 +130,7 @@
                                     <td class="table-data col-2">{{this.address}}</td>
                                     <td class="table-data col-1">{{this.sumary}}</td>
                                     <td class="table-data col-2">{{this.dateOrder}}</td>
-                                    <td class="col-2">
+                                    <td class="table-data col-2">
                                         <a href="/admin/order/{{this._id}}/edit" class="btn btn-link">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
@@ -148,7 +148,8 @@
                                 </tr>
                                 {{/each }}
                             </tbody>
-                        </table>
+                        </table> 
+                        <p style="display: none;" class="sumary-page">{{tongSoPage}}</p>
                         <div class="menu-main__pagination">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center">
@@ -185,11 +186,11 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Xóa tài khoản ?</h5>
+                    <h5 class="modal-title">Xóa đơn hàng ?</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Bạn có chắc chắn muốn xóa tài khoản này không.</p>
+                    <p>Bạn có chắc chắn muốn xóa đơn hàng này không?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy xóa</button>
@@ -314,21 +315,21 @@
     <script>
         const urlSearchParams = new URLSearchParams(window.location.search);
         const params = Object.fromEntries(urlSearchParams.entries());
-
+        const sumaryPage = Number(document.querySelector('.sumary-page').innerText) 
         let currentPage = parseInt(params.page);
         function nextPage() {
             var nextPage = currentPage + 1
-            if (nextPage > 5) {
-                nextPage = 5
+            if (nextPage > sumaryPage) {
+                nextPage = sumaryPage
             }
-            location.href = `/admin/account?page=${nextPage}`;
+            location.href = `/admin/order?page=${nextPage}`;
         }
         function previousPage() {
             var previousPage = currentPage - 1
             if (previousPage < 1) {
                 previousPage = 1
             }
-            location.href = `/admin/account?page=${previousPage}`;
+            location.href = `/admin/order?page=${previousPage}`;
         }
         var list = document.querySelectorAll('.page-link--number')
 

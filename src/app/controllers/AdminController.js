@@ -704,7 +704,11 @@ Account.findById(ketqua._id)
         Promise.all( 
             [Order.find({  
                 "$or" : [  
-                    {name : new RegExp(search, 'i')},  
+                    {name : new RegExp(search, 'i')},    
+                    {phone : new RegExp(search, 'i')}, 
+                    {email : new RegExp(search, 'i')}, 
+                    {address : new RegExp(search, 'i')}, 
+                    {dateOrder : new RegExp(search, 'i')}
                 ]
             }),  
             Order.countDocumentsDeleted()])
@@ -796,6 +800,10 @@ Account.findById(ketqua._id)
         Product.countDocuments(),  
         Comment.countDocuments(),  
         Feedback.countDocuments(),  
+        Order.countDocuments(), 
+        Order.aggregate([ 
+            {$group : {_id : null, sumaryOrder: { $sum: "$sumary" }}}
+        ]), 
         Product.countDocuments({ category: 'Tra-hoa-qua'}), 
         Product.countDocuments({ category: 'Ca-phe'}), 
         Product.countDocuments({ category: 'Smoothies'}), 
@@ -805,10 +813,10 @@ Account.findById(ketqua._id)
             {$sort:{"sumaryByDate": 1}}
         ]) 
       ])   
-      .then(([numberAccount, numberProduct, numberComment, numberFeedback,  
-      quantityTraHoaQua, quantitySmoothies, quantityCaPhe, quantityBanhngot, listSumaryByDate]) => {    
+      .then(([numberAccount, numberProduct, numberComment, numberFeedback, numberOrder, sumaryOrderList, quantityTraHoaQua, quantitySmoothies, quantityCaPhe, quantityBanhngot, listSumaryByDate]) => {    
     var resultData = [] 
-    var resultLabels = []
+    var resultLabels = [] 
+    var sumaryOrder = sumaryOrderList[0].sumaryOrder
     for(var i = 0; i < listSumaryByDate.length; i++) { 
         resultData.push(listSumaryByDate[i].sumaryByDate)
         resultLabels.push(listSumaryByDate[i]._id) 
@@ -817,7 +825,9 @@ Account.findById(ketqua._id)
             numberProduct,
             numberAccount, 
             numberComment,   
-            numberFeedback, 
+            numberFeedback,  
+            numberOrder, 
+            sumaryOrder,
             quantityTraHoaQua, 
             quantitySmoothies, 
             quantityCaPhe, 

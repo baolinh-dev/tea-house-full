@@ -17,24 +17,20 @@ class HomeController {
             } else { 
                 quantityCart = req.session.cart.length
             } 
-            if(ketqua) {                 
+            if(ketqua) {           
                 Account.findById(ketqua._id) 
                     .then((accounts) => {
-                        if(accounts.role == 'user' || accounts.role == 'admin') { 
+                        if(accounts.role == 'user' || accounts.role == 'admin') {  
                             Product.find({ category: 'Tra-hoa-qua' }) 
                                 .limit(8)
                                 .then((products) => { 
                                     res.render('home', {   
-                                        avatar, 
-                                        name, 
-                                        quantityCart,
+                                        avatar, name, quantityCart,
                                         products: mutipleMongooseToObject(products),
                                     });
                                 })
                             .catch(next);
-                        } else { 
-                            res.json('Ban khong co quyen vao trang mua hang')  
-                        }
+                        } 
                     }) 
             }  
         } catch (error) {
@@ -44,13 +40,18 @@ class HomeController {
     // [GET] /ca-phe
     caphe(req, res, next) { 
         var name = req.cookies.name  
-        var avatar = req.cookies.avatar  
+        var avatar = req.cookies.avatar   
+        var quantityCart
+        if(typeof req.session.cart == "undefined") { 
+            quantityCart = 0
+        } else { 
+            quantityCart = req.session.cart.length
+        }
         Product.find({ category: 'Ca-phe' }) 
             .limit(4)
             .then((products) => {
-                res.render('home', {  
-                    avatar, 
-                    name,
+                res.render('home', {   
+                    quantityCart, avatar, name,
                     products: mutipleMongooseToObject(products),
                 });
             })
@@ -59,13 +60,18 @@ class HomeController {
     // [GET] /smoothies
     smoothies(req, res, next) { 
         var name = req.cookies.name 
-        var avatar = req.cookies.avatar 
+        var avatar = req.cookies.avatar  
+        var quantityCart
+        if(typeof req.session.cart == "undefined") { 
+            quantityCart = 0
+        } else { 
+            quantityCart = req.session.cart.length
+        }
         Product.find({ category: 'Smoothies' }) 
             .limit(4)
             .then((products) => {
                 res.render('home', {  
-                    avatar, 
-                    name,
+                    avatar, quantityCart, name,
                     products: mutipleMongooseToObject(products),
                 });
             })
@@ -74,13 +80,18 @@ class HomeController {
     // [GET] /banh-ngot
     banhngot(req, res, next) { 
         var name = req.cookies.name 
-        var avatar = req.cookies.avatar 
+        var avatar = req.cookies.avatar  
+        var quantityCart
+        if(typeof req.session.cart == "undefined") { 
+            quantityCart = 0
+        } else { 
+            quantityCart = req.session.cart.length
+        }
         Product.find({ category: 'Banh-ngot' }) 
             .limit(4)
             .then((products) => {
-                res.render('home', {  
-                    avatar, 
-                    name,
+                res.render('home', {   
+                    avatar,  quantityCart, name,
                     products: mutipleMongooseToObject(products),
                 });
             })
