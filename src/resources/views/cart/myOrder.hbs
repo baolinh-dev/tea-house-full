@@ -1,0 +1,101 @@
+<section id="my-order">
+    <div class="breadcumb-container">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a href="index.html">Giỏ hàng</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Đơn hàng của tôi</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="order-main" id="order-main">
+                <div class="common-heading">
+                    <div class="common-heading__img-wrap">
+                        <img class="common-heading__img" src="/img/logo-text.png" alt="">
+                    </div>
+                    <p class="common-heading__text">My Orders</p>
+                </div> 
+                {{#each orders}}
+                <div class="order-body"> 
+                    <div class="order-body__name-wrap">
+                        <i class="fa-solid fa-calendar-days"></i>
+                        <p class="order-body__item">{{this.dateOrder}}</p>
+                    </div>
+                    <div class="order-body__name-wrap">
+                        <i class="fa-solid fa-user"></i>
+                        <p class="order-body__item">{{this.name}}</p>
+                    </div>
+                    <div class="order-body__name-wrap">
+                        <i class="fa-solid fa-phone"></i>
+                        <p class="order-body__item">{{this.phone}}</p>
+                    </div>
+                    <div class="order-body__name-wrap">
+                        <i class="fa-solid fa-envelope"></i>
+                        <p class="order-body__item">{{this.email}}</p>
+                    </div>
+                    <div class="order-body__name-wrap">
+                        <i class="fa-solid fa-address-book"></i>
+                        <p class="order-body__item">{{this.address}}</p>
+                    </div>
+                    <div class="order-body__name-wrap">
+                        <i class="fa-sharp fa-solid fa-sack-dollar"></i>
+                        <p style="display: none;" class="order-body__item order-sumary-hidden">{{this.sumary}}</p>
+                        <p class="order-body__item order-sumary-text"></p>
+                    </div>
+                </div> 
+                {{/each }}
+            </div>
+        </div>
+    </div>
+</section>
+<div class="toast-container position-fixed top-0 end-0 p-3">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <i class="fa-solid fa-thumbs-up "></i>
+            <strong class="me-auto">Thông báo</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body bg-success text-white">
+            Đơn hàng của bạn đã được xác nhận
+        </div>
+    </div>
+</div>
+<script>
+    var checkOrder = document.querySelector('.check-order').innerText
+    const toastLiveExample = document.getElementById('liveToast')
+    if (checkOrder == "true") {
+        document.addEventListener("DOMContentLoaded", function () {
+            const toast = new bootstrap.Toast(toastLiveExample)
+            toast.show()
+        });
+    }
+</script>
+{{!-- Format Number --}}
+<script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+<script>
+    var sumaryList = document.querySelectorAll('.order-sumary-hidden')
+    var sumaryResult = document.querySelectorAll('.order-sumary-text')
+    for(key in sumaryList) {
+        var sumaryNumber = Number.parseInt(sumaryList[key].innerText)
+        var sumaryFormat = numeral(sumaryNumber);
+        var sumaryStringFormat = String(sumaryFormat.format('0,0')) + " đ"; 
+        sumaryResult[key].innerText = sumaryStringFormat   
+    }
+</script>
+{{!-- Print into paper --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+    integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    function printContent(el) {
+        var restorepage = $('body').html();
+        var printcontent = $('#' + el).clone();
+        $('body').empty().html(printcontent);
+        window.print();
+        $('body').html(restorepage);
+    }  
+</script>

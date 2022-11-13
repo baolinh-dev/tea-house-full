@@ -1409,3 +1409,23 @@
   text-decoration: none;
   text-align: center;
   cursor: pointer; }
+
+#my-order {
+  margin-top: var(--height-header);
+  padding-bottom: 40px; }
+
+#my-order .order-body {
+  padding: 20px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  margin-bottom: 20px; }
+
+#my-order .order-body__name-wrap {
+  display: flex;
+  align-items: center; }
+
+#my-order .order-body__name-wrap i {
+  margin-right: 12px; }
+
+#my-order .order-body__name-wrap p {
+  margin-bottom: 0; }

@@ -92,8 +92,24 @@ app.get('*', (req, res, next) => {
   res.locals.cart = req.session.cart
   next()
 })  
-// Test DashBoard
- 
+// Test My Order
+ app.get('/my-order', (req, res, next) => {   
+  var name = req.cookies.name
+  var avatar = req.cookies.avatar  
+  var quantityCart
+    if(typeof req.session.cart == "undefined") { 
+        quantityCart = 0
+    } else { 
+        quantityCart = req.session.cart.length
+    } 
+  Order.find({name}) 
+    .then(orders => {  
+      res.render('cart/myOrder', { 
+        orders: mutipleMongooseToObject(orders), 
+        name, avatar, quantityCart
+      })
+    })
+ })
 // 404 Not Found 
 app.use((req, res) => { 
   return res.render('404', { 
