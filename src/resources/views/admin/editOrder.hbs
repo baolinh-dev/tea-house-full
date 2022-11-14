@@ -94,27 +94,27 @@
                 <div class="admin-main__body">
                     <form class="ms-3" method="POST" action="/admin/order/{{orders._id}}?_method=PUT">
                         <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
+                            <label for="name" class="form-label">Name:</label>
                             <input type="text" class="form-control" value="{{orders.name}}" id="name" name="name">
                         </div>  
                         <div class="mb-3">
-                            <label for="phone" class="form-label">Phone</label>
+                            <label for="phone" class="form-label">Phone:</label>
                             <input type="text" class="form-control" value="{{orders.phone}}" id="phone" name="phone">
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
+                            <label for="email" class="form-label">Email:</label>
                             <input type="text" class="form-control" value="{{orders.email}}" id="email" name="email">
                         </div>
                         <div class="mb-3">
-                            <label for="address" class="form-label">Address</label>
+                            <label for="address" class="form-label">Address:</label>
                             <input type="text" class="form-control" value="{{orders.address}}" id="address" name="address">
                         </div>
                         <div class="mb-3">
-                            <label for="sumary" class="form-label">Sumary</label>
+                            <label for="sumary" class="form-label">Sumary:</label>
                             <input type="text" class="form-control" value="{{orders.sumary}}" id="sumary" name="sumary">
                         </div>
                         <div class="mb-3">
-                            <label for="dateOrder" class="form-label">Date order</label>
+                            <label for="dateOrder" class="form-label">Date order:</label>
                             <input type="text" class="form-control" value="{{orders.dateOrder}}" id="dateOrder" name="dateOrder">
                         </div>
                         <button type="submit" class="btn btn-success">Lưu lại</button>
@@ -143,29 +143,5 @@
         </div>
     </div>
 </body>
-{{!-- Pagination --}}
-<script>
-    const urlSearchParams = new URLSearchParams(window.location.search);
-    const params = Object.fromEntries(urlSearchParams.entries());
-    const sumaryPage = Number(document.querySelector('.sumary-page').innerText)
-    let currentPage = parseInt(params.page);
-    function nextPage() {
-        var nextPage = currentPage + 1
-        if (nextPage > sumaryPage) {
-            nextPage = sumaryPage
-        }
-        location.href = `/admin/order?page=${nextPage}`;
-    }
-    function previousPage() {
-        var previousPage = currentPage - 1
-        if (previousPage < 1) {
-            previousPage = 1
-        }
-        location.href = `/admin/account?page=${previousPage}`;
-    }
-    var list = document.querySelectorAll('.page-link--number')
-
-    document.querySelectorAll('.page-link--number')[currentPage - 1].classList.add('page-link--actived')
-</script>
 
 </html>

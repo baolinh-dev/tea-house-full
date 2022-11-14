@@ -94,19 +94,19 @@
                 <div class="admin-main__body">
                     <form class="ms-3" method="POST" action="/admin/warehouse/{{products._id}}?_method=PUT">
                         <div class="mb-3">
-                            <label for="name" class="form-label">Tên sản phẩm</label>
+                            <label for="name" class="form-label">Tên sản phẩm:</label>
                             <input type="text" class="form-control" value="{{products.name}}" id="name" name="name">
                         </div>
                         <div class="mb-3">
-                            <label for="price" class="form-label">Giá</label>
+                            <label for="price" class="form-label">Giá:</label>
                             <input type="text" class="form-control" value="{{products.price}}" id="price" name="price">
                         </div>
                         <div class="mb-3">
-                            <label for="image" class="form-label">Hình ảnh sản phẩm</label>
+                            <label for="image" class="form-label">Hình ảnh sản phẩm:</label>
                             <input type="text" class="form-control" value="{{products.image}}" id="image" name="image">
                         </div>
                         <div class="mb-3">
-                            <label for="category" class="form-label">Danh mục</label>
+                            <label for="category" class="form-label">Danh mục:</label>
                             <select class="form-select" name="category">
                                 <option> {{products.category}}</option>
                                 <option value="Trà hoa quả">Trà hoa quả</option>
@@ -140,30 +140,6 @@
             </div>
         </div>
     </div>
-    {{!-- Pagination --}}
-    <script>
-        const urlSearchParams = new URLSearchParams(window.location.search);
-        const params = Object.fromEntries(urlSearchParams.entries());
-        const sumaryPage = Number(document.querySelector('.sumary-page').innerText)
-        let currentPage = parseInt(params.page);
-        function nextPage() {
-            var nextPage = currentPage + 1
-            if (nextPage > sumaryPage) {
-                nextPage = sumaryPage
-            }
-            location.href = `/admin/account?page=${nextPage}`;
-        }
-        function previousPage() {
-            var previousPage = currentPage - 1
-            if (previousPage < 1) {
-                previousPage = 1
-            }
-            location.href = `/admin/warehouse?page=${previousPage}`;
-        }
-        var list = document.querySelectorAll('.page-link--number')
-
-        document.querySelectorAll('.page-link--number')[currentPage - 1].classList.add('page-link--actived')
-    </script>
 </body>
 
 </html>

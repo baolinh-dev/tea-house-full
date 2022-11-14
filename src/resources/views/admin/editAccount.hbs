@@ -94,28 +94,28 @@
                     <div class="admin-main__body">
                         <form class="ms-3" method="POST" action="/admin/account/{{accounts._id}}?_method=PUT">
                             <div class="mb-3">
-                                <label for="name" class="form-label">Name</label>
+                                <label for="name" class="form-label">Name:</label>
                                 <input type="text" class="form-control" value="{{accounts.name}}" id="name" name="name">
                             </div> 
                             <div class="mb-3">
-                                <label for="username" class="form-label">User Name</label>
+                                <label for="username" class="form-label">User Name:</label>
                                 <input type="text" class="form-control" value="{{accounts.username}}" id="username" name="username">
                             </div>
                             <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
+                                <label for="email" class="form-label">Email:</label>
                                 <input type="text" class="form-control" value="{{accounts.email}}" id="email" name="email">
                             </div>
                             <div class="mb-3">
-                                <label for="phone" class="form-label">Phone</label>
+                                <label for="phone" class="form-label">Phone:</label>
                                 <input type="text" class="form-control" value="{{accounts.phone}}" id="phone" name="phone">
                             </div>
                             <div class="mb-3">
-                                <label for="password" class="form-label">Pass Word</label>
+                                <label for="password" class="form-label">Pass Word:</label>
                                 <input type="text" class="form-control table__password" value="{{accounts.password}}" id="password"
                                     name="password">
                             </div>
                             <div class="mb-3">
-                                <label for="role" class="form-label">Admin</label>
+                                <label for="role" class="form-label">Admin:</label>
                                 <select class="form-select" name="role">
                                     <option > {{accounts.role}}</option>
                                     <option value="admin" >admin</option>
@@ -147,29 +147,18 @@
             </div>
         </div>
     </div>
+    {{!-- Hashing password --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"
+        integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript">
+        function encryptString(oldString) {
+            var encryptText = CryptoJS.AES.encrypt(oldString, 'teahouse').toString();
+            return encryptText
+        } 
+        var listPasswork = document.querySelector('.table__password')  
+        listPasswork.value = encryptString(listPasswork.value)
+    </script>
 </body>
-{{!-- Pagination --}}
-<script>
-    const urlSearchParams = new URLSearchParams(window.location.search);
-    const params = Object.fromEntries(urlSearchParams.entries());
-    const sumaryPage = Number(document.querySelector('.sumary-page').innerText)
-    let currentPage = parseInt(params.page);
-    function nextPage() {
-        var nextPage = currentPage + 1
-        if (nextPage > sumaryPage) {
-            nextPage = sumaryPage
-        }
-        location.href = `/admin/account?page=${nextPage}`;
-    }
-    function previousPage() {
-        var previousPage = currentPage - 1
-        if (previousPage < 1) {
-            previousPage = 1
-        }
-        location.href = `/admin/account?page=${previousPage}`;
-    }
-    var list = document.querySelectorAll('.page-link--number')
 
-    document.querySelectorAll('.page-link--number')[currentPage - 1].classList.add('page-link--actived')
-</script>
 </html>

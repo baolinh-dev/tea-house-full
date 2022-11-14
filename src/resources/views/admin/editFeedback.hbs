@@ -94,19 +94,19 @@
                 <div class="admin-main__body">
                     <form class="ms-3" method="POST" action="/admin/feedback/{{feedbacks._id}}?_method=PUT">
                         <div class="mb-3">
-                            <label for="fullname" class="form-label">Name</label>
+                            <label for="fullname" class="form-label">Name:</label>
                             <input type="text" class="form-control" value="{{feedbacks.fullname}}" id="fullname" name="fullname">
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
+                            <label for="email" class="form-label">Email:</label>
                             <input type="text" class="form-control" value="{{feedbacks.email}}" id="email" name="email">
                         </div>
                         <div class="mb-3">
-                            <label for="phone" class="form-label">Phone</label>
+                            <label for="phone" class="form-label">Phone:</label>
                             <input type="text" class="form-control" value="{{feedbacks.phone}}" id="phone" name="phone">
                         </div>
                         <div class="mb-3">
-                            <label for="content" class="form-label">Content</label>
+                            <label for="content" class="form-label">Content:</label>
                             <textarea     
                             type="text" class="form-control"  
                             id="content" name="content">{{feedbacks.content}}</textarea>
@@ -117,30 +117,6 @@
             </div>
         </div>
     </div>
-{{!-- Pagination --}}
-<script>
-    const urlSearchParams = new URLSearchParams(window.location.search);
-    const params = Object.fromEntries(urlSearchParams.entries());
-    const sumaryPage = Number(document.querySelector('.sumary-page').innerText)
-    let currentPage = parseInt(params.page);
-    function nextPage() {
-        var nextPage = currentPage + 1
-        if (nextPage > sumaryPage) {
-            nextPage = sumaryPage
-        }
-        location.href = `/admin/account?page=${nextPage}`;
-    }
-    function previousPage() {
-        var previousPage = currentPage - 1
-        if (previousPage < 1) {
-            previousPage = 1
-        }
-        location.href = `/admin/feedback?page=${previousPage}`;
-    }
-    var list = document.querySelectorAll('.page-link--number')
-
-    document.querySelectorAll('.page-link--number')[currentPage - 1].classList.add('page-link--actived')
-</script>
 </body>
 
 </html>
