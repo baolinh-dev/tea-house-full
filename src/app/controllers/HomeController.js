@@ -21,7 +21,7 @@ class HomeController {
                 Account.findById(ketqua._id) 
                     .then((accounts) => {
                         if(accounts.role == 'user' || accounts.role == 'admin') {  
-                            Product.find({ category: 'Tra-hoa-qua' }) 
+                            Product.find({ category: 'Trà hoa quả' }) 
                                 .limit(8)
                                 .then((products) => { 
                                     res.render('home', {   
@@ -47,7 +47,7 @@ class HomeController {
         } else { 
             quantityCart = req.session.cart.length
         }
-        Product.find({ category: 'Ca-phe' }) 
+        Product.find({ category: 'Cà phê' }) 
             .limit(4)
             .then((products) => {
                 res.render('home', {   
@@ -87,7 +87,7 @@ class HomeController {
         } else { 
             quantityCart = req.session.cart.length
         }
-        Product.find({ category: 'Banh-ngot' }) 
+        Product.find({ category: 'Bánh ngọt' }) 
             .limit(4)
             .then((products) => {
                 res.render('home', {   

@@ -63,7 +63,7 @@ class OrderController {
                 var name = req.cookies.name   
                 var avatar = req.cookies.avatar
                 var quantityCart = req.session.cart.length 
-                Product.find({ category: 'Tra-hoa-qua' }).exec() 
+                Product.find({ category: 'Trà hoa quả' }).exec() 
                         .then((products) => {   
                             res.render('menu', {  
                                 name,  

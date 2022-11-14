@@ -30,187 +30,142 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Link CSS -->
     <link rel="stylesheet" href="/css/base.css">
-    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
-    <div id="admin">
+    <div id="adminBeauty">
         <div class="row">
-            <div class="col-lg-2 menu">
-                <h3 class="menu-heading">Menu Admin</h3>
-                <ul class="menu-list">
-                    <li class="menu-list__item">
-                        <a href="/" class="menu-list__item-link">
-                            <i class="menu-icon fa-solid fa-house"></i> 
-                            <p>Trang chủ</p>
+            <div class="col-lg-3 pr-0">
+                <div class="admin-menu">
+                    <div class="admin-logo">
+                        <a href="/">
+                            <img src="/img/main-logo.png" alt="" class="admin-logo-img">
                         </a>
-                    </li>
-                    <li class="menu-list__item">
-                        <a href="/admin/account?page=1" class="menu-list__item-link">
-                            <i class="menu-icon fa-solid fa-user"></i> 
-                            <p>Account</p>
-                        </a>
-                    </li>
-                    <li class="menu-list__item">
-                        <a href="/admin/warehouse?page=1" class="menu-list__item-link">
-                            <i class="menu-icon fa-solid fa-warehouse"></i>
-                            <p>Nhà kho</p>
-                        </a>
-                    </li>
-                    <li class="menu-list__item">
-                        <a href="/admin/feedback?page=1" class="menu-list__item-link">
+                    </div>
+                    <ul class="admin-menu__list">
+                        <li class="admin-menu__list-item ">
+                            <i class="fa-solid fa-chart-simple"></i>
+                            <a href="/admin/dashboard" class="admin-menu__list-item-anchor">Dashboard</a>
+                        </li>
+                        <li class="admin-menu__list-item ">
+                            <i class="fa-solid fa-user"></i>
+                            <a href="/admin/account?page=1" class="admin-menu__list-item-anchor">Tài khoản</a>
+                        </li>
+                        <li class="admin-menu__list-item">
+                            <i class="fa-solid fa-warehouse"></i>
+                            <a href="/admin/warehouse?page=1" class="admin-menu__list-item-anchor">Nhà kho</a>
+                        </li>
+                        <li class="admin-menu__list-item">
                             <i class="fa-solid fa-envelope"></i>
-                            <p>Feedbacks</p>
-                        </a>
-                    </li> 
-                    <li class="menu-list__item">
-                        <a href="/admin/comment?page=1" class="menu-list__item-link">
-                            <i class="fa-solid fa-comment"></i>
-                            <p>Comments</p>
-                        </a>
-                    </li>
-                </ul>
+                            <a href="/admin/feedback?page=1" class="admin-menu__list-item-anchor">Feedbacks</a>
+                        </li>
+                        <li class="admin-menu__list-item">
+                            <i class="fa-solid fa-comments"></i>
+                            <a href="/admin/comment?page=1" class="admin-menu__list-item-anchor">Comments</a>
+                        </li>
+                        <li class="admin-menu__list-item admin-menu__list-item--active">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <a href="/admin/order?page=1" class="admin-menu__list-item-anchor">Đơn hàng</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="col-lg-10 content">
-                <div class="admin-heading">
-                    <h1 class="admin-content-heading">
-                        Quản lí đơn hàng
-                    </h1>
-                    <div class="admin-infor">
-                        <img style="border-radius: 50%; margin-right: 8px" width="32" src="{{avatar}}" alt="">
-                        <h1 class="admin-name-heading">
-                            {{name}}
-                        </h1>
+            <div class="col-lg-9 pl-0">
+                <div class="admin-main__header">
+                    <div class="row">
+                        <div class="col-lg-9 admin__title">
+                            <h1 class="admin__title-text">Chỉnh sửa đơn hàng</h1>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="admin-infor">
+                                <div class="admin-infor__img-wrap">
+                                    <img src="{{avatar}}" alt="" class="admin-infor__img">
+                                </div>
+                                <div class="admin-infor__detail">
+                                    <h3 class="admin-infor__name">{{name}}</h3>
+                                    <p class="admin-infor__level">Admin</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="admin-edit">
-                <form method="POST" action="/admin/order/{{orders._id}}?_method=PUT">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" value="{{orders.name}}" id="name" name="name">
-                    </div>
-                    <div class="mb-3">
-                        <label for="phone" class="form-label">Phone</label>
-                        <input type="text" class="form-control" value="{{orders.phone}}" id="phone" name="phone">
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="text" class="form-control" value="{{orders.email}}" id="email" name="email">
-                    </div>
-                    <div class="mb-3">
-                        <label for="address" class="form-label">Address</label>
-                        <input type="text" class="form-control" value="{{orders.address}}" id="address" name="address">
-                    </div>
-                    <div class="mb-3">
-                        <label for="sumary" class="form-label">Sumary</label>
-                        <input type="text" class="form-control" value="{{orders.sumary}}" id="sumary" name="sumary">
-                    </div>
-                    <div class="mb-3">
-                        <label for="dateOrder" class="form-label">Date Order</label>
-                        <input type="text" class="form-control " value="{{orders.dateOrder}}" id="dateOrder" name="dateOrder">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Lưu lại</button>
-                </form>
+                <div class="admin-main__body">
+                    <form class="ms-3" method="POST" action="/admin/order/{{orders._id}}?_method=PUT">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" value="{{orders.name}}" id="name" name="name">
+                        </div>  
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone</label>
+                            <input type="text" class="form-control" value="{{orders.phone}}" id="phone" name="phone">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="text" class="form-control" value="{{orders.email}}" id="email" name="email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" class="form-control" value="{{orders.address}}" id="address" name="address">
+                        </div>
+                        <div class="mb-3">
+                            <label for="sumary" class="form-label">Sumary</label>
+                            <input type="text" class="form-control" value="{{orders.sumary}}" id="sumary" name="sumary">
+                        </div>
+                        <div class="mb-3">
+                            <label for="dateOrder" class="form-label">Date order</label>
+                            <input type="text" class="form-control" value="{{orders.dateOrder}}" id="dateOrder" name="dateOrder">
+                        </div>
+                        <button type="submit" class="btn btn-success">Lưu lại</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Link Owlcaroulsel -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
-        integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
-        integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- Link Bootrap Script -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
-        integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
-        crossorigin="anonymous"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
-        integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
-        crossorigin="anonymous"></script>
-
-    {{!-- Owl --}}
-
-    <script>
-        $('#home .gallery .owl-carousel.owl-carousel--gallery').owlCarousel({
-            loop: true,
-            autoplay: true,
-            autoplayTimeout: 6000,
-            responsive: {
-                0: {
-                    items: 2
-                },
-                740: {
-                    items: 3
-                },
-                1024: {
-                    items: 5
-                }
-            }
-        })
-        $('#home .drink-list .owl-carousel').owlCarousel({
-            loop: true,
-            autoplay: false,
-            autoplayTimeout: 6000,
-            responsive: {
-                0: {
-                    items: 2
-                },
-                740: {
-                    items: 2
-                },
-                1024: {
-                    items: 4
-                }
-            }
-        })
-        $('#home .category .owl-carousel').owlCarousel({
-            loop: true,
-            margin: 10,
-            nav: true,
-            autoplay: true,
-            autoplayTimeout: 6000,
-            dotsEach: true,
-            URLhashListener: true,
-            center: true,
-            startPosition: 'URLHash',
-            responsive: {
-                0: {
-                    items: 1
-                },
-                600: {
-                    items: 3
-                },
-                1000: {
-                    items: 3
-                }
-            }
-        })
-        $('#menu .owl-carousel').owlCarousel({
-            loop: true,
-            margin: 10,
-            nav: true,
-            responsive: {
-                0: {
-                    items: 2
-                },
-                600: {
-                    items: 3
-                },
-                1000: {
-                    items: 4
-                }
-            }
-        })  
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"
-        integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+    {{!-- Confirm Delete --}}
+    <div id="deleteCourseModal" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Xóa tài khoản ?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn xóa tài khoản này không?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy xóa</button>
+                    <button id="btn-delete-course" type="button" class="btn btn-danger">Xác nhận xóa</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+{{!-- Pagination --}}
+<script>
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+    const sumaryPage = Number(document.querySelector('.sumary-page').innerText)
+    let currentPage = parseInt(params.page);
+    function nextPage() {
+        var nextPage = currentPage + 1
+        if (nextPage > sumaryPage) {
+            nextPage = sumaryPage
+        }
+        location.href = `/admin/order?page=${nextPage}`;
+    }
+    function previousPage() {
+        var previousPage = currentPage - 1
+        if (previousPage < 1) {
+            previousPage = 1
+        }
+        location.href = `/admin/account?page=${previousPage}`;
+    }
+    var list = document.querySelectorAll('.page-link--number')
+
+    document.querySelectorAll('.page-link--number')[currentPage - 1].classList.add('page-link--actived')
+</script>
 
 </html>

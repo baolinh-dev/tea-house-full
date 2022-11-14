@@ -67,11 +67,14 @@ Account.findById(ketqua._id)
         }
     }  
     // [GET] /admin/account/:id/edit
-    editAccount(req, res, next) {
+    editAccount(req, res, next) { 
+        var name = req.cookies.name 
+        var avatar = req.cookies.avatar 
         Account.findById(req.params.id)
             .then((accounts) => {
                 res.render('admin/editAccount', { 
-                    layout: false,
+                    layout: false, 
+                    name, avatar, 
                     accounts: mongooseToObject(accounts),
                 });
             })
@@ -172,10 +175,13 @@ Account.findById(ketqua._id)
         }  
     }   
     // [GET] /admin/warehouse/:id/edit
-    editWarehouse(req, res, next) {
+    editWarehouse(req, res, next) { 
+        var name = req.cookies.name 
+        var avatar = req.cookies.avatar 
         Product.findById(req.params.id)
             .then((products) => {
-                res.render('admin/editWarehouse', { 
+                res.render('admin/editWarehouse', {  
+                    name, avatar, 
                     layout: false,
                     products: mongooseToObject(products),
                 });
@@ -409,10 +415,13 @@ Account.findById(ketqua._id)
         }
     }
     // [GET] /admin/feedback/:id/edit
-    editFeedback(req, res, next) {
+    editFeedback(req, res, next) {  
+        var name = req.cookies.name 
+        var avatar = req.cookies.avatar 
         Feedback.findById(req.params.id)
             .then((feedbacks) => {
-                res.render('admin/editFeedback', { 
+                res.render('admin/editFeedback', {  
+                    name, avatar, 
                     layout: false,
                     feedbacks: mongooseToObject(feedbacks),
                 });
@@ -420,10 +429,13 @@ Account.findById(ketqua._id)
             .catch(next); 
     }   
     // [GET] /admin/comment/:id/edit
-    editComment(req, res, next) {
+    editComment(req, res, next) { 
+        var name = req.cookies.name 
+        var avatar = req.cookies.avatar  
         Comment.findById(req.params.id)
             .then((comments) => {
-                res.render('admin/editComment', { 
+                res.render('admin/editComment', {  
+                    name, avatar, 
                     layout: false,
                     comments: mongooseToObject(comments),
                 });
@@ -431,10 +443,13 @@ Account.findById(ketqua._id)
             .catch(next); 
     }   
     // [GET] /admin/order/:id/edit
-    editOrder(req, res, next) {
+    editOrder(req, res, next) { 
+        var name = req.cookies.name 
+        var avatar = req.cookies.avatar 
         Order.findById(req.params.id)
             .then((orders) => {
-                res.render('admin/editOrder', { 
+                res.render('admin/editOrder', {  
+                    name, avatar, 
                     layout: false,
                     orders: mongooseToObject(orders),
                 });
@@ -442,7 +457,7 @@ Account.findById(ketqua._id)
             .catch(next); 
     }   
     // [PUT] /admin/feedback/:id
-    updateFeedback(req, res, next) {
+    updateFeedback(req, res, next) { 
         Feedback.updateOne({ _id: req.params.id }, req.body)
             .then(() => res.redirect('/admin/feedback'))
             .catch(next);  
@@ -804,10 +819,10 @@ Account.findById(ketqua._id)
         Order.aggregate([ 
             {$group : {_id : null, sumaryOrder: { $sum: "$sumary" }}}
         ]), 
-        Product.countDocuments({ category: 'Tra-hoa-qua'}), 
-        Product.countDocuments({ category: 'Ca-phe'}), 
+        Product.countDocuments({ category: 'Trà hoa quả'}), 
+        Product.countDocuments({ category: 'Cà phê'}), 
         Product.countDocuments({ category: 'Smoothies'}), 
-        Product.countDocuments({ category: 'Banh-ngot'}), 
+        Product.countDocuments({ category: 'Bánh ngọt'}), 
         Order.aggregate([ 
             {$group : {_id : "$dateOrder", sumaryByDate: { $sum: "$sumary" }}}, 
             {$sort:{"sumaryByDate": 1}}
