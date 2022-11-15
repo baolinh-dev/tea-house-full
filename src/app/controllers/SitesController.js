@@ -44,7 +44,7 @@ class HomeController {
             if(ketqua) {  
                 var name = req.cookies.name 
                 var avatar = req.cookies.avatar 
-                res.render('news', { avatar, name , quantityCart})
+                res.render('sites/news', { avatar, name , quantityCart})
             } 
         } catch (error) {
             res.redirect('/account/login')
@@ -64,7 +64,7 @@ class HomeController {
             if(ketqua) {  
                 var name = req.cookies.name 
                 var avatar = req.cookies.avatar 
-                res.render('introduce', { avatar, name , quantityCart})
+                res.render('sites/introduce', { avatar, name , quantityCart})
             }
         } catch (error) {
             res.redirect('/account/login')
