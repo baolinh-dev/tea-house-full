@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken')
 const PAGE_SIZE = 8
 class MenuController { 
     // [GET] /menu
-    index(req, res, next) {       
+    index(req, res, next) {     
         try {            
             var token = req.cookies.token
             var ketqua = jwt.verify(token, 'matkhau')   
@@ -258,7 +258,7 @@ class MenuController {
             res.redirect('/account/login')
         }  
     }  
-     // [GET] /menu/banh-ngot
+    // [GET] /menu/banh-ngot
     banhngot(req, res, next) {    
         try {            
             var token = req.cookies.token
@@ -266,7 +266,13 @@ class MenuController {
             if(ketqua) {  
                 var name = req.cookies.name 
                 var avatar = req.cookies.avatar 
-                var page = parseInt(req.query.page); 
+                var page = parseInt(req.query.page) 
+                var quantityCart
+                if(typeof req.session.cart == "undefined") { 
+                    quantityCart = 0
+                } else { 
+                    quantityCart = req.session.cart.length
+                }
                 if (page) {  
                     // Get Page bằng pagination   
                     var soLuongBoQua = (page - 1) * PAGE_SIZE
@@ -279,7 +285,7 @@ class MenuController {
                                 res.render('productDetails/banhngot', {   
                                     avatar, 
                                     name,
-                                    tongSoPage,
+                                    tongSoPage, quantityCart,
                                     productsBanhngot: mutipleMongooseToObject(productsBanhngot),
                                 });
                             })
@@ -295,7 +301,7 @@ class MenuController {
                                 res.render('productDetails/banhngot', {   
                                     avatar,  
                                     name,
-                                    tongSoPage, 
+                                    tongSoPage, quantityCart, 
                                     productsBanhngot: mutipleMongooseToObject(productsBanhngot),
                                 });
                             })
@@ -306,6 +312,11 @@ class MenuController {
         } catch (error) {
             res.redirect('/account/login')
         }
-    }   
+    }    
+     // [GET] /menu/continue
+    continue(req, res, next) {      
+        req.session.destroy(); 
+        res.redirect('/menu')
+    }
 } 
 module.exports = new MenuController;

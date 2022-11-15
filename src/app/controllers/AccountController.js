@@ -42,6 +42,13 @@ class AccountController {
             layout: false,
         })
     }    
+    logout(req, res, next) { 
+        res.clearCookie('name')  
+        res.clearCookie('token') 
+        res.clearCookie('avatr')  
+        req.session.destroy();
+        res.redirect('/account/login')
+    }    
     // [POST] /account/enter 
     enter(req, res, next) {
   var username = req.body.username

@@ -1188,6 +1188,19 @@
   background-color: var(--main-color);
   color: var(--white-color); }
 
+#cartList .cart-btns {
+  display: flex;
+  justify-content: space-around; }
+
+#cartList .cart-btns a {
+  padding: 12px 20px;
+  background-color: var(--main-color);
+  border-radius: 20px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600; }
+
 #order {
   margin-top: var(--height-header);
   padding-bottom: 40px; }

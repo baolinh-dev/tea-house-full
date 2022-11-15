@@ -3,8 +3,9 @@
         <div class="container">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Thực đơn</li>
+                    <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a href="/menu">Thực đơn</a></li>
+                    <li class="breadcrumb-item active"> Cà phê </li>
                 </ol>
             </nav>
         </div>
@@ -29,12 +30,14 @@
                             <div class="row">
                                 {{#each productsCaphe}}
                                 <div class="col-lg-3 col-md-6 col-6">
-                                    <div class="drink-item">
+                                    <div data-slug="{{this.slug}}" class="drink-item">
                                         <div class="drink-item__img-wrap">
-                                            <img src="{{this.image}}" alt="" class="drink-item__img">
-                                            <div class="add-to-cart-part">
+                                            <a href="/menu/{{this.slug}}">
+                                                <img src="{{this.image}}" alt="" class="drink-item__img">
+                                            </a>
+                                            <a href="/cart/{{this.slug}}" data-id="{{this._id}}" class="add-to-cart-part">
                                                 <p>thêm vào giỏ hàng</p>
-                                            </div>
+                                            </a>
                                         </div>
                                         <div class="drink-item__content">
                                             <h3 class="drink-item__content-heading">
@@ -49,7 +52,7 @@
                                 {{/each}}
                             </div>
                         </div>
-                    </div>  
+                    </div>
         <p class="tongSoPage" style="display: none">{{tongSoPage}}</p>
         <div class="menu-main__pagination">
             <nav aria-label="Page navigation example">

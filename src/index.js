@@ -71,15 +71,7 @@ app.engine('.hbs', engine(
 app.set('view engine', 'hbs'); 
 app.set('views', path.join(__dirname, 'resources', 'views'));   
 // Route Init  
-route(app)    
-// Delete Cookies 
-app.get('/account/logout',(req, res, next)=>{ 
-  res.clearCookie('name')  
-  res.clearCookie('token') 
-  res.clearCookie('avatr')  
-  req.session.destroy();
-  res.redirect('/account/login')
-})     
+route(app)       
 // Test Session
 app.get('/set_session', (req, res) => {
     //set a object to session

@@ -3,6 +3,7 @@ const router = express.Router();
 const menuController = require('../app/controllers/MenuController');
 
 router.get('/', menuController.index); 
+router.get('/continue', menuController.continue); 
 router.get('/tra-hoa-qua', menuController.trahoaqua);  
 router.get('/tra-vai', menuController.travai);   
 router.post('/tra-vai', menuController.travaiComment);  

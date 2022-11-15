@@ -17,7 +17,7 @@
                 </div>
                 <form action="/cart/list" class="form-ship" method="POST">   
                     <div class="form-ship__item"> 
-                        <label for="">Tên người mua hàng:</label> 
+                        <label for="">Tên người mua hàng:</label>  
                         <input name="name" type="text" value="{{accounts.name}}" placeholder="{{accounts.name}}" required>  
                     </div> 
                     <div class="form-ship__item">
@@ -67,34 +67,43 @@
                         <img class="common-heading__img" src="/img/logo-text.png" alt="">
                     </div>
                     <p class="common-heading__text">Giỏ hàng</p>
-                </div>
-                {{#each carts}} 
-                <div class="box-cart-item">
-                    <div class="cart-infor"> 
-                        <div class="cart-infor-img-wrap">
-                            <img src="{{this.image}}"
-                                alt="" class="cart-infor-img">
+                </div> 
+                {{#if carts}}
+                    {{#each carts}} 
+                    <div class="box-cart-item">
+                        <div class="cart-infor"> 
+                            <div class="cart-infor-img-wrap">
+                                <img src="{{this.image}}"
+                                    alt="" class="cart-infor-img">
+                            </div>
+                                <h3 class="cart-infor-name">{{this.name}}</h3>   
                         </div>
-
-                            <h3 class="cart-infor-name">{{this.name}}</h3>   
+                        <div class="cart-price">
+                            <div class="cart-price-value-wrap">
+                                <label for="" class="cart-price-value-label">Giá :  </label>
+                                <p class="cart-price-value">{{this.price}} 
+                                    <span> đ </span>
+                                </p>
+                            </div>
+                            <div class="cart-price-quantity-wrap">
+                                <label for="" class="cart-price-quantity-label">Số lượng :  </label>
+                                <p class="cart-price-quantity">{{this.quantity}}</p>
+                            </div>
+                        </div>
+                    </div>  
+                    {{/each }}    
+                    {{else}}  
+                    <div class="no-cart">
+                        <img src="https://xn--s1-j9s.vn/assets/images/no-cart.png" alt="" class="header__cart-no-cart-img">
                     </div>
-                    <div class="cart-price">
-                        <div class="cart-price-value-wrap">
-                            <label for="" class="cart-price-value-label">Giá :  </label>
-                            <p class="cart-price-value">{{this.price}} 
-                                <span> đ </span>
-                            </p>
-                        </div>
-                        <div class="cart-price-quantity-wrap">
-                            <label for="" class="cart-price-quantity-label">Số lượng :  </label>
-                            <p class="cart-price-quantity">{{this.quantity}}</p>
-                        </div>
-                    </div>
-                </div>  
-                {{/each }}  
+                {{/if }}
                 <div class="sumary-wrap"> 
                     <label class="sumary-label" for="">Tổng giá tiền: </label>
                     <div class="sumary"> </div> 
+                </div>  
+                <div class="cart-btns">
+                    <a href="/cart/cancel">Hủy đơn hàng</a>
+                    <a href="/menu/tra-hoa-qua">Tiếp tục mua hàng</a>
                 </div>
             </div>
         </div>
@@ -122,8 +131,7 @@
     document.querySelector('.sumary').innerText = sumaryStringFormat    
     document.querySelector('.sumary-cart').value = sumary 
 </script>   
-
-{{!-- Render đại chỉ --}} 
+{{!-- Render địa chỉ --}} 
 <script>
     document.querySelector('.numberAddress').oninput = function() { 
         document.querySelector('.numberAddressText').innerHTML = document.querySelector('.numberAddress').value

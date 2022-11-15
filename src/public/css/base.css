@@ -588,3 +588,9 @@
   font-weight: 400;
   font-size: 16px;
   overflow-x: hidden; }
+
+.no-cart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 60px; }

@@ -119,6 +119,11 @@ class OrderController {
                 orders: mongooseToObject(orders)
             }) 
         })
+    }  
+    // [GET] /cart/cancel
+    cancel(req, res, next) {      
+        req.session.destroy(); 
+        res.redirect('/cart/list')
     }
 } 
 module.exports = new OrderController;

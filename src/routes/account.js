@@ -27,6 +27,7 @@ let upload = multer({ storage: storage, fileFilter: imageFilter });
 
 router.get('/register', accountController.register); 
 router.get('/login', accountController.login);   
+router.get('/logout', accountController.logout);   
 router.get('/upload-avatar', accountController.uploadAvatar);    
 router.post('/upload-profile-pic', upload.single('profile_pic'), accountController.handleUploadFile)
 router.post('/store', accountController.store);  
