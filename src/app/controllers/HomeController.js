@@ -24,7 +24,7 @@ class HomeController {
                             Product.find({ category: 'Trà hoa quả' }) 
                                 .limit(8)
                                 .then((products) => { 
-                                    res.render('home', {   
+                                    res.render('sites/home', {   
                                         avatar, name, quantityCart,
                                         products: mutipleMongooseToObject(products),
                                     });
@@ -50,7 +50,7 @@ class HomeController {
         Product.find({ category: 'Cà phê' }) 
             .limit(4)
             .then((products) => {
-                res.render('home', {   
+                res.render('sites/home', {   
                     quantityCart, avatar, name,
                     products: mutipleMongooseToObject(products),
                 });
@@ -70,7 +70,7 @@ class HomeController {
         Product.find({ category: 'Smoothies' }) 
             .limit(4)
             .then((products) => {
-                res.render('home', {  
+                res.render('sites/home', {  
                     avatar, quantityCart, name,
                     products: mutipleMongooseToObject(products),
                 });
@@ -90,7 +90,7 @@ class HomeController {
         Product.find({ category: 'Bánh ngọt' }) 
             .limit(4)
             .then((products) => {
-                res.render('home', {   
+                res.render('sites/home', {   
                     avatar,  quantityCart, name,
                     products: mutipleMongooseToObject(products),
                 });

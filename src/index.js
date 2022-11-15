@@ -104,7 +104,7 @@ app.get('*', (req, res, next) => {
  })
 // 404 Not Found 
 app.use((req, res) => { 
-  return res.render('404', { 
+  return res.render('sites/404', { 
     layout: false
   })
 })

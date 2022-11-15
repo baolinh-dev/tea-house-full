@@ -21,7 +21,7 @@ class HomeController {
                 var avatar = req.cookies.avatar   
                 Account.findOne({ name}) 
                     .then(accounts => {  
-                        res.render('contact',  
+                        res.render('sites/contact',  
                             { avatar, name , quantityCart, 
                             accounts: mongooseToObject(accounts)})
                     })
