@@ -17,36 +17,36 @@
                 </div>
                 <form action="/cart/list" class="form-ship" method="POST">   
                     <div class="form-ship__item"> 
-                        <label for="">Tên người mua hàng:</label>  
-                        <input name="name" type="text" value="{{accounts.name}}" placeholder="{{accounts.name}}" required>  
+                        <label class="form-ship__item-label" for="">Tên người mua hàng:</label>  
+                        <input class="form-ship__item-input" name="name" type="text" value="{{accounts.name}}" placeholder="{{accounts.name}}" required>  
                     </div> 
                     <div class="form-ship__item">
-                        <label for="">Số điện thoại:</label> 
-                        <input name="phone" type="text" value="{{accounts.phone}}" placeholder="{{accounts.phone}}" required> 
+                        <label class="form-ship__item-label" for="">Số điện thoại:</label> 
+                        <input class="form-ship__item-input" name="phone" type="text" value="{{accounts.phone}}" placeholder="{{accounts.phone}}" required> 
                     </div> 
                     <div class="form-ship__item">
-                        <label for="">Email:</label> 
-                        <input name="email" type="text" value="{{accounts.email}}" placeholder="{{accounts.email}}" required>  
+                        <label class="form-ship__item-label" for="">Email:</label> 
+                        <input class="form-ship__item-input" name="email" type="text" value="{{accounts.email}}" placeholder="{{accounts.email}}" required>  
                     </div> 
                     <div class="form-ship__item">
-                        <label for="">Tên đường, Tòa nhà, Số nhà:</label>
-                        <input class="numberAddress" type="text" required>
+                        <label class="form-ship__item-label" for="">Tên đường, Tòa nhà, Số nhà:</label>
+                        <input class="form-ship__item-input numberAddress" type="text" required>
                     </div> 
                     <div class="form-ship__item">
-                        <label for="">Tỉnh/Thành phố:</label>
-                        <input class="province" type="text" required>
+                        <label class="form-ship__item-label" for="">Tỉnh/Thành phố:</label>
+                        <input class="form-ship__item-input province" type="text" required>
                     </div> 
                     <div class="form-ship__item">
-                        <label for="">Quận/Huyện:</label>
-                        <input class="district" type="text" required>
+                        <label class="form-ship__item-label" for="">Quận/Huyện:</label>
+                        <input class="form-ship__item-input district" type="text" required>
                     </div> 
                     <div class="form-ship__item">
-                        <label for="">Phường/Xã:</label>
-                        <input class="wards" type="text" required>
+                        <label class="form-ship__item-label" for="">Phường/Xã:</label>
+                        <input class="form-ship__item-input wards" type="text" required>
                     </div> 
                     <div class="form-ship__item">
-                        <label for="">Địa chỉ nhận hàng:</label> 
-                        <input type="text" name="address" class="finalAddress" required>
+                        <label class="form-ship__item-label" for="">Địa chỉ nhận hàng:</label> 
+                        <input type="text" name="address" class="form-ship__item-input finalAddress" required>
                         <p style="font-size: 0px;" class="resultAddress"> 
                             <span class="numberAddressText"></span>  
                             <span> / </span> 
@@ -56,7 +56,20 @@
                             <span> / </span>
                             <span class="provinceText"></span> 
                         </p>
-                    </div> 
+                    </div>   
+                    <div class="form-ship__item mb-3"> 
+                        <label class="form-ship__item-label" for="">Hình thức thanh toán:</label>  
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="payment" id="inlineRadio1" value="COD">
+                                <label class="form-check-label" for="inlineRadio1">Thanh toán khi nhận hàng</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="payment" type="radio" id="inlineRadio2" value="Đang chờ xác nhận">
+                                <label class="form-check-label" for="inlineRadio2">Chuyển khoản</label>
+                            </div>
+                        </div>
+                    </div>
                     <input style="display: none;" name="sumary" class="sumary-cart"></input>
                     <button class="form-ship__submit" type="submit">Thanh toán</button>
                 </form> 
@@ -80,13 +93,13 @@
                         </div>
                         <div class="cart-price">
                             <div class="cart-price-value-wrap">
-                                <label for="" class="cart-price-value-label">Giá :  </label>
+                                <label class="form-ship__item-label" for="" class="cart-price-value-label">Giá :  </label>
                                 <p class="cart-price-value">{{this.price}} 
                                     <span> đ </span>
                                 </p>
                             </div>
                             <div class="cart-price-quantity-wrap">
-                                <label for="" class="cart-price-quantity-label">Số lượng :  </label>
+                                <label class="form-ship__item-label" for="" class="cart-price-quantity-label">Số lượng :  </label>
                                 <p class="cart-price-quantity">{{this.quantity}}</p>
                             </div>
                         </div>
@@ -98,7 +111,7 @@
                     </div>
                 {{/if }}
                 <div class="sumary-wrap"> 
-                    <label class="sumary-label" for="">Tổng giá tiền: </label>
+                    <label class="form-ship__item-label" class="sumary-label" for="">Tổng giá tiền: </label>
                     <div class="sumary"> </div> 
                 </div>  
                 <div class="cart-btns">

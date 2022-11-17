@@ -117,8 +117,9 @@
                                     <th class="col-2" scope="col">Email</th>
                                     <th class="col-2" scope="col">Address</th>
                                     <th class="col-1" scope="col">Sumary</th>
-                                    <th class="col-2" scope="col">Date Order</th>
-                                    <th class="col-2" scope="col" colspan="2"></th>
+                                    <th class="col-1" scope="col">Date Order</th>
+                                    <th class="col-2" scope="col">Payment</th>
+                                    <th class="col-1" scope="col" colspan="2"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -129,8 +130,9 @@
                                     <td class="table-data col-2">{{this.email}}</td>
                                     <td class="table-data col-2">{{this.address}}</td>
                                     <td class="table-data col-1">{{this.sumary}}</td>
-                                    <td class="table-data col-2">{{this.dateOrder}}</td>
-                                    <td class="table-data col-2">
+                                    <td class="table-data col-1">{{this.dateOrder}}</td>
+                                    <td class="table-data col-2">{{this.payment}}</td>
+                                    <td class="table-data col-1">
                                         <a href="/admin/order/{{this._id}}/edit" class="btn btn-link">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>

@@ -1158,14 +1158,14 @@
 #cartList .form-ship__item {
   margin-bottom: 20px; }
 
-#cartList .form-ship__item label {
+#cartList .form-ship__item .form-ship__item-label {
   margin-bottom: 12px;
   font-size: 18px;
   font-weight: 400;
   border-bottom: 2px solid var(--main-color); }
 
-#cartList .form-ship__item textarea,
-#cartList .form-ship__item input {
+#cartList .form-ship__item .form-ship__item-textarea,
+#cartList .form-ship__item .form-ship__item-input {
   display: block;
   width: 100%;
   padding: 12px;
@@ -1204,6 +1204,19 @@
 #order {
   margin-top: var(--height-header);
   padding-bottom: 40px; }
+
+#order .order-banking {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+  border-top: 2px solid var(--main-color); }
+
+#order .hightlight-payment {
+  display: block;
+  padding: 4px;
+  background-color: var(--main-color);
+  color: #fff; }
 
 #order .order-main {
   width: 720px;

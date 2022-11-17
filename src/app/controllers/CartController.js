@@ -81,23 +81,29 @@ class OrderController {
         var month = d.getMonth() + 1; 
         var day = d.getDate()  
         var estimatedDay = d.getDate() + 5;
-        var year = d.getFullYear()   
+        var year = d.getFullYear()    
 
         var name = req.body.name
         var phone = req.body.phone
         var email = req.body.email
         var address = req.body.address
         var sumary = req.body.sumary   
+        var payment = req.body.payment   
 
         var dateOrder = `${day}-${month}-${year}`   
         var dateEstimatedOrder = `${estimatedDay}-${month}-${year}`   
 
-        Order.create({name, phone, email, address, sumary, dateOrder, dateEstimatedOrder}) 
+        Order.create({name, phone, email, address, sumary, dateOrder, dateEstimatedOrder, payment}) 
             .then((data) => { 
-                    req.session.orderId = data._id 
-                    res.redirect('/cart/detail')
+                    req.session.orderId = data._id   
+                    if(payment == "COD") {
+                        res.redirect('/cart/detail')
+                    } else if(payment == "Đang chờ xác nhận") {
+                        res.redirect('/cart/detail/banking')
+                    }
             })
-    }
+    } 
+    // [GET] /cart/detail
     cartDetail(req, res, next) {   
         var name = req.cookies.name   
         var avatar = req.cookies.avatar   
@@ -115,6 +121,29 @@ class OrderController {
         Order.findById(req.session.orderId) 
         .then((orders) => {  
             res.render('cart/cartDetail', {     
+                name, avatar, quantityCart, checkOrder, carts, 
+                orders: mongooseToObject(orders)
+            }) 
+        })
+    }  
+    // [GET] /cart/detail/banking
+    cartDetailBanking(req, res, next) {   
+        var name = req.cookies.name   
+        var avatar = req.cookies.avatar   
+        var carts = req.session.cart
+        var checkOrder = false 
+        if(req.session.orderId) { 
+            checkOrder = true
+        }
+        var quantityCart
+            if(typeof req.session.cart == "undefined") { 
+                quantityCart = 0
+            } else { 
+                quantityCart = req.session.cart.length
+            } 
+        Order.findById(req.session.orderId) 
+        .then((orders) => {  
+            res.render('cart/cartDetailBanking', {     
                 name, avatar, quantityCart, checkOrder, carts, 
                 orders: mongooseToObject(orders)
             }) 

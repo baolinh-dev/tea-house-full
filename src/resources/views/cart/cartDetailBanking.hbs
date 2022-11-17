@@ -2,7 +2,7 @@
         <div class="breadcumb-container">
                 <div class="container">
                         <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
+                                <ol class="breadcrumb"> 
                                         <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
                                         <li class="breadcrumb-item"><a href="index.html">Giỏ hàng</a></li>
                                         <li class="breadcrumb-item active" aria-current="page">Đơn hàng</li>
@@ -49,7 +49,7 @@
                                         <div class="order-body__name-wrap">
                                                 <i class="fa-solid fa-address-book"></i>
                                                 <p class="order-body__item">{{orders.address}}</p>
-                                        </div> 
+                                        </div>
                                         <div class="order-body__name-wrap">
                                                 <i class="fa-solid fa-credit-card"></i>
                                                 <p class="hightlight-payment order-body__item">{{orders.payment}}</p>
@@ -74,12 +74,15 @@
                                                 </div>
                                         </div> 
                                         {{/each}}
-                                </div>
+                                </div> 
                                 <div class="order-sumary">
                                         <label for="" class="order-sumary-label">Tổng hóa đơn : </label> 
                                         <p style="display: none;" class="order-sumary-hidden">{{orders.sumary}}</p>
                                         <p class="order-sumary-text"></p>  
                                 </div>   
+                                <div class="order-banking">
+                                        <img style="width: 60%; height: 60%;" src="https://f7-zpcloud.zdn.vn/2367999298325045329/266bc8833175f72bae64.jpg" alt="">
+                                </div>
                                 <div class="order-buttons">
                                         <a onclick="printContent('order-main');" class="printToPaper">In đơn hàng</a> 
                                         <a href="/menu/continue">Tiếp tục mua hàng</a>

@@ -49,7 +49,7 @@
                             <i class="fa-solid fa-chart-simple"></i>
                             <a href="/admin/dashboard" class="admin-menu__list-item-anchor">Dashboard</a>
                         </li>
-                        <li class="admin-menu__list-item admin-menu__list-item--active">
+                        <li class="admin-menu__list-item ">
                             <i class="fa-solid fa-user"></i>
                             <a href="/admin/account?page=1" class="admin-menu__list-item-anchor">Tài khoản</a>
                         </li>
@@ -65,7 +65,7 @@
                             <i class="fa-solid fa-comments"></i>
                             <a href="/admin/comment?page=1" class="admin-menu__list-item-anchor">Comments</a>
                         </li> 
-                        <li class="admin-menu__list-item">
+                        <li class="admin-menu__list-item admin-menu__list-item--active">
                             <i class="fa-solid fa-cart-shopping"></i>
                             <a href="/admin/order?page=1" class="admin-menu__list-item-anchor">Đơn hàng</a>
                         </li>
@@ -77,7 +77,7 @@
                     <div class="admin-main__header">
                         <div class="row">
                             <div class="col-lg-2 admin__title">
-                                <h1 class="admin__title-text">Tài khoản</h1>
+                                <h1 class="admin__title-text">Đơn hàng</h1>
                             </div>
                             <div class="col-lg-7 admin-table__options">
                                 <div class="admin-table__options-search-wrap">
@@ -117,7 +117,8 @@
                                     <th class="col-2" scope="col">Email</th>
                                     <th class="col-2" scope="col">Address</th>
                                     <th class="col-1" scope="col">Sumary</th>
-                                    <th class="col-2" scope="col">Date Order</th>
+                                    <th class="col-1" scope="col">Date Order</th>
+                                    <th class="col-1" scope="col">Payment</th>
                                     <th class="col-2" scope="col" colspan="2"></th>
                                 </tr>
                             </thead>
@@ -129,7 +130,8 @@
                                     <td class="col-2">{{this.email}}</td>
                                     <td class="col-2">{{this.address}}</td>
                                     <td class="col-1">{{this.sumary}}</td>
-                                    <td class="col-2">{{this.dateOrder}}</td>
+                                    <td class="col-1">{{this.dateOrder}}</td>
+                                    <td class="col-1">{{this.payment}}</td>
                                     <td class="col-2">
                                         <a href="" class="btn btn-link btn-restore" data-id="{{this._id}}">
                                             <i class="fa-solid fa-window-restore"></i>

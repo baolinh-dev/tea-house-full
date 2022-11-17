@@ -10,7 +10,8 @@ const Order = new Schema(
         address : { type: String}, 
         sumary : { type: Number}, 
         dateOrder: { type: String}, 
-        dateEstimatedOrder: { type: String}, 
+        dateEstimatedOrder: { type: String},  
+        payment: { type: String}, 
     }, 
     {
         timestamps: true,

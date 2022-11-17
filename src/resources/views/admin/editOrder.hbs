@@ -117,6 +117,15 @@
                             <label for="dateOrder" class="form-label">Date order:</label>
                             <input type="text" class="form-control" value="{{orders.dateOrder}}" id="dateOrder" name="dateOrder">
                         </div>
+                        <div class="mb-3">
+                            <label for="payment" class="form-label">Paymemt:</label>
+                            <select id="payment" name="payment" class="form-select" aria-label="Default select example">
+                                <option selected>{{orders.payment}}</option>
+                                <option value="COD">COD</option>
+                                <option value="Đang chờ xác nhận">Đang chờ xác nhận</option>
+                                <option value="Đã chuyển khoản thành công">Đã chuyển khoản thành công</option>
+                            </select>
+                        </div>
                         <button type="submit" class="btn btn-success">Lưu lại</button>
                     </form>
                 </div>
