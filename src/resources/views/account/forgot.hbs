@@ -1,0 +1,119 @@
+<script>
+    function login() {
+        $.ajax({
+            url: 'account/login',
+            type: 'POST',
+            data: {
+                username: $('#username').val(),
+                password: $('#password').val()
+            }
+        }).then(data => {
+            setCookie('token', data.token, 1)
+        })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
+</script>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tea House | Trang chủ</title>
+    <!-- Link TinyMce -->
+    <script src="https://cdn.tiny.cloud/1/t7lfci0vr2p6osdmr32k2iz3qdpczrskr1fizt0muc6tbozu/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
+    <!-- Link Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://concung.com/img/concung.ico">
+    <!-- Link Bootrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <!-- Link OwlCarousel -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+        integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+        integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Link Font AweSome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+        integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Link Normalize Css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+        integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+</head>
+
+<body>
+    <div class="app">
+        <section id="login">
+            <form class="login-form-container" method="POST" action="/account/forgot">
+                <h3 class="login-heading">Quên mật khẩu</h3>
+                <p class="resgister-link-wrap">Nếu bạn chưa có tài khoản,
+                    <a class="resgister-link" href="/account/register">đăng ký tại đây</a>
+                </p>
+                <input required type="email" class="login-register-btn-common"
+                    placeholder="Vui lòng nhập Email để reset mật khẩu" name="email" id="email">
+                <p style="display: none;" class="check">{{check}}</p>
+                <input type="submit" class="login-register-btn-common submit-input">
+            </form>
+        </section>
+        {{!-- Toast Send Mail Success --}}
+        <div class="toast-container position-fixed top-0 end-0 p-3">
+            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <strong class="me-auto">Thông báo</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body bg-success bg-gradient text-white">
+                    Đã gửi về email của bạn. Vui lòng kiểm tra hòm thư !
+                </div>
+            </div>
+        </div>
+    </div>
+    {{!-- Script Send Mail Success --}}
+    <script>
+        var check = document.querySelector('.check').innerText
+        const toastLiveExample = document.getElementById('liveToast')
+        if (check) {
+            document.addEventListener("DOMContentLoaded", function () {
+                const toast = new bootstrap.Toast(toastLiveExample)
+                toast.show()
+            });
+        } 
+    </script>
+    <!-- Link JQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+        integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Link Owlcaroulsel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+        integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+        integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Link Bootrap Script -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+        integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
+        integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

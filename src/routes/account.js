@@ -26,7 +26,11 @@ const imageFilter = function (req, file, cb) {
 let upload = multer({ storage: storage, fileFilter: imageFilter });
 
 router.get('/register', accountController.register); 
-router.get('/login', accountController.login);   
+router.get('/login', accountController.login);    
+router.get('/forgot', accountController.forgot);   
+router.post('/forgot', accountController.forgotSendMail);   
+router.get('/restore', accountController.restore);    
+router.put('/restore/save', accountController.restoreSave);    
 router.get('/logout', accountController.logout);   
 router.get('/upload-avatar', accountController.uploadAvatar);    
 router.post('/upload-profile-pic', upload.single('profile_pic'), accountController.handleUploadFile)

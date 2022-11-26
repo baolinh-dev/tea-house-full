@@ -2,11 +2,36 @@ const Account = require('../models/Account')
 const Product = require('../models/Product') 
 const { mongooseToObject } = require('../../util/mogoose');
 const { mutipleMongooseToObject } = require('../../util/mogoose'); 
-const jwt = require('jsonwebtoken');   
+const jwt = require('jsonwebtoken');    
+const nodemailer = require('nodemailer') 
 const multer  = require('multer')  
 const { json } = require('express'); 
 const { FALSE } = require('node-sass');
+function sendEmail(email) { 
+  return new Promise((resolve, reject) => { 
+    var transporter = nodemailer.createTransport({ 
+      service: "Gmail",
+      auth: {  
+        user: "baoolink@gmail.com",  
+        pass: "ijpfdhbmbdhggwnk"
+      }
+    })
 
+    const mail_configs = { 
+      from: "Concunng", 
+      to: email, 
+      subject: "Lấy lại mật khẩu",  
+      text: "Lấy lại mật khẩu",  
+      html: `<p>Để lấy lại mật khẩu click vào đường link sau đây <a href="http://localhost:3000/account/restore?email=${email}">Lấy lại mật khẩu</a> </p>`,
+    } 
+    transporter.sendMail(mail_configs, function(error, info) { 
+      if(error) { 
+        console.log(error) 
+      }  
+      console.log(info)
+    })
+  })
+} 
 class AccountController {  
     // [GET] /account/register
     register(req, res, next) {
@@ -109,6 +134,42 @@ class AccountController {
             .catch(next);  
         // res.send(`You have uploaded this image: <hr/><img src="${urlAvatarUser}" width="300"><hr /><a href="/upload">Upload another image</a>`);  
         res.redirect('/account/login')
-    }
+    } 
+ // [GET]
+    forgot(req, res, next) {  
+        res.render('account/forgot', { 
+            layout: false
+        })
+    }   
+    // [POST]
+    forgotSendMail(req, res, next) {   
+        const email = req.body.email 
+        sendEmail(email)     
+        var check = true 
+        res.render('account/forgot', {
+            layout: false, check
+        })
+    }   
+    // [GET]
+    restore(req, res, next) {   
+        var email = req.query.email   
+        Account.find({email}) 
+            .then(accounts => { 
+                var username = accounts[0].username
+                res.render('account/restore', {  
+                    layout: false,  
+                    email, username
+                })
+            })
+    } 
+    // [PUT]
+    restoreSave(req, res, next) {     
+        var password = req.body.password 
+        var username = req.body.username
+        Account.updateOne({ email: req.body.email }, 
+            {password}, {username})
+            .then(() => res.redirect('/account/login'))
+            .catch(next);  
+    }  
 } 
 module.exports = new AccountController; 
