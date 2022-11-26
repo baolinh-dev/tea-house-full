@@ -37,7 +37,7 @@ class AccountController {
         // Tạo mới một Object theo kiểu Constructor
     }
     // [GET] /account/login
-    login(req, res, next) { 
+    login(req, res, next) {  
         res.render('account/login', {   
             layout: false,
         })
