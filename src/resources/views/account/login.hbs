@@ -66,7 +66,8 @@
             <input required type="text" class="login-register-btn-common" placeholder="Username" name="username"
                 id="username">
             <input required type="password" class="login-register-btn-common" placeholder="Passwork" name="password"
-                id="password">   
+                id="password">    
+            <p style="display: none;" class="check">{{checkWrongPassWord}}</p>
             <div class="showpassword">
                 <input onclick="showPassWord()" type="checkbox" name=""> 
                 <label for="">Show Password</label>
@@ -87,7 +88,20 @@
                 </a>
             </div>
         </form>
-    </section>
+    </section> 
+    {{!-- Toast Send Mail Success --}}
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <strong class="me-auto">Thông báo</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body bg-danger bg-gradient text-white">
+                Mật khẩu không đúng. Vui lòng thử lại !
+            </div>
+        </div>
+    </div>
     </div>
     <!-- Link JQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
@@ -108,168 +122,18 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
         integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
-        crossorigin="anonymous"></script>
-
-    {{!-- Owl --}}
+        crossorigin="anonymous"></script> 
+    {{!-- Script Send Mail Success --}}
     <script>
-        $('#home .gallery .owl-carousel.owl-carousel--gallery').owlCarousel({
-            loop: true,
-            autoplay: true,
-            autoplayTimeout: 6000,
-            responsive: {
-                0: {
-                    items: 2
-                },
-                740: {
-                    items: 3
-                },
-                1024: {
-                    items: 5
-                }
-            }
-        })
-        $('#home .drink-list .owl-carousel').owlCarousel({
-            loop: true,
-            autoplay: false,
-            autoplayTimeout: 6000,
-            responsive: {
-                0: {
-                    items: 2
-                },
-                740: {
-                    items: 2
-                },
-                1024: {
-                    items: 4
-                }
-            }
-        })
-        $('#home .category .owl-carousel').owlCarousel({
-            loop: true,
-            margin: 10,
-            nav: true,
-            autoplay: true,
-            autoplayTimeout: 6000,
-            dotsEach: true,
-            URLhashListener: true,
-            center: true,
-            startPosition: 'URLHash',
-            responsive: {
-                0: {
-                    items: 1
-                },
-                600: {
-                    items: 3
-                },
-                1000: {
-                    items: 3
-                }
-            }
-        })
-        $('#menu .owl-carousel').owlCarousel({
-            loop: true,
-            margin: 10,
-            nav: true,
-            responsive: {
-                0: {
-                    items: 2
-                },
-                600: {
-                    items: 3
-                },
-                1000: {
-                    items: 4
-                }
-            }
-        })  
+        var check = document.querySelector('.check').innerText
+        const toastLiveExample = document.getElementById('liveToast')
+        if (check) {
+            document.addEventListener("DOMContentLoaded", function () {
+                const toast = new bootstrap.Toast(toastLiveExample)
+                toast.show()
+            });
+        } 
     </script>
-    {{!-- Next Pre Pagination --}}
-    <script>
-        const urlSearchParams = new URLSearchParams(window.location.search);
-        const params = Object.fromEntries(urlSearchParams.entries());
-        var currentPage = parseInt(params.page);
-        var lastPage = document.querySelector('.tongSoPage').innerText
-        // Màu pagination
-        var list = document.querySelectorAll('.page-link--number')
-        document.querySelectorAll('.page-link--number')[currentPage - 1].classList.add('page-link--actived')
-        function nextMenu() {
-            var nextPage = currentPage + 1
-            if (nextPage > lastPage) {
-                nextPage = lastPage
-            }
-            location.href = `/menu?page=${nextPage}`;
-        }
-        function nextTraHoaQua() {
-            var nextPage = currentPage + 1
-            if (nextPage > lastPage) {
-                nextPage = lastPage
-            }
-            location.href = `/menu/tra-hoa-qua?page=${nextPage}`;
-        }
-        function nextSmoothies() {
-            var nextPage = currentPage + 1
-            if (nextPage > lastPage) {
-                nextPage = lastPage
-            }
-            location.href = `/menu/smoothies?page=${nextPage}`;
-        }
-        function nextBanhngot() {
-            var nextPage = currentPage + 1
-            if (nextPage > lastPage) {
-                nextPage = lastPage
-            }
-            location.href = `/menu/banh-ngot?page=${nextPage}`;
-        }
-        function nextCaphe() {
-            var nextPage = currentPage + 1
-            if (nextPage > lastPage) {
-                nextPage = lastPage
-            }
-            location.href = `/menu/ca-phe?page=${nextPage}`;
-        }
-        function previousMenu() {
-            var previousPage = currentPage - 1
-            if (previousPage < 1) {
-                previousPage = 1
-            }
-            location.href = `/menu?page=${previousPage}`;
-        }
-        function previousMenu() {
-            var previousPage = currentPage - 1
-            if (previousPage < 1) {
-                previousPage = 1
-            }
-            location.href = `/menu?page=${previousPage}`;
-        }
-        function previousTrahoaqua() {
-            var previousPage = currentPage - 1
-            if (previousPage < 1) {
-                previousPage = 1
-            }
-            location.href = `/menu/tra-hoa-qua?page=${previousPage}`;
-        }
-        function previousCaphe() {
-            var previousPage = currentPage - 1
-            if (previousPage < 1) {
-                previousPage = 1
-            }
-            location.href = `/menu/ca-phe?page=${previousPage}`;
-        }
-        function previousSmoothies() {
-            var previousPage = currentPage - 1
-            if (previousPage < 1) {
-                previousPage = 1
-            }
-            location.href = `/menu/smoothies?page=${previousPage}`;
-        }
-        function previousBanhngot() {
-            var previousPage = currentPage - 1
-            if (previousPage < 1) {
-                previousPage = 1
-            }
-            location.href = `/menu/banh-ngot?page=${previousPage}`;
-        }     
-    </script> 
     {{!-- Show Hide PassWord --}}  
     <script>         
         function showPassWord() {

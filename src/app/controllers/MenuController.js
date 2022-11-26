@@ -317,6 +317,82 @@ class MenuController {
     continue(req, res, next) {      
         req.session.destroy(); 
         res.redirect('/menu')
+    } 
+    // [GET] /menu/jumpsuitHan
+    jumpsuitHan(req, res, next) {  
+        var name = req.cookies.name  
+        var avatar = req.cookies.avatar 
+        var quantityCart
+            if(typeof req.session.cart == "undefined") { 
+                quantityCart = 0
+            } else { 
+                quantityCart = req.session.cart.length
+            }   
+        Promise.all([Product.find({slug: req.params.slug}), Comment.find({})])
+            .then(([products, comments]) => {  
+                var slug = req.params.slug
+                var nameProduct = products[0].name
+                var priceProduct = products[0].price
+                var imageProduct = products[0].image
+                res.render(`detail/detailProduct`, {  
+                    name, avatar, quantityCart, slug,
+                    nameProduct, priceProduct, imageProduct,
+                    comments: mutipleMongooseToObject(comments)
+                })
+            })
+            .catch(next)
+    } 
+    commentDetail(req, res, next) {    
+        var name = req.cookies.name  
+        var avatar = req.cookies.avatar   
+        var comment = req.body.comment  
+        
+        Comment.create( 
+            { name: name, avatar: avatar, comment: comment},  
+        );     
+        res.redirect('back')
+    } 
+    // [GET] /menu/:slug/cart 
+    menuAddCart(req, res, next) { 
+        var slug = req.params.slug     
+        var quantity = req.query.quantity
+        var quantityNumber = Number(quantity)
+        Product.findOne({slug})  
+            .then((products) => { 
+                if(typeof req.session.cart == "undefined") { 
+                    req.session.cart = []; 
+                    req.session.cart.push({ 
+                        title: slug, 
+                        quantity: quantityNumber, 
+                        name: products.name, 
+                        price: products.price, 
+                        image: products.image, 
+                    })
+                } else { 
+                    var cart = req.session.cart; 
+                    var newItem = true; 
+
+                    for(var i = 0; i < cart.length; i++) { 
+                        if(cart[i].title == slug) { 
+                            cart[i].quantity += quantityNumber; 
+                            newItem = false; 
+                            break;
+                        }
+                    } 
+                    if(newItem) { 
+                        cart.push({ 
+                            title: slug, 
+                            quantity: quantityNumber, 
+                            name: products.name, 
+                            price: products.price, 
+                            image: products.image, 
+                        })
+                    }
+                }   
+                res.redirect('back')   
+            })  
+            .catch(next)
+
     }
 } 
 module.exports = new MenuController;

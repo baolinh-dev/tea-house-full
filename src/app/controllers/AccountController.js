@@ -76,11 +76,12 @@ class AccountController {
     }    
     // [POST] /account/enter 
     enter(req, res, next) {
-  var username = req.body.username
-  var password = req.body.password   
+    var username = req.body.username
+    var password = req.body.password    
+    var checkWrongPassWord = true
       Account.findOne({ username, password })
               .then((accounts) => {  
-                  if(accounts) {    
+                  if(accounts) {     
                       var token = jwt.sign({ _id: accounts._id},'matkhau')     
                       res.setHeader('Content-Type', 'text/html');
                       res.cookie('token', token) 
@@ -93,8 +94,11 @@ class AccountController {
                         // redirect 
                         res.redirect('/admin/account')
                       }
-                  } else { 
-                      res.json('Dang nhap that bai')
+                  } else {   
+                        res.render('account/login', { 
+                            layout: false, 
+                            checkWrongPassWord
+                        })
                   }
               }) 
               .catch(next);

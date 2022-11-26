@@ -1,0 +1,133 @@
+<section id="detail">
+    <div class="breadcumb-container">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+                    <li class="breadcrumb-item " aria-current="page">Sản phẩm</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{nameProduct}}</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="detail-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="img-product">
+                        <div class="img-product__represent-wrap">
+                            <img class="img-product__represent" src="{{imageProduct}}" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="detail-infor">
+                        <form action="/menu/{{slug}}/cart" method="get" class="detail-content">
+                            <h3 class="detail-heading">{{nameProduct}}</h3>
+                            <div class="detail-price">
+                                <p class="detail-price__label">Giá:</p>
+                                <p class="detail-price__content">{{priceProduct}}₫</p>
+                            </div>
+                            <div class="detail-quantity">
+                                <p class="detail-quantity__label">Số lượng:</p>
+                                <div class="detail-quantity__input-wrap">
+                                    <input class="detail-quantity__input" type="number" name="quantity"
+                                        placeholder="Nhập số lượng bạn mong muốn">
+                                </div>
+                            </div>
+                            <div class="detail-content__button-list">
+                                <button class="detail-content__button">
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                    <a type="submit" class="add-to-cart-part">
+                                        <p>thêm vào giỏ hàng</p>
+                                    </a>
+                                </button>
+                            </div>
+                        </form>
+                        <div class="detail-ship">
+                            <div class="detail-ship__part">
+                                <b class="detail-ship__label">Giao hàng miễn phí:</b>
+                                <p class="detail-ship__content">Áp dụng đơn hàng > 200.000đ</p>
+                            </div>
+                            <div class="detail-ship__part">
+                                <b class="detail-ship__label">Thanh toán tại nhà:</b>
+                                <p class="detail-ship__content">Nhanh chóng và an toàn</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="detail-describle">
+        <div class="container">
+            <h4 class="detail-describle__heading">Mô tả sản phẩm</h4>
+            <div class="detail-describle__content">
+                <p>Đang cập nhật ...</p>
+            </div>
+        </div>
+    </div>
+    <div class="detail-comment">
+        <div class="container">
+            <h4 class="detail-comment__heading">Bình luận</h4>
+            <div id="detail-comment__content-wrap">
+                {{#each comments}}
+                <div class="detail-comment__content">
+                    <div class="detail-comment__content-infor">
+                        <img src="{{this.avatar}}" alt="" class="detail-comment__content-infor-avatar">
+                        <div class="detail-comment__content-infor-author">
+                            <h4 class="detail-comment__content-infor-name">{{this.name}}</h4>
+                            <p class="detail-comment__content-infor-time">28/10/2022</p>
+                        </div>
+                    </div>
+                    <p class="detail-comment__content-text">
+                        {{this.comment}}
+                    </p>
+                </div>
+                {{/each }}
+            </div>
+            <form action="/menu/comment-detail" method="POST">
+                <textarea class="contact-form__text-area" name="comment"></textarea>
+                <button type="submit" class="detail-comment__btn">Thêm bình luận</button>
+            </form>
+            <p style="display: none;" class="nameComment">{{name}}</p>
+            <p style="display: none;" class="avatarComment">{{avatar}}</p>
+        </div>
+    </div>
+
+</section>
+{{!-- Ajax --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+    integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $(document).ready(function () {
+        $("button").on("click", function (e) {
+            let content = $('.contact-form__text-area').val()
+            const name = document.querySelector('.nameComment').innerText
+            const avatar = document.querySelector('.avatarComment').innerText
+            var dataComment = {
+                content, name, avatar
+            }
+            const nodeSuper = document.querySelector('#detail-comment__content-wrap')
+            var nodeChild = document.createElement("div");
+
+            nodeChild.innerHTML = ` 
+            <div class="detail-comment__content">
+                <div class="detail-comment__content-infor">
+                    <img src="${avatar}" alt=""
+                        class="detail-comment__content-infor-avatar">
+                    <div class="detail-comment__content-infor-author">
+                        <h4 class="detail-comment__content-infor-name">${name}</h4>
+                        <p class="detail-comment__content-infor-time">28/10/2022</p>
+                    </div>
+                </div>
+                <p class="detail-comment__content-text">
+                    ${content}
+                </p>
+            </div>  
+                `
+            nodeSuper.appendChild(nodeChild)
+        });
+    });
+</script>
