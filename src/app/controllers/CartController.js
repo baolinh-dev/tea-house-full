@@ -3,8 +3,35 @@ const { mongooseToObject } = require('../../util/mogoose');
 const { mutipleMongooseToObject } = require('../../util/mogoose'); 
 const Account = require('../models/Account');
 const Order = require('../models/Order')  
-const Product = require('../models/Product');  
-const { account } = require('./AdminController');
+const Product = require('../models/Product');   
+const nodemailer = require('nodemailer') 
+const { account } = require('./AdminController'); 
+//  
+function sendEmail(orderId, email, name, phone, sumary, payment, address, estimatedDay) { 
+  return new Promise((resolve, reject) => { 
+    var transporter = nodemailer.createTransport({ 
+      service: "Gmail",
+      auth: {  
+        user: "baoolink@gmail.com",  
+        pass: "ijpfdhbmbdhggwnk"
+      }
+    })
+
+    const mail_configs = { 
+      from: "Tea House", 
+      to: email, 
+      subject: "Đơn hàng đã được xác nhận", 
+      text: `Mã đơn hàng: ${orderId}\nTên người mua: ${name}\nSố điện thoại: ${phone}\nTổng đơn hàng: ${sumary}\nHình thức thanh toán: ${payment}\nĐịa chỉ giao hàng: ${address}\nNgày nhận hàng dự kiến: ${estimatedDay}`
+    } 
+    transporter.sendMail(mail_configs, function(error, info) { 
+      if(error) { 
+        console.log(error) 
+        return reject({message: "An error"})
+      }  
+      return resolve({message: "Email sent"})
+    })
+  })
+} 
 class OrderController {  
     cartList(req, res, next) {   
         var carts = req.session.cart 
@@ -94,7 +121,8 @@ class OrderController {
         var dateEstimatedOrder = `${estimatedDay}-${month}-${year}`   
 
         Order.create({name, phone, email, address, sumary, dateOrder, dateEstimatedOrder, payment}) 
-            .then((data) => { 
+            .then((data) => {  
+                    sendEmail(data._id, email, name, phone, sumary, payment, address, dateEstimatedOrder)
                     req.session.orderId = data._id   
                     if(payment == "COD") {
                         res.redirect('/cart/detail')
