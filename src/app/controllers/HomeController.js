@@ -17,8 +17,8 @@ class HomeController {
             } else { 
                 quantityCart = req.session.cart.length
             } 
-            if(ketqua) {           
-                Account.findById(ketqua._id) 
+            if(ketqua) {            
+                Account.findById(ketqua.id) 
                     .then((accounts) => {
                         if(accounts.role == 'user' || accounts.role == 'admin') {  
                             Product.find({ category: 'Trà hoa quả' }) 
