@@ -18,7 +18,7 @@ class HomeController {
                 quantityCart = req.session.cart.length
             } 
             if(ketqua) {            
-                Account.findById(ketqua.id) 
+                Account.findById(ketqua._id) 
                     .then((accounts) => {
                         if(accounts.role == 'user' || accounts.role == 'admin') {  
                             Product.find({ category: 'Trà hoa quả' }) 
