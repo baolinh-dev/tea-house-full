@@ -14,13 +14,14 @@ class AdminController {
         try {
             var token = req.cookies.token
             var ketqua = jwt.verify(token, 'matkhau')  
-            var name = req.cookies.name   
+            var name = req.cookies.name  
+            console.log(name);  
             var avatar = req.cookies.avatar  
-            var page = parseInt(req.query.page);   
-            if(ketqua) {      
-Account.findById(ketqua._id)  
-    .then((accounts) => {  
-        if(accounts.role == 'admin') {   
+            var page = parseInt(req.query.page);    
+            if(ketqua) {        
+                Account.findById(ketqua._id)  
+                .then((accounts) => {   
+                    if(accounts.role == 'admin') {    
                 if (page) {   
                     if (page < 1) { page = 1 } 
                     var soLuongBoQua = (page - 1) * PAGE_SIZE   

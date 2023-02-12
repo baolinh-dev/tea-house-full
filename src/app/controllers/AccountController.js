@@ -6,14 +6,14 @@ const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer') 
 const multer  = require('multer')  
 const { json } = require('express'); 
-const { FALSE } = require('node-sass');
+const { FALSE } = require('sass');
 function sendEmail(email) { 
   return new Promise((resolve, reject) => { 
     var transporter = nodemailer.createTransport({ 
       service: "Gmail",
       auth: {  
         user: "baoolink@gmail.com",  
-        pass: "ijpfdhbmbdhggwnk"
+        pass: "pgfuqyxknzkugwxs"
       }
     })
 
@@ -50,7 +50,7 @@ class AccountController {
         .then(data => { 
             if(data) {  
                 res.json('Đã trùng username')
-            } else { 
+            } else {  
                 const account = new Account(req.body);
                 account
                     .save()  

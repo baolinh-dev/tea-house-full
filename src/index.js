@@ -47,17 +47,18 @@ app.get( '/google/callback',
 app.get('/protected', isLoggedIn, (req, res) => {  
   var name = req.user.displayName 
   var avatar = req.user.picture   
-  var email = req.user.email 
-  // var id = req.user.id
+  var email = req.user.email   
+  var role = "user"
+  var id = req.user.id
 
   var checkDupliAccount = true 
 
-  Account.findOne({name: name}) 
-    .then(accounts => {     
+  Account.findOne({avatar: avatar}) 
+    .then(accounts => {    
       if(accounts == null) { 
-        Account.create({name, avatar, email})   
+        Account.create({name, avatar, email, role})  
       } 
-      var token = jwt.sign({id: accounts._id},'matkhau')     
+      var token = jwt.sign({id: accounts._id}, 'matkhau')     
       res.setHeader('Content-Type', 'text/html');
       res.cookie('token', token) 
       res.cookie('name', name)    

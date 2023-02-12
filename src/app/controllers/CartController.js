@@ -13,7 +13,7 @@ function sendEmail(orderId, email, name, phone, sumary, payment, address, estima
       service: "Gmail",
       auth: {  
         user: "baoolink@gmail.com",  
-        pass: "ijpfdhbmbdhggwnk"
+        pass: "pgfuqyxknzkugwxs"
       }
     })
 

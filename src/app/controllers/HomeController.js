@@ -17,20 +17,18 @@ class HomeController {
             } else { 
                 quantityCart = req.session.cart.length
             } 
-            if(ketqua) {            
+            if(ketqua) {      
                 Account.findById(ketqua._id) 
-                    .then((accounts) => {
-                        if(accounts.role == 'user' || accounts.role == 'admin') {  
-                            Product.find({ category: 'Trà hoa quả' }) 
-                                .limit(8)
-                                .then((products) => { 
-                                    res.render('sites/home', {   
-                                        avatar, name, quantityCart,
-                                        products: mutipleMongooseToObject(products),
-                                    });
-                                })
-                            .catch(next);
-                        } 
+                .then((accounts) => { 
+                        Product.find({ category: 'Trà hoa quả' }) 
+                        .limit(8)
+                        .then((products) => { 
+                            res.render('sites/home', {   
+                                avatar, name, quantityCart,
+                                products: mutipleMongooseToObject(products),
+                            });
+                        })
+                    .catch(next);
                     }) 
             }  
         } catch (error) {
